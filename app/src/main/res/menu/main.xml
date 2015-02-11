@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/action_demo"
+        android:title="@string/menu_show_demo"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_close_sesion"
+        android:orderInCategory="100"
+        android:title="@string/menu_close_sesion"
+        app:showAsAction="never" />
+</menu>

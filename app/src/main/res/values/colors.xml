@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary">#00CCAE</color>
+    <color name="primary_dark">#00BFA5</color>
+    <color name="accent">#9E9E9E</color>
+    <color name="disable_black">#42000000</color>
+    <!--<color name="primary_dark">#ff4da485</color>-->
+    <!--<color name="primary">#E0E0E0</color>-->
+    <!--<color name="accent">#00BFA5</color>-->
+    <color name="cristal">#4FBC9D</color>
+    <color name="white">#ffffff</color>
+    <color name="white_two">#90ffffff</color>
+    <color name="gray">#f1f1f1</color>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="transparent_black">#90000000</color>
+    <color name="black_two">#80000000</color>
+    <color name="gray_two">#4c4c4c</color>
+    <color name="toolbar_register">#F5F5F5</color>
+    <color name="toolbar_register_text">#9E9E9E</color>
+    <color name="trans">#ff212cff</color>
+    <color name="item_selector_drawer">#424242</color>
+    <color name="back_navigation_select">#33ffffff</color>
+    <color name="recycle_events_background">#e3e3e3</color>
+    <color name="button_pressed">#9500CCAE</color>
+
+</resources>

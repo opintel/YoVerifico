@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">VerificacionCiudadana</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- LoginActivity -->
+    <string name="user_mail">Correo electrónico</string>
+    <string name="user_password">Contraseña</string>
+    <string name="button_session">Entrar</string>
+    <string name="button_register">Registrate</string>
+    <string name="title_activity_sign_up">SignUp</string>
+
+    <!-- SignUp -->
+    <string name="sign_up_title">Registrate </string>
+    <string name="user_name">Nombre completo</string>
+    <string name="user_password_confirm">Confirma contraseña</string>
+    <string name="button_register_sing_up">Registrarme</string>
+
+    <!-- NavDrawer List -->
+    <string name="my_events">Mis eventos</string>
+    <string name="my_perfil">Mi perfil</string>
+    <string name="settings">Configurar</string>
+    <string name="about">Acerca de</string>
+
+
+    <!-- Mainly Menu -->
+    <string name="menu_show_demo">Cómo funciona</string>
+    <string name="menu_close_sesion">Cerrar sesión</string>
+    <string name="title_activity_demo">DemoActivity</string>
+
+    <!-- Demo Activity-->
+    <string name="action_omited">Omitir</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</string>
+    <string name="text_demo_1">VERIFICA TU LOCALIDAD</string>
+    <string name="text_demo_2">CAPTURA UNA O VARIAS FOTOS DEL EVENTO</string>
+    <string name="text_demo_3">CHECA TUS RESULTADOS</string>
+    <!--Events Fragment-->
+
+    <string name="google_maps_key">AIzaSyCAIn_FQYTrqtgu_nYvzwRWsIgmrMtIq4s</string>
+
+    <!-- Evidence Activity and Fragment -->
+
+    <string name="title_evidence">Yo Reviso</string>
+    <string name="question">¿Se está realizando el evento descrito?</string>
+
+</resources>
