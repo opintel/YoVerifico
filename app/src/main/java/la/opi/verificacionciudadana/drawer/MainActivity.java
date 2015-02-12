@@ -25,6 +25,8 @@ import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.interfaces.ActivitySettings;
 import la.opi.verificacionciudadana.interfaces.PressedDetail;
 import la.opi.verificacionciudadana.util.OtroComunicator;
+import la.opi.verificacionciudadana.util.StorageFiles;
+import la.opi.verificacionciudadana.util.StorageState;
 
 
 public class MainActivity extends BaseActivity
@@ -227,4 +229,6 @@ public class MainActivity extends BaseActivity
         super.getToolbar().setBackgroundColor(getResources().getColor(R.color.toolbar_register));
         super.getToolbar().setTitleTextColor(getResources().getColor(R.color.toolbar_register_text));
     }
+
+
 }

@@ -17,6 +17,8 @@ import android.widget.Toast;
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.drawer.MainActivity;
 import la.opi.verificacionciudadana.interfaces.ActivityChange;
+import la.opi.verificacionciudadana.util.StorageFiles;
+import la.opi.verificacionciudadana.util.StorageState;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
@@ -29,6 +31,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        createDirectory();
         systemBarsCustom();
         widgets();
 
@@ -99,6 +102,18 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     private void systemBarsCustom() {
         SystemConfigurationBars systemConfigurationBars = new SystemConfigurationBars(this);
         systemConfigurationBars.configurationSystemBars();
+    }
+
+    private void createDirectory() {
+
+        // FALTA VALIDAR CUANDO ESTA LLENA LA MEMORIA
+        if (StorageState.validateStorage(this)) {
+            Log.i("DIRECTORY", "se puede crear ");
+            StorageFiles.createDirectory(this);
+
+        } else {
+            Log.i("DIRECTORY", "no se puede crear");
+        }
     }
 
 

@@ -1,16 +1,11 @@
 package la.opi.verificacionciudadana.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.fragments.FragmentEventoQuestion;
+import la.opi.verificacionciudadana.fragments.FragmentPhotoPictures;
 import la.opi.verificacionciudadana.interfaces.ActivitySettings;
 
 public class EvidenceActivity extends BaseActivity implements ActivitySettings {
@@ -21,7 +16,7 @@ public class EvidenceActivity extends BaseActivity implements ActivitySettings {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container_evidence, new FragmentEventoQuestion())
+                    .add(R.id.container_evidence, new FragmentPhotoPictures())
                     .commit();
         }
 

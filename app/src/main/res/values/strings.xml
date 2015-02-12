@@ -52,4 +52,12 @@
     <string name="title_evidence">Yo Reviso</string>
     <string name="question">¿Se está realizando el evento descrito?</string>
 
+    <!--Messages-->
+
+    <string name="not_avaliable">Memoria no esta disponible , verifica que tengas espacio</string>
+    <string name="only_reading">Al parecer Memoria se encuentra solo en modo lectura</string>
+
+    <string name="yes_dialog">Por supuesto</string>
+    <string name="no_dialog">No lo creo</string>
+
 </resources>

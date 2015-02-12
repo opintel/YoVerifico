@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="la.opi.verificacionciudadana" >
+    package="la.opi.verificacionciudadana">
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".drawer.MainActivity"
             android:label="@string/app_name" />
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,32 +22,29 @@
         <activity
             android:name=".activities.SignUp"
             android:label="@string/title_activity_sign_up"
-            android:parentActivityName=".activities.LoginActivity" >
+            android:parentActivityName=".activities.LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.LoginActivity" >
-            </meta-data>
+                android:value=".activities.LoginActivity"></meta-data>
         </activity>
         <activity
             android:name=".activities.DemoActivity"
             android:label="@string/title_activity_demo"
-            android:parentActivityName=".drawer.MainActivity" >
+            android:parentActivityName=".drawer.MainActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".drawer.MainActivity" >
-            </meta-data>
+                android:value=".drawer.MainActivity"></meta-data>
         </activity>
 
         <activity
             android:name=".activities.EvidenceActivity"
             android:label="@string/title_activity_demo"
-            android:parentActivityName=".drawer.MainActivity" >
+            android:parentActivityName=".drawer.MainActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".drawer.MainActivity" >
-            </meta-data>
+                android:value=".drawer.MainActivity"></meta-data>
         </activity>
 
 
@@ -63,6 +60,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.

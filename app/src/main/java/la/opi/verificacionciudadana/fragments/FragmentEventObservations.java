@@ -13,17 +13,17 @@ import la.opi.verificacionciudadana.R;
 /**
  * Created by Jhordan on 10/02/15.
  */
-public class FragmentPhotoGallery extends FragmentModel implements View.OnClickListener {
+public class FragmentEventObservations extends FragmentModel implements View.OnClickListener {
 
-    public FragmentPhotoGallery() {
+    public FragmentEventObservations() {
     }
 
-    public static FragmentPhotoGallery newInstance() {
+    public static FragmentEventObservations newInstance() {
 
-        FragmentPhotoGallery fragmentPhotoGallery = new FragmentPhotoGallery();
+        FragmentEventObservations fragmentEventObservations = new FragmentEventObservations();
         Bundle extraArguments = new Bundle();
-        fragmentPhotoGallery.setArguments(extraArguments);
-        return fragmentPhotoGallery;
+        fragmentEventObservations.setArguments(extraArguments);
+        return fragmentEventObservations;
     }
 
 
@@ -34,24 +34,33 @@ public class FragmentPhotoGallery extends FragmentModel implements View.OnClickL
 
     }
 
-    TextView bt;
+    private TextView btn;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_pictures_gallery, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_event_observation, container, false);
 
-        bt = (TextView) rootView.findViewById(R.id.buto);
+        btn = (TextView) rootView.findViewById(R.id.imagesi);
 
-        bt.setOnClickListener(this);
+        btn.setOnClickListener(this);
+
 
         return rootView;
 
     }
 
     @Override
-    public void onClick(View v) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        fragmentTransactionReplace(FragmentEventCalification.newInstance(), "calificaion");
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        fragmentTransactionReplace(FragmentEventConfirmation.newInstance(), "confirma");
 
     }
 
@@ -59,4 +68,5 @@ public class FragmentPhotoGallery extends FragmentModel implements View.OnClickL
     protected void fragmentTransactionReplace(Fragment fragmentInstance, String fragmentName) {
         super.fragmentTransactionReplace(fragmentInstance, fragmentName);
     }
+
 }
