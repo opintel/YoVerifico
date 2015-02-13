@@ -114,7 +114,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
             editTxtEmail = (EditText) rootView.findViewById(R.id.edit_txt_email);
             editTxtPassword = (EditText) rootView.findViewById(R.id.edit_txt_password);
             editTxtPassConfirm = (EditText) rootView.findViewById(R.id.edit_txt_password_confirm);
-            btnRegisterme = (Button) rootView.findViewById(R.id.btn_register);
+            btnRegisterme = (Button) rootView.findViewById(R.id.btn_continue_photo);
             editTxtName.setTypeface(VerificaCiudadFonts.typefaceRobotoRegular(getActivity()));
             editTxtEmail.setTypeface(VerificaCiudadFonts.typefaceRobotoRegular(getActivity()));
             editTxtPassword.setTypeface(VerificaCiudadFonts.typefaceRobotoRegular(getActivity()));

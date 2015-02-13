@@ -11,12 +11,16 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,23 +28,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.util.StorageFiles;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 
 /**
  * Created by Jhordan on 10/02/15.
  */
-public class FragmentPhotoPictures extends FragmentModel implements View.OnClickListener {
+public class FragmentPictureEvidences extends FragmentModel implements View.OnClickListener {
 
-    public FragmentPhotoPictures() {
+    public FragmentPictureEvidences() {
     }
 
-    public static FragmentPhotoPictures newInstance() {
+    public static FragmentPictureEvidences newInstance() {
 
-        FragmentPhotoPictures fragmentPhotoPictures = new FragmentPhotoPictures();
+        FragmentPictureEvidences fragmentPictureEvidences = new FragmentPictureEvidences();
         Bundle extraArguments = new Bundle();
-        fragmentPhotoPictures.setArguments(extraArguments);
-        return fragmentPhotoPictures;
+        fragmentPictureEvidences.setArguments(extraArguments);
+        return fragmentPictureEvidences;
     }
 
 
@@ -52,30 +55,65 @@ public class FragmentPhotoPictures extends FragmentModel implements View.OnClick
     }
 
 
-    ImageView img;
+
+    // ImageView img;
     final static int REQUEST_IMAGE_CAPTURE = 0;
 
     String mCurrentPhotoPath;
 
+    FloatingActionButton btnCamera;
+
+    View rootView;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_pictures_photo, container, false);
 
 
-        ((TextView) rootView.findViewById(R.id.camara)).setOnClickListener(this);
-        img = (ImageView) rootView.findViewById(R.id.imageCaptured);
+        if(rootView == null){
+            rootView = inflater.inflate(R.layout.fragment_pictures_evidence, container, false);
+            ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Capturar Evidencia");
+
+            ((FloatingActionButton) rootView.findViewById(R.id.btn_camera)).setOnClickListener(this);
+            ((Button) rootView.findViewById(R.id.btn_continue_photo)).setOnClickListener(this);
+        }
+
+
+
+
+
+
+
+
+
+
 
         return rootView;
 
     }
 
+
     @Override
     public void onClick(View v) {
 
-        initializedCamera();
-        // fragmentTransactionReplace(FragmentPhotoGallery.newInstance(), "otra");
+        switch (v.getId()) {
+            case R.id.btn_camera:
+                initializedCamera();
+                break;
+            case R.id.btn_continue_photo:
+                fragmentEventConfirmation();
+                break;
+        }
+
+
     }
 
+
+    private void fragmentEventConfirmation() {
+
+                fragmentTransactionReplace(FragmentEventCalification.newInstance(), "photos");
+
+
+
+    }
 
     private void initializedCamera() {
 
@@ -117,15 +155,17 @@ public class FragmentPhotoPictures extends FragmentModel implements View.OnClick
 
                 //  img.setImageBitmap(yo(mCurrentPhotoPath));
 
-                setFullImageFromFilePath(mCurrentPhotoPath, img);
+                // setFullImageFromFilePath(mCurrentPhotoPath, img);
 
-                img.setOnClickListener(new View.OnClickListener() {
+               /* img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         StorageFiles.deleteFilesFromDirectory();
                     }
-                });
+                });*/
                 Log.i("CAMERA", "OK");
+
+                Toast.makeText(getActivity(), "Evidencia ha sido guardada", Toast.LENGTH_SHORT).show();
             } else if (resultCode == getActivity().RESULT_CANCELED) {
                 // User cancelled the image capture
                 Log.i("CAMERA", "CANCEL");
@@ -189,6 +229,18 @@ public class FragmentPhotoPictures extends FragmentModel implements View.OnClick
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (rootView != null) {
+            ViewGroup parentViewGroup = (ViewGroup) rootView.getParent();
+
+            if (parentViewGroup != null) {
+                parentViewGroup.removeAllViews();
+            }
+        }
+    }
+
     /**
      * Scale the photo down and fit it to our image views.
      * <p/>
@@ -243,6 +295,8 @@ public class FragmentPhotoPictures extends FragmentModel implements View.OnClick
     protected void fragmentTransactionReplace(Fragment fragmentInstance, String fragmentName) {
         super.fragmentTransactionReplace(fragmentInstance, fragmentName);
     }
+
+
 }
 
 

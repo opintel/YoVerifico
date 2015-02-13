@@ -23,5 +23,6 @@
     <color name="back_navigation_select">#33ffffff</color>
     <color name="recycle_events_background">#e3e3e3</color>
     <color name="button_pressed">#9500CCAE</color>
+    <color name="orange">#FF9800</color>
 
 </resources>

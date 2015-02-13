@@ -60,4 +60,7 @@
     <string name="yes_dialog">Por supuesto</string>
     <string name="no_dialog">No lo creo</string>
 
+
+    <string name="camera_instruction">Captura una o varias fotos del evento para continuar.</string>
+
 </resources>

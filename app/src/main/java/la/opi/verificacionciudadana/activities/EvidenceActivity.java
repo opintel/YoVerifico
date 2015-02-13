@@ -5,7 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.fragments.FragmentPhotoPictures;
+import la.opi.verificacionciudadana.fragments.FragmentPictureEvidences;
 import la.opi.verificacionciudadana.interfaces.ActivitySettings;
 
 public class EvidenceActivity extends BaseActivity implements ActivitySettings {
@@ -16,7 +16,7 @@ public class EvidenceActivity extends BaseActivity implements ActivitySettings {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container_evidence, new FragmentPhotoPictures())
+                    .add(R.id.container_evidence, new FragmentPictureEvidences())
                     .commit();
         }
 
@@ -48,10 +48,7 @@ public class EvidenceActivity extends BaseActivity implements ActivitySettings {
     }
 
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+
 
     @Override
     public void activitySettingsToolbar() {

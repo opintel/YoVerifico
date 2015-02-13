@@ -7,8 +7,6 @@ import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +18,6 @@ import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.util.StorageFiles;
 import la.opi.verificacionciudadana.util.StorageState;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
-import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 
 public class LoginActivity extends ActionBarActivity implements View.OnClickListener, ActivityChange {
@@ -52,7 +49,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                 activitiesChanged();
                 showToast("user: " + editTxtEmail.getText().toString() + " password: " + editTxtPassword.getText().toString() + " !");
                 break;
-            case R.id.btn_register:
+            case R.id.btn_continue_photo:
                 singUp();
                 break;
         }
@@ -87,7 +84,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     private void widgets() {
         Button btnLogin, btnRegister;
         btnLogin = (Button) findViewById(R.id.btn_login);
-        btnRegister = (Button) findViewById(R.id.btn_register);
+        btnRegister = (Button) findViewById(R.id.btn_continue_photo);
         editTxtEmail = (EditText) findViewById(R.id.edit_txt_email);
         editTxtPassword = (EditText) findViewById(R.id.edit_txt_password);
         btnLogin.setOnClickListener(this);

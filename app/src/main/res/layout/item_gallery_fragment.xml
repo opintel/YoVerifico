@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/image"
+    <ImageView
+        android:id="@+id/imageView_photo_evidence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="SOY CALIFICACION STARS"
-        android:textColor="@color/primary_dark" />
+        android:src="@drawable/ic_launcher" />
 
-    <RatingBar
+    <TextView
+        android:id="@+id/textView_photo_evidence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBar"
-        android:layout_gravity="center_horizontal" />
+        android:text="New Text" />
+
+
 </LinearLayout>
