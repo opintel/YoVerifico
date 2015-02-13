@@ -61,6 +61,7 @@
     <string name="no_dialog">No lo creo</string>
 
 
-    <string name="camera_instruction">Captura una o varias fotos del evento para continuar.</string>
+    <string name="camera_instruction">Captura una o varias fotos del evento.</string>
+    <string name="calification_event">¿Comó calificarías el evento?</string>
 
 </resources>

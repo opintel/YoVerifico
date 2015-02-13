@@ -55,7 +55,6 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
     }
 
 
-
     // ImageView img;
     final static int REQUEST_IMAGE_CAPTURE = 0;
 
@@ -64,26 +63,18 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
     FloatingActionButton btnCamera;
 
     View rootView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        if(rootView == null){
+        if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_pictures_evidence, container, false);
-            ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Capturar Evidencia");
-
             ((FloatingActionButton) rootView.findViewById(R.id.btn_camera)).setOnClickListener(this);
             ((Button) rootView.findViewById(R.id.btn_continue_photo)).setOnClickListener(this);
         }
 
-
-
-
-
-
-
-
-
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Capturar Evidencia");
 
 
         return rootView;
@@ -109,8 +100,7 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
 
     private void fragmentEventConfirmation() {
 
-                fragmentTransactionReplace(FragmentEventCalification.newInstance(), "photos");
-
+        fragmentTransactionReplace(FragmentEventCalification.newInstance(), "photos");
 
 
     }

@@ -3,9 +3,11 @@ package la.opi.verificacionciudadana.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import la.opi.verificacionciudadana.R;
@@ -34,16 +36,18 @@ public class FragmentEventObservations extends FragmentModel implements View.OnC
 
     }
 
-    private TextView btn;
+    private TextView txtContinue;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_observation, container, false);
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Agregar Observación");
 
-        btn = (TextView) rootView.findViewById(R.id.imagesi);
 
-        btn.setOnClickListener(this);
+        txtContinue = (TextView) rootView.findViewById(R.id.continue_observations);
+
+        txtContinue.setOnClickListener(this);
 
 
         return rootView;
@@ -60,7 +64,7 @@ public class FragmentEventObservations extends FragmentModel implements View.OnC
 
     @Override
     public void onClick(View v) {
-        fragmentTransactionReplace(FragmentEventConfirmation.newInstance(), "confirma");
+        fragmentTransactionReplace(FragmentEventConfirmation.newInstance(), "confirmaciones");
 
     }
 

@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.interfaces.ItemListRecycleClickListener;
 import la.opi.verificacionciudadana.models.Persona;
-import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
@@ -55,7 +53,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
                 }
             });
             image = (TextView) itemView.findViewById(R.id.texto);
-            name = (TextView) itemView.findViewById(R.id.name);
+            name = (TextView) itemView.findViewById(R.id.calification_txt);
             description = (TextView) itemView.findViewById(R.id.comunity);
 
         }

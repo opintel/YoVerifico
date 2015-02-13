@@ -78,7 +78,7 @@ public class FragmentGallery extends Fragment {
                 R.id.textView_photo_evidence,
                 weekForecast);
 
-        gridView.setAdapter(mForestAdapter);
+       // gridView.setAdapter(mForestAdapter);
     }
 
 

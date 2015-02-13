@@ -3,9 +3,11 @@ package la.opi.verificacionciudadana.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,16 +37,13 @@ public class FragmentEventConfirmation extends Fragment implements View.OnClickL
 
     }
 
-    private TextView btn;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_confirmation, container, false);
-
-        btn = (TextView) rootView.findViewById(R.id.im);
-
-        btn.setOnClickListener(this);
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Reporte Final");
 
 
         return rootView;
@@ -62,9 +61,8 @@ public class FragmentEventConfirmation extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
 
-        Toast.makeText(getActivity(), "Enviado al servidor", Toast.LENGTH_SHORT).show();
-    }
 
+    }
 
 
 }
