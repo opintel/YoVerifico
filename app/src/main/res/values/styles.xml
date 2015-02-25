@@ -12,7 +12,7 @@
         <item name="windowActionBar">false</item>
         <item name="android:textColorSecondary">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
-        <item name="colorControlNormal">@color/disable_black</item>
+        <item name="colorControlNormal">@color/accent</item>
         <item name="colorControlActivated">@color/primary</item>
         <item name="colorControlHighlight">@color/primary</item>
         <!--<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>-->
@@ -23,6 +23,8 @@
         <item name="spinBars">true</item>
         <item name="color">@color/toolbar_register_text</item>
     </style>
+
+
 
 
     <!-- ToolBar -->
@@ -38,10 +40,11 @@
 
     <style name="Widget.Button.Standar" parent="android:Widget">
         <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="android:background">@drawable/button_standar</item>
+        <item name="android:background">@drawable/button_pruebas</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
+
     </style>
 
     <style name="Widget.Button.Standar.Other" parent="android:Widget">
@@ -56,6 +59,7 @@
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:textColor">@color/black_two</item>
         <item name="android:textColorHint">@color/accent</item>
+
     </style>
 
 

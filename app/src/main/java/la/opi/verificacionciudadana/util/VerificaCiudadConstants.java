@@ -14,4 +14,8 @@ public class VerificaCiudadConstants {
     public final static String DATA_FORMAT = "yyyyMMdd_HHmmss";
     public final static String IMAGE_NAME_DEFOULT = "YoVerifico";
     public final static String JPG_EXTENSION = ".jpg";
+    public final static String ERROR_PARSER= "parser error States";
+
+
+
 }

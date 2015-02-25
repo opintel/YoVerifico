@@ -5,6 +5,7 @@
     <color name="primary_dark">#00BFA5</color>
     <color name="accent">#9E9E9E</color>
     <color name="disable_black">#42000000</color>
+    <color name="disable_black_two">#32000000</color>
     <!--<color name="primary_dark">#ff4da485</color>-->
     <!--<color name="primary">#E0E0E0</color>-->
     <!--<color name="accent">#00BFA5</color>-->
@@ -23,6 +24,9 @@
     <color name="back_navigation_select">#33ffffff</color>
     <color name="recycle_events_background">#e3e3e3</color>
     <color name="button_pressed">#9500CCAE</color>
+    <color name="button_shadow">#008974</color>
     <color name="orange">#FF9800</color>
+    <color name="white_selector">#00BFA5</color>
+    <color name="btn_enabled">#64FFDA</color>
 
 </resources>

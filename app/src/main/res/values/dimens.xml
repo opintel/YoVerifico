@@ -11,4 +11,5 @@
 
 
     <dimen name="padding_edt">15dp</dimen>
+    <dimen name="corner_radius">3dp</dimen>
 </resources>

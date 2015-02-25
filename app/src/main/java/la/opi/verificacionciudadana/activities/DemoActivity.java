@@ -27,7 +27,7 @@ import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.interfaces.ActivitySettings;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 
-public class DemoActivity extends BaseActivity implements ActivityChange ,ActivitySettings {
+public class DemoActivity extends BaseActivity implements ActivityChange, ActivitySettings {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +72,17 @@ public class DemoActivity extends BaseActivity implements ActivityChange ,Activi
             case android.R.id.home:
                 demoActivity();
                 break;
+
+            case R.id.action_omited:
+                Login();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void Login() {
+        startActivity(new Intent(DemoActivity.this, LoginActivity.class));
     }
 
     @Override
@@ -108,10 +116,6 @@ public class DemoActivity extends BaseActivity implements ActivityChange ,Activi
         SystemConfigurationBars systemConfigurationBars = new SystemConfigurationBars(this);
         systemConfigurationBars.configurationNavigationBar();
     }
-
-
-
-
 
 
     /**
@@ -216,7 +220,6 @@ public class DemoActivity extends BaseActivity implements ActivityChange ,Activi
         }
 
     }
-
 
 
 }

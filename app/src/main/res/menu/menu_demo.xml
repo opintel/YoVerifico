@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="la.opi.verificacionciudadana.activities.DemoActivity">
 
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/action_omited"
         android:title="@string/action_omited"
         android:actionLayout="@layout/item_menu_demo"
         app:showAsAction="never|ifRoom"

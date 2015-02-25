@@ -1,15 +1,15 @@
 package la.opi.verificacionciudadana.models;
 
+import java.util.ArrayList;
 
 /**
- * Created by  Jhordan on 25/01/15.
+ * Created by Jhordan on 24/02/15.
  */
-
-public class Persona {
+public class State {
 
     private String id;
     private String name;
-    private String comunity;
+    private ArrayList<String> town;
 
 
     public String getId() {
@@ -28,12 +28,12 @@ public class Persona {
         this.name = name;
     }
 
-    public String getComunity() {
-        return comunity;
+    public ArrayList<String> getTown() {
+        return town;
     }
 
-    public void setComunity(String comunity) {
-        this.comunity = comunity;
+    public void setTown(ArrayList<String> town) {
+        this.town = town;
     }
 
 

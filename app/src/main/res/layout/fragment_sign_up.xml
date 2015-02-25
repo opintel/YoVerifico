@@ -3,32 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/transparent"
+    android:paddingLeft="@dimen/margin_left_login"
+    android:paddingRight="@dimen/margin_left_login">
 
 
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/margin_left_login"
-        android:paddingRight="@dimen/margin_left_login"
-        tools:context="la.opi.verificacionciudadana.activities.SignUp$PlaceholderFragment">
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:contentDescription="@android:string/unknownName"
-                android:src="@drawable/ic_profile" />
+            android:background="@drawable/layout_c"
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <EditText
                 android:id="@+id/edit_txt_name"
@@ -36,27 +27,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:background="@color/white"
                 android:ems="10"
                 android:hint="@string/user_name"
                 android:inputType="textEmailAddress"
-                android:padding="15dp" />
-
-        </LinearLayout>
+                android:padding="10dp" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:contentDescription="@android:string/unknownName"
-                android:src="@drawable/ic_email_registration" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/disable_black_two" />
 
             <EditText
                 android:id="@+id/edit_txt_email"
@@ -64,26 +45,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:background="@color/white"
                 android:ems="10"
                 android:hint="@string/user_mail"
                 android:inputType="textEmailAddress"
-                android:padding="@dimen/padding_edt" />
+                android:padding="10dp" />
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/disable_black_two" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:contentDescription="@android:string/unknownName"
-                android:src="@drawable/ic_password_registration" />
 
             <EditText
                 android:id="@+id/edit_txt_password"
@@ -91,26 +64,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:background="@color/white"
                 android:ems="10"
                 android:hint="@string/user_password"
                 android:inputType="textPassword"
-                android:padding="@dimen/padding_edt" />
+                android:padding="10dp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:contentDescription="@android:string/unknownName"
-                android:src="@drawable/ic_password_registration" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/disable_black_two" />
 
             <EditText
                 android:id="@+id/edit_txt_password_confirm"
@@ -118,19 +81,82 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:background="@color/white"
                 android:ems="10"
                 android:hint="@string/user_password_confirm"
                 android:inputType="textPassword"
-                android:padding="@dimen/padding_edt" />
+                android:padding="10dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/disable_black_two" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Estado"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/accent" />
+
+                <Spinner
+                    android:id="@+id/spinner_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/disable_black_two" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Municipio"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/accent" />
+
+                <Spinner
+                    android:id="@+id/spinner_municipal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
-
         <Button
-            android:id="@+id/btn_continue_photo"
+            android:id="@+id/btn_register_user"
             style="@style/Widget.Button.Standar"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/button_register_sing_up" />
 

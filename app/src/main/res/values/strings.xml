@@ -31,19 +31,18 @@
     <string name="settings">Configurar</string>
     <string name="about">Acerca de</string>
 
-
     <!-- Mainly Menu -->
     <string name="menu_show_demo">Cómo funciona</string>
     <string name="menu_close_sesion">Cerrar sesión</string>
     <string name="title_activity_demo">DemoActivity</string>
 
-    <!-- Demo Activity-->
+    <!-- Demo Activity -->
     <string name="action_omited">Omitir</string>
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetuer adipiscing elit ipsum dolor sit amet, consectetuer adipiscing elit</string>
     <string name="text_demo_1">VERIFICA TU LOCALIDAD</string>
     <string name="text_demo_2">CAPTURA UNA O VARIAS FOTOS DEL EVENTO</string>
     <string name="text_demo_3">CHECA TUS RESULTADOS</string>
-    <!--Events Fragment-->
+    <!-- Events Fragment -->
 
     <string name="google_maps_key">AIzaSyCAIn_FQYTrqtgu_nYvzwRWsIgmrMtIq4s</string>
 
@@ -52,16 +51,14 @@
     <string name="title_evidence">Yo Reviso</string>
     <string name="question">¿Se está realizando el evento descrito?</string>
 
-    <!--Messages-->
+    <!-- Messages -->
 
     <string name="not_avaliable">Memoria no esta disponible , verifica que tengas espacio</string>
     <string name="only_reading">Al parecer Memoria se encuentra solo en modo lectura</string>
-
     <string name="yes_dialog">Por supuesto</string>
     <string name="no_dialog">No lo creo</string>
-
-
     <string name="camera_instruction">Captura una o varias fotos del evento.</string>
     <string name="calification_event">¿Comó calificarías el evento?</string>
+    <string name="title_activity_municipal">MunicipalActivity</string>
 
 </resources>
