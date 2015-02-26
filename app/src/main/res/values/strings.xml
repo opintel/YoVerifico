@@ -18,12 +18,20 @@
     <string name="button_session">Entrar</string>
     <string name="button_register">Registrate</string>
     <string name="title_activity_sign_up">SignUp</string>
+    <string name="not_internet_conection">En este momento no estas conectado</string>
+    <string name="not_session_succes">Se ha producido un error durante el inicio de sesión. Inténtalo de nuevo.</string>
+    <string name="not_register_succes">Se ha producido un error durante el registro de usuario. Inténtalo de nuevo.</string>
+    <string name="expected_error">Parece que hay un problema con tu conexión. Inténtalo de nuevo.</string>
+    <string name="expected_connection">No se pudo obtener Estado y Municipio debido a un problema con tu conexión. Inténtalo de nuevo"</string>
 
     <!-- SignUp -->
     <string name="sign_up_title">Registrate </string>
     <string name="user_name">Nombre completo</string>
     <string name="user_password_confirm">Confirma contraseña</string>
     <string name="button_register_sing_up">Registrarme</string>
+    <string name="message_password_length">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="message_password_equals">Las contraseñas deben coincidir y tener al menos 8 caracteres </string>
+    <string name="message_mail">El formato de la dirección de correo electrónico no es válido</string>
 
     <!-- NavDrawer List -->
     <string name="my_events">Mis eventos</string>
@@ -60,5 +68,9 @@
     <string name="camera_instruction">Captura una o varias fotos del evento.</string>
     <string name="calification_event">¿Comó calificarías el evento?</string>
     <string name="title_activity_municipal">MunicipalActivity</string>
+
+    <!--Error Dialog-->
+    <string name="session_error">Correo electrónico o contraseña incorrectos</string>
+    <string name="session_error_confirm">vale</string>
 
 </resources>

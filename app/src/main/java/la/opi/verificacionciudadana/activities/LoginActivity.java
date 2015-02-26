@@ -3,8 +3,8 @@ package la.opi.verificacionciudadana.activities;
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,23 +13,31 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
 
+import java.io.IOException;
 import java.io.StringWriter;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
+import la.opi.verificacionciudadana.api.EndPoint;
+import la.opi.verificacionciudadana.api.HttpHelper;
+import la.opi.verificacionciudadana.api.RetrofitErrorHandler;
+import la.opi.verificacionciudadana.dialogs.ConnectionDialog;
+import la.opi.verificacionciudadana.dialogs.ErrorDialog;
 import la.opi.verificacionciudadana.drawer.MainActivity;
 import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.models.User;
+import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.StorageFiles;
 import la.opi.verificacionciudadana.util.StorageState;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
+import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
+import retrofit.RetrofitError;
 import retrofit.client.Response;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -40,6 +48,8 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     private String email, password;
     Button btnLogin, btnRegister;
     boolean textChangedEmail, textChangedPassword;
+    String html;
+    String userToken = "";
 
 
     @Override
@@ -63,7 +73,9 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
-
+        if (!InternetConnection.connectionState(this) && !InternetConnection.mobileConnection(this)) {
+            showToast(R.string.not_internet_conection);
+        }
         enabledButtonLogin();
     }
 
@@ -74,9 +86,17 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_login:
 
-                //  activitiesChangedMunicipal();
-                activitiesChanged();
-                //   validateData();
+                try {
+                    if (InternetConnection.connectionState(this)) {
+                        connectionPitagoras();
+                    } else {
+                        dialogConnection();
+                        showToast(R.string.not_internet_conection);
+                    }
+                } catch (Exception e) {
+                    showToast("no pudimos conectarnos vatp");
+                }
+
 
                 break;
             case R.id.btn_continue_photo:
@@ -121,30 +141,79 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         finish();
     }
 
-    private void validateData() {
+    private void connectionPitagoras() {
+
+
+        if (!InternetConnection.mobileConnection(this) && !InternetConnection.connectionState(this)) {
+            dialogConnection();
+        }
+        homeRequest();
         email = editTxtEmail.getText().toString();
         password = editTxtPassword.getText().toString();
         boolean emailValida = isEmailValid(email);
         if (!emailValida) {
-            showToast("password o mail invalido");
+
+            dialogError();
 
         } else {
 
             User user = new User();
             user.setUserEmail(email);
             user.setUserPassword(password);
-            showToast(user.getUserEmail() + " " + user.getUserPassword());
+            singInRequest(EndPoint.PARAMETER_UTF8, userToken, email, password, EndPoint.PARAMETER_REMEMBERME, EndPoint.PARAMETER_COMMIT_SIGN_IN);
         }
 
     }
 
-    private void loginRequest() {
+    private void singInRequest(String utf, String token, String userMail, String userPassword, String rememberme, String commit) {
+
+        ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
+        apiPitagorasService.userSingIn(utf, token, userMail, userPassword, rememberme, commit)
+                .observeOn(AndroidSchedulers.handlerThread(new Handler())).subscribe(new Action1<Response>() {
+            @Override
+            public void call(Response response) {
+
+                try {
+                    final StringWriter writer = new StringWriter();
+                    IOUtils.copy(response.getBody().in(), writer, VerificaCiudadConstants.UTF_8);
+                    if (HttpHelper.regexLoginSuccess(writer.toString())) {
+
+                        activitiesChanged();
+
+                    } else {
+
+                        dialogError();
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
-        Log.i("datos", email);
-        Log.i("datos", password);
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                showToast(R.string.expected_error);
 
+            }
+        });
 
+    }
+
+    private void dialogError() {
+
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        ErrorDialog dialogo = new ErrorDialog();
+        dialogo.show(fragmentManager, VerificaCiudadConstants.DIALOG_TEXT);
+    }
+
+    private void dialogConnection() {
+
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        ConnectionDialog dialog = new ConnectionDialog();
+        dialog.show(fragmentManager, VerificaCiudadConstants.DIALOG_TEXT);
     }
 
     private void enabledButtonLogin() {
@@ -158,7 +227,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (count != 0) {
+                if (s.length() > 0) {
 
                     textChangedEmail = true;
                     if (textChangedEmail == textChangedPassword) {
@@ -187,7 +256,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count != 0) {
+                if (s.length() > 0) {
 
                     textChangedPassword = true;
                     if (textChangedEmail == textChangedPassword) {
@@ -247,5 +316,46 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
+    public void homeRequest() {
+
+        ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
+        apiPitagorasService.getHome().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Response>() {
+            @Override
+            public void call(Response response) {
+
+
+                try {
+                    final StringWriter writer = new StringWriter();
+                    IOUtils.copy(response.getBody().in(), writer, VerificaCiudadConstants.UTF_8);
+
+                    String token = "";
+                    try {
+                        html = writer.toString();
+                        token = HttpHelper.regexToken(html);
+                    } catch (Exception e) {
+                        Log.e(VerificaCiudadConstants.ERROR_REGULAR_EXPRESION, e.toString());
+                    }
+
+                    userToken = token;
+                    System.out.println("TOKEN API:  " + token);
+
+                /*    if(token != null){
+                        TokenPreference.setTokenPreference(context, token);
+                    }*/
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                Log.e(VerificaCiudadConstants.ERROR_RETROFIT, throwable.getMessage());
+            }
+        });
+
+
+    }
 
 }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.activities.BaseActivity;
 import la.opi.verificacionciudadana.activities.DemoActivity;
+import la.opi.verificacionciudadana.activities.LoginActivity;
 import la.opi.verificacionciudadana.fragments.AboutFragment;
 import la.opi.verificacionciudadana.fragments.EventsFragment;
 import la.opi.verificacionciudadana.fragments.PerfilFragment;
@@ -144,6 +145,7 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.action_close_sesion:
                 showToast("cerrar sesion");
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
                 break;
 
@@ -226,7 +228,6 @@ public class MainActivity extends BaseActivity
         super.getToolbar().setBackgroundColor(getResources().getColor(R.color.toolbar_register));
         super.getToolbar().setTitleTextColor(getResources().getColor(R.color.toolbar_register_text));
     }
-
 
 
 }

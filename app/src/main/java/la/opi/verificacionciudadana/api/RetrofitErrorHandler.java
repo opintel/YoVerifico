@@ -1,7 +1,10 @@
 package la.opi.verificacionciudadana.api;
 
 import android.util.Log;
+
 import java.net.ConnectException;
+
+import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 import retrofit.ErrorHandler;
 import retrofit.RetrofitError;
 
@@ -17,8 +20,7 @@ public class RetrofitErrorHandler implements ErrorHandler {
     public Throwable handleError(RetrofitError cause) {
 
 
-        Log.e("Error en peticion HTTP: ", cause.getMessage());
-
+        Log.e(VerificaCiudadConstants.ERROR_REQUEST, cause.getMessage());
         if (cause.getKind() == RetrofitError.Kind.NETWORK)
             return new ConnectException(cause.getMessage());
 

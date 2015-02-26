@@ -5,10 +5,10 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,25 +25,25 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.adapters.SpinnerCustomAdapter;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
+import la.opi.verificacionciudadana.api.EndPoint;
+import la.opi.verificacionciudadana.dialogs.ConnectionRegisterDialog;
+import la.opi.verificacionciudadana.dialogs.CustomDialog;
 import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.interfaces.ActivitySettings;
-import la.opi.verificacionciudadana.models.*;
-import la.opi.verificacionciudadana.models.Town;
+import la.opi.verificacionciudadana.models.State;
 import la.opi.verificacionciudadana.parser.ParserStatesSpinner;
+import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
+import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 import retrofit.client.Response;
 import rx.android.schedulers.AndroidSchedulers;
@@ -68,6 +68,12 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
     @Override
     protected void onStart() {
         super.onStart();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         responseStates = requestStates();
     }
@@ -126,6 +132,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
         return ActivityOptions.makeCustomAnimation(this, R.animator.animator_enter, R.animator.animator_exit).toBundle();
     }
 
+
     private String requestStates() {
 
         ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
@@ -143,6 +150,11 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
                     e.printStackTrace();
                 }
 
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                Log.e(VerificaCiudadConstants.ERROR_RETROFIT, throwable.getMessage());
             }
         });
 
@@ -162,7 +174,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
         private EditText editTxtName, editTxtEmail, editTxtPassword, editTxtPassConfirm;
         private Button btnRegisterme;
         Spinner spinnerMunicipal, spinnerStates;
-        private java.lang.String userName, userMail, userPassword, userConfirm, userMunicipio, userState, dataStates;
+        private String userName, userMail, userPassword, userConfirm, userMunicipio, userState;
         private Boolean textChangeA, textChangeB, textChangeC, textChangeD;
 
 
@@ -184,6 +196,9 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
         public void onResume() {
             super.onResume();
 
+            if (!InternetConnection.connectionState(getActivity()) && !InternetConnection.mobileConnection(getActivity())) {
+                showToast(R.string.not_internet_conection);
+            }
 
             textChanged();
 
@@ -203,9 +218,91 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
             switch (v.getId()) {
 
                 case R.id.btn_register_user:
-                    validate();
+
+                    try {
+                        if (InternetConnection.connectionState(getActivity())) {
+                            connnectionPitagoras();
+                        } else {
+
+                            dialogConnection();
+                            showToast(R.string.not_internet_conection);
+                        }
+                    } catch (Exception e) {
+                        showToast(R.string.expected_error);
+                    }
+
+
                     break;
             }
+        }
+
+
+        private void connnectionPitagoras() {
+
+            if (!InternetConnection.mobileConnection(getActivity()) && !InternetConnection.connectionState(getActivity())) {
+                dialogConnection();
+            }
+            String token = "";
+
+
+            userName = editTxtName.getText().toString();
+            userMail = editTxtEmail.getText().toString();
+            userPassword = editTxtPassword.getText().toString();
+            userConfirm = editTxtPassConfirm.getText().toString();
+            userMunicipio = itemSpinnerTownListener();
+            boolean emailValida = isEmailValid(userMail);
+
+            if (!emailValida) {
+
+                dialogCustom(R.string.message_mail);
+
+
+            } else if (!userPassword.equals(userConfirm) || userPassword.length() <= 7) {
+
+                dialogCustom(R.string.message_password_equals);
+            } else if (userState == null || userMunicipio == null) {
+                dialogCustom(R.string.expected_connection);
+                editTxtPassword.setText("");
+                editTxtPassConfirm.setText("");
+                editTxtName.setText("");
+                editTxtEmail.setText("");
+            } else {
+
+                singUserRequest(token, EndPoint.PARAMETER_UTF8, userName, userMail, EndPoint.PARAMETER_USER_ROLE, userState, userMunicipio,
+                        userPassword, userConfirm, EndPoint.PARAMETER_COMMIT_SIGN_UP);
+            }
+
+
+        }
+
+
+        private void singUserRequest(String token, String utf, String userName, String userMail, String userRole,
+                                     String userState, String userMunicipio, String userPassword, String userConfirm, String commit) {
+
+            ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
+            apiPitagorasService.userSignUp(token, utf, userName, userMail, userRole, userState, userMunicipio, userPassword,
+                    userConfirm, commit).observeOn(AndroidSchedulers.handlerThread(new Handler())).subscribe(new Action1<Response>() {
+                @Override
+                public void call(Response response) {
+
+                    try {
+                        final StringWriter writer = new StringWriter();
+                        IOUtils.copy(response.getBody().in(), writer, "UTF-8");
+                        Log.i("RESPONSE", writer.toString());
+                    } catch (Exception e) {
+
+                    }
+
+
+                }
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    Log.e(VerificaCiudadConstants.ERROR_RETROFIT, throwable.getMessage());
+                    showToast(R.string.expected_error);
+                }
+            });
+
         }
 
 
@@ -223,6 +320,8 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
 
             } else {
                 System.out.println("VACIO");
+
+
             }
 
 
@@ -244,7 +343,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                          //  userMunicipio = adapter.getItem(position);
+                            //  userMunicipio = adapter.getItem(position);
                         }
 
                         @Override
@@ -265,27 +364,18 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
 
         }
 
+        private void dialogCustom(int message) {
 
-        private void validate() {
+            android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            CustomDialog dialog = CustomDialog.newInstance(message);
+            dialog.show(fragmentManager, VerificaCiudadConstants.DIALOG_TEXT);
+        }
 
-            userName = editTxtName.getText().toString();
-            userMail = editTxtEmail.getText().toString();
-            userPassword = editTxtPassword.getText().toString();
-            userConfirm = editTxtPassConfirm.getText().toString();
-            userMunicipio = itemSpinnerTownListener();
-            boolean emailValida = isEmailValid(userMail);
+        private void dialogConnection() {
 
-            if (emailValida && userPassword.length() >= 8 && userPassword.equals(userConfirm)) {
-
-                showToast(userName + userMail + userPassword + userConfirm + userState + userMunicipio);
-
-            } else if (userPassword.length() <= 8 && userPassword.equals(userConfirm)) {
-                showToast("Contraseña de contener minimo 8 caracteres ");
-            } else {
-                showToast("Email invalido o Contraseñas invalidas ");
-            }
-
-
+            android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            ConnectionRegisterDialog dialog = new ConnectionRegisterDialog();
+            dialog.show(fragmentManager, VerificaCiudadConstants.DIALOG_TEXT);
         }
 
         private void initializeWidgets(View rootView) {
@@ -305,6 +395,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
             btnRegisterme.setOnClickListener(this);
 
         }
+
 
         private boolean isEmailValid(CharSequence email) {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -434,6 +525,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
 
                         if (textChangeA == textChangeD && textChangeD == textChangeB && textChangeD == textChangeC) {
                             btnRegisterme.setEnabled(true);
+
                             spinnerData();
 
                         }
@@ -472,6 +564,9 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
             return state.getName();
         }
 
+        private void showToast(int message) {
+            Toast.makeText(getActivity(), getResources().getString(message), Toast.LENGTH_SHORT).show();
+        }
 
     }
 
