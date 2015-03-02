@@ -11,7 +11,7 @@
             </item>
             <item android:bottom="1.5dp">
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/white_selector" />
+                    <solid android:color="@color/white_other_selector" />
                     <corners android:radius="2dp" />
                     <padding android:left="-10dp" android:right="-10dp" />
                 </shape>
@@ -31,7 +31,7 @@
             </item>
             <item android:bottom="1.5dp">
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/primary" />
+                    <solid android:color="@color/button_cristal" />
                     <corners android:radius="2dp" />
                     <padding android:left="-10dp" android:right="-10dp" />
                 </shape>
@@ -51,7 +51,7 @@
             </item>
             <item android:bottom="1.5dp">
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/btn_enabled" />
+                    <solid android:color="@color/btn_other_enabled" />
                     <corners android:radius="2dp" />
                     <padding android:left="-10dp" android:right="-10dp" />
                 </shape>

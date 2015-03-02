@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
@@ -31,6 +32,7 @@ import la.opi.verificacionciudadana.dialogs.ErrorDialog;
 import la.opi.verificacionciudadana.drawer.MainActivity;
 import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.models.User;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.StorageFiles;
 import la.opi.verificacionciudadana.util.StorageState;
@@ -51,6 +53,8 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     String html;
     String userToken = "";
 
+    ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,15 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         systemBarsCustom();
         widgets();
         btnLogin.setEnabled(false);
+        btnLogin.setTextColor(getResources().getColor(R.color.white_nitido));
+
+        imageView = (ImageView) findViewById(R.id.pruebas);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        });
 
     }
 
@@ -165,7 +178,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
 
     }
 
-    private void singInRequest(String utf, String token, String userMail, String userPassword, String rememberme, String commit) {
+    private void singInRequest(String utf, String token, final String userMail, String userPassword, String rememberme, String commit) {
 
         ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
         apiPitagorasService.userSingIn(utf, token, userMail, userPassword, rememberme, commit)
@@ -179,6 +192,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                     if (HttpHelper.regexLoginSuccess(writer.toString())) {
 
                         activitiesChanged();
+                        ConfigurationPreferences.setMailPreference(LoginActivity.this, userMail);
 
                     } else {
 
@@ -232,7 +246,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                     textChangedEmail = true;
                     if (textChangedEmail == textChangedPassword) {
                         btnLogin.setEnabled(true);
-
+                        btnLogin.setTextColor(getResources().getColor(R.color.white));
 
                     }
 
@@ -261,6 +275,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                     textChangedPassword = true;
                     if (textChangedEmail == textChangedPassword) {
                         btnLogin.setEnabled(true);
+                        btnLogin.setTextColor(getResources().getColor(R.color.white));
 
 
                     }

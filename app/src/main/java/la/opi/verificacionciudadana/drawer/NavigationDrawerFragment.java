@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,7 +31,9 @@ import java.util.List;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.adapters.NavigationDrawerAdapter;
+import la.opi.verificacionciudadana.adapters.NavigationDrawerRecycleAdapter;
 import la.opi.verificacionciudadana.models.ItemNavigationDrawer;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -67,6 +71,14 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
     private List<ItemNavigationDrawer> itemNavigationDrawerList;
+    private String name = "Yo Verifico";
+    private String email = "ciudadano@gmail.com";
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+    DrawerLayout Drawer;
+    NavigationDrawerRecycleAdapter navigationDrawerRecycleAdapter;
+    int PROFILE = R.drawable.verifico_icon;
 
     public NavigationDrawerFragment() {
     }
@@ -76,8 +88,8 @@ public class NavigationDrawerFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         itemNavigationDrawerList = new ArrayList<>();
+        itemNavigationDrawerList.add(new ItemNavigationDrawer(0, R.string.header));
         itemNavigationDrawerList.add(new ItemNavigationDrawer(R.drawable.ic_events, R.string.my_events));
-        itemNavigationDrawerList.add(new ItemNavigationDrawer(R.drawable.ic_profile_nav, R.string.my_perfil));
         itemNavigationDrawerList.add(new ItemNavigationDrawer(R.drawable.ic_settings, R.string.settings));
         itemNavigationDrawerList.add(new ItemNavigationDrawer(R.drawable.ic_about, R.string.about));
 
@@ -106,7 +118,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+       /* mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -116,7 +128,20 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setAdapter(new NavigationDrawerAdapter(itemNavigationDrawerList, getActivity()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
-        return mDrawerListView;
+        return mDrawerListView;*/
+        View rootView = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        email = ConfigurationPreferences.getMailPreference(getActivity());
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        navigationDrawerRecycleAdapter = new NavigationDrawerRecycleAdapter(itemNavigationDrawerList, name, email, PROFILE);
+        mRecyclerView.setAdapter(navigationDrawerRecycleAdapter);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+        return rootView;
+
+
     }
 
     public boolean isDrawerOpen() {
@@ -129,17 +154,16 @@ public class NavigationDrawerFragment extends Fragment {
      * @param fragmentId   The android:id of this fragment in its activity's layout.
      * @param drawerLayout The DrawerLayout containing this fragment's UI.
      */
-    public void setUp(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
+    public void setUp(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar, NavigationDrawerRecycleAdapter.ItemRecycleClickListener itemRecycleClickListener) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
+        navigationDrawerRecycleAdapter.setItemRecycleClickListener(itemRecycleClickListener);
+        // ActionBar actionBar = getActionBar();
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.

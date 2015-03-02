@@ -13,9 +13,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Es necesario saber tu localidad para brindarte un mejor servicio"
-        android:textColor="@color/primary"
-        android:textSize="14sp" />
+        android:text="Selecciona tu nueva Localidad"
+        android:textColor="@color/font_color_app"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal" />
 
 
     <TextView
@@ -23,11 +24,35 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Estado"
-        android:textColor="@color/primary"
+        android:textColor="@color/font_color_app"
         android:textSize="14sp" />
 
     <FrameLayout
         android:id="@+id/layoutSpinnerCivilStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:paddingBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="12dp">
+
+        <Spinner
+            android:id="@+id/spinner_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Municipio"
+        android:textColor="@color/font_color_app"
+        android:textSize="14sp" />
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,29 +68,14 @@
             android:layout_height="match_parent" />
     </FrameLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Municipio"
-        android:textColor="@color/primary"
-        android:textSize="14sp" />
 
-    <FrameLayout
+    <Button
+        android:id="@+id/save"
+        style="@style/Widget.Button.Application"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:paddingBottom="12dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingTop="12dp">
-
-        <Spinner
-            android:id="@+id/spinner_state"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+        android:layout_height="55dp"
+        android:layout_marginTop="25dp"
+        android:text="Guardar Cambios" />
 
 
 </LinearLayout>

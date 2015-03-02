@@ -1,10 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/recycle_events_background"
     android:orientation="vertical"
-    tools:context="la.opi.verificacionciudadana.activities.DemoActivity">
+    tools:context="la.opi.verificacionciudadana.activities.SignUp">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,26 +17,13 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="la.opi.verificacionciudadana.activities.DemoActivity"
+        tools:context="la.opi.verificacionciudadana.activities.MunicipalActivity"
         tools:ignore="MergeRootFrame" />
 
-    <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginTop="25dp"
-        android:minHeight="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        app:theme="@style/Rushmore.Toolbar.Transparent">
-    </android.support.v7.widget.Toolbar>
-    <View
-        android:id="@+id/statusBarBackground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 
-</FrameLayout>
+</LinearLayout>
+
+
+
 
 

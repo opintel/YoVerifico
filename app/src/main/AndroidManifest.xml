@@ -70,6 +70,10 @@
         <activity
             android:name=".activities.MunicipalActivity"
             android:label="@string/title_activity_municipal" >
+            <intent-filter>
+                <action android:name=".activities.MunicipalActivity"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

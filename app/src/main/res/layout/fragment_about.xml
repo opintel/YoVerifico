@@ -37,11 +37,13 @@
             android:text="Aplicación desarollada por inteligencia paraticipativa SA de CV. Para mas información visita nuestra pagina." />
 
         <TextView
-            android:id="@+id/textVi"
+            android:id="@+id/txt_opi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="opi.la"
-            android:typeface="sans"/>
+            android:textSize="16sp"
+            android:textColor="@color/cristal"
+            android:typeface="monospace"/>
 
     </LinearLayout>
 

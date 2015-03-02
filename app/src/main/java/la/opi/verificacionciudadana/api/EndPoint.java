@@ -11,6 +11,8 @@ public class EndPoint {
     public final static String USER_SIGN_IN = "/users/sign_in";
     public final static String HOME= "/home";
     public final static String OCURRENCES = "/occurrences.json";
+    public final static String UPDATE_USER_DATA= "/users/{:id}/update.json";
+    public final static String OPI_WEB= "http://opi.la";
 
 
     public final static String FIELD_AUTHENTICITY_TOKEN = "authenticity_token";

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -26,8 +25,8 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/lorem"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="12sp"
-                android:textColor="@color/item_selector_drawer"/>
+                android:textColor="@color/item_selector_drawer"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/texiew3"
@@ -36,8 +35,8 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/lorem"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="12sp"
-                android:textColor="@color/item_selector_drawer"/>
+                android:textColor="@color/item_selector_drawer"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textVi3"
@@ -46,8 +45,8 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/lorem"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="12sp"
-                android:textColor="@color/item_selector_drawer"/>
+                android:textColor="@color/item_selector_drawer"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textVie"
@@ -56,15 +55,15 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/lorem"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="12sp"
-                android:textColor="@color/item_selector_drawer"/>
+                android:textColor="@color/item_selector_drawer"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btn_evidence"
-                style="@style/Widget.Button.Standar.Other"
+                style="@style/Widget.Button.Application"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_margin="10dp"
+                android:layout_marginTop="15dp"
                 android:text="Recopilar evidencia" />
 
 

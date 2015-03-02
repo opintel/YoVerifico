@@ -35,6 +35,14 @@ public interface ApiPitagorasService {
     );
 
     @FormUrlEncoded
+    @POST(EndPoint.UPDATE_USER_DATA)
+    Observable<Response> userUpdate(
+
+            @Field(EndPoint.FIELD_USER_STATE) String State,
+            @Field(EndPoint.FIELD_USER_TOWN) String twon
+    );
+
+    @FormUrlEncoded
     @POST(EndPoint.USER_SIGN_IN)
     Observable<Response> userSingIn(
 

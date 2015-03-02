@@ -41,6 +41,7 @@ import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.interfaces.ActivitySettings;
 import la.opi.verificacionciudadana.models.State;
 import la.opi.verificacionciudadana.parser.ParserStatesSpinner;
+import la.opi.verificacionciudadana.parser.RegisterResponse;
 import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
@@ -186,6 +187,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
             ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(R.string.sign_up_title);
             initializeWidgets(rootView);
             btnRegisterme.setEnabled(false);
+            btnRegisterme.setTextColor(getResources().getColor(R.color.white_nitido));
 
 
             return rootView;
@@ -244,7 +246,9 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
             }
             String token = "";
 
-
+            String PARAMETER_COMMIT_SIGN_UP = "Save";
+            String PARAMETER_UTF8 = "&#x2713";
+            String PARAMETER_USER_ROLE = "9";
             userName = editTxtName.getText().toString();
             userMail = editTxtEmail.getText().toString();
             userPassword = editTxtPassword.getText().toString();
@@ -268,8 +272,8 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
                 editTxtEmail.setText("");
             } else {
 
-                singUserRequest(token, EndPoint.PARAMETER_UTF8, userName, userMail, EndPoint.PARAMETER_USER_ROLE, userState, userMunicipio,
-                        userPassword, userConfirm, EndPoint.PARAMETER_COMMIT_SIGN_UP);
+                singUserRequest(token,PARAMETER_UTF8, userName, userMail, PARAMETER_USER_ROLE, userState, userMunicipio,
+                        userPassword, userConfirm, PARAMETER_COMMIT_SIGN_UP);
             }
 
 
@@ -287,9 +291,16 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
 
                     try {
                         final StringWriter writer = new StringWriter();
-                        IOUtils.copy(response.getBody().in(), writer, "UTF-8");
-                        Log.i("RESPONSE", writer.toString());
+                         IOUtils.copy(response.getBody().in(), writer, "UTF-8");
+                         Log.i("RESPONSE", writer.toString());
+                         RegisterResponse.registerResponseSucces(writer.toString());
+
+
+                        showToast("Se ha registrado a "+  RegisterResponse.getName() + " exitosamente" +
+                                "");
                     } catch (Exception e) {
+
+                        e.printStackTrace();
 
                     }
 
@@ -298,8 +309,16 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
             }, new Action1<Throwable>() {
                 @Override
                 public void call(Throwable throwable) {
-                    Log.e(VerificaCiudadConstants.ERROR_RETROFIT, throwable.getMessage());
-                    showToast(R.string.expected_error);
+
+                    if( throwable.getMessage().equals("422 Unprocessable Entity")){
+                        showToast("usuario ya esta registrado");
+
+                    }else{
+                        Log.e(VerificaCiudadConstants.ERROR_RETROFIT, throwable.getMessage());
+                        showToast(R.string.expected_error);
+                    }
+
+
                 }
             });
 
@@ -419,6 +438,8 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
                         if (textChangeA == textChangeB && textChangeA == textChangeC && textChangeA == textChangeD) {
 
                             btnRegisterme.setEnabled(true);
+                            btnRegisterme.setTextColor(getResources().getColor(R.color.white));
+
 
                         }
 
@@ -454,6 +475,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
                         textChangeB = true;
                         if (textChangeA == textChangeB && textChangeC == textChangeB && textChangeD == textChangeB) {
                             btnRegisterme.setEnabled(true);
+                            btnRegisterme.setTextColor(getResources().getColor(R.color.white));
 
                         }
 
@@ -489,6 +511,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
 
                         if (textChangeA == textChangeC && textChangeB == textChangeC && textChangeD == textChangeC) {
                             btnRegisterme.setEnabled(true);
+                            btnRegisterme.setTextColor(getResources().getColor(R.color.white));
 
                         }
 
@@ -525,6 +548,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
 
                         if (textChangeA == textChangeD && textChangeD == textChangeB && textChangeD == textChangeC) {
                             btnRegisterme.setEnabled(true);
+                            btnRegisterme.setTextColor(getResources().getColor(R.color.white));
 
                             spinnerData();
 

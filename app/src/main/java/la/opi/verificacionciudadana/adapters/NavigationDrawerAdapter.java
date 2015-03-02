@@ -53,7 +53,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
         TextView itemTitle = (TextView) rootView.findViewById(R.id.textViewContentTitle);
         itemIcon.setImageResource(itemNavigationDrawerList.get(position).getIdIcon());
         itemTitle.setText(itemNavigationDrawerList.get(position).getIdTitle());
-       itemTitle.setTypeface(VerificaCiudadFonts.typefaceRobotoRegular(context));
+       itemTitle.setTypeface(VerificaCiudadFonts.typefaceRobotoMedium(context));
 
         return rootView;
     }

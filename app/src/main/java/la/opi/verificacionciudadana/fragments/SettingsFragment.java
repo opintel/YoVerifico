@@ -1,18 +1,20 @@
 package la.opi.verificacionciudadana.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 
 /**
  * Created by Jhordan on 07/02/15.
  */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     public SettingsFragment() {
     }
@@ -21,7 +23,7 @@ public class SettingsFragment extends Fragment {
 
         SettingsFragment settingsFragment = new SettingsFragment();
         Bundle extraArguments = new Bundle();
-       settingsFragment.setArguments(extraArguments);
+        settingsFragment.setArguments(extraArguments);
         return settingsFragment;
     }
 
@@ -32,15 +34,46 @@ public class SettingsFragment extends Fragment {
         // needed to indicate that the fragment would
         // like to add items to the Options Menu
         setHasOptionsMenu(true);
-        // update the actionbar to show the up carat/affordance
+
+        addPreferencesFromResource(R.xml.general_preferences);
 
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+    public void onResume() {
+        super.onResume();
 
-        return rootView;
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
+
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        view.setBackgroundColor(getResources().getColor(R.color.recycle_events_background));
+
+        return view;
+    }
+
+    private void bindPreferenceSummaryToValue(Preference preference) {
+        preference.setOnPreferenceChangeListener(this);
+
+        onPreferenceChange(preference, PreferenceManager.getDefaultSharedPreferences(preference.getContext())
+                .getString(preference.getKey(), ""));
+
+    }
+
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+        String localidad = ConfigurationPreferences.getStatePreference(getActivity()) + " - " +
+                ConfigurationPreferences.getMunicipioPreference(getActivity());
+        preference.setSummary(localidad);
+        return true;
+
+    }
+
+
 }

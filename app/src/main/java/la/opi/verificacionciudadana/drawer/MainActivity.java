@@ -5,30 +5,33 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.activities.BaseActivity;
 import la.opi.verificacionciudadana.activities.DemoActivity;
 import la.opi.verificacionciudadana.activities.LoginActivity;
+import la.opi.verificacionciudadana.adapters.NavigationDrawerRecycleAdapter;
 import la.opi.verificacionciudadana.fragments.AboutFragment;
 import la.opi.verificacionciudadana.fragments.EventsFragment;
-import la.opi.verificacionciudadana.fragments.PerfilFragment;
 import la.opi.verificacionciudadana.fragments.RecycleViewCardView;
 import la.opi.verificacionciudadana.fragments.SettingsFragment;
 import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.interfaces.ActivitySettings;
 import la.opi.verificacionciudadana.interfaces.PressedDetail;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 
 
-public class MainActivity extends BaseActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActivityChange, PressedDetail, ActivitySettings {
+public class MainActivity extends ActionBarActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActivityChange, PressedDetail, ActivitySettings, NavigationDrawerRecycleAdapter.ItemRecycleClickListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -41,26 +44,49 @@ public class MainActivity extends BaseActivity
     private boolean onPressedDetail = false;
 
     boolean map;
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        activitySettingsToolbar();
+        //estoy prbando a preferencia
+
+
+        if (!ConfigurationPreferences.getPlacePreference(MainActivity.this)) {
+            ConfigurationPreferences.setMunicipioPreference(MainActivity.this, "Localidad del server(Guadalajara-jalisco)");
+            ConfigurationPreferences.setPlacePreference(MainActivity.this, true);
+
+        }
+
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
-        mTitle = getTitle();
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        activitySettingsToolbar();
+        if (mTitle != null) {
+            toolbar.setTitle(mTitle);
+        } else {
+            toolbar.setTitle(getResources().getString(R.string.app_name));
+        }
+        setSupportActionBar(toolbar);
 
+        mTitle = toolbar.getTitle();
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout), super.getToolbar());
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, drawerLayout, toolbar, this);
+
+
     }
 
+
     @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_main;
+    public void itemRecycleClicked(int position) {
+        onNavigationDrawerItemSelected(position);
     }
 
     @Override
@@ -74,11 +100,14 @@ public class MainActivity extends BaseActivity
                 break;
 
             case 1:
-                fragmentTransactionReplace(PerfilFragment.newInstance());
+                fragmentTransactionReplace(EventsFragment.newInstance());
                 break;
 
             case 2:
-                fragmentTransactionReplace(SettingsFragment.newInstance());
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, SettingsFragment.newInstance())
+                        .commit();
                 break;
 
             case 3:
@@ -87,17 +116,20 @@ public class MainActivity extends BaseActivity
 
         }
 
+        Log.i("posicion", Integer.toString(position));
         onSectionAttached(position);
 
     }
 
     public void onSectionAttached(int number) {
+
+        Log.i("posicion attached", Integer.toString(number));
         switch (number) {
             case 0:
                 mTitle = getString(R.string.my_events);
                 break;
             case 1:
-                mTitle = getString(R.string.my_perfil);
+                mTitle = getString(R.string.my_events);
                 break;
             case 2:
                 mTitle = getString(R.string.settings);
@@ -105,9 +137,14 @@ public class MainActivity extends BaseActivity
             case 3:
                 mTitle = getString(R.string.about);
                 break;
+
         }
+        Log.i("posicion attached", mTitle.toString());
 
-
+        if (toolbar != null) {
+            toolbar.setTitle(mTitle);
+            drawerLayout.closeDrawers();
+        }
     }
 
     public void restoreActionBar() {
@@ -145,6 +182,7 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.action_close_sesion:
                 showToast("cerrar sesion");
+                ConfigurationPreferences.clearMailPreference(MainActivity.this);
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
                 break;
@@ -225,8 +263,11 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void activitySettingsToolbar() {
-        super.getToolbar().setBackgroundColor(getResources().getColor(R.color.toolbar_register));
-        super.getToolbar().setTitleTextColor(getResources().getColor(R.color.toolbar_register_text));
+        // super.getToolbar().setTitleTextColor(getResources().getColor(R.color.font_color_app));
+
+        toolbar.setTitleTextColor(getResources().getColor(R.color.font_color_app));
+
+
     }
 
 

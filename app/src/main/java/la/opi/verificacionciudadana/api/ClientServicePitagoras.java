@@ -1,24 +1,13 @@
 package la.opi.verificacionciudadana.api;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.squareup.okhttp.OkHttpClient;
 
-import org.apache.commons.io.IOUtils;
-
-import java.io.StringWriter;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 
-import la.opi.verificacionciudadana.util.TokenPreference;
-import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
-import retrofit.client.Response;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 /**
  * Created by Jhordan on 24/02/15.

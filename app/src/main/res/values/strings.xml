@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">VerificacionCiudadana</string>
+    <string name="app_name">Yo Verifico</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
@@ -23,6 +23,7 @@
     <string name="not_register_succes">Se ha producido un error durante el registro de usuario. Inténtalo de nuevo.</string>
     <string name="expected_error">Parece que hay un problema con tu conexión. Inténtalo de nuevo.</string>
     <string name="expected_connection">No se pudo obtener Estado y Municipio debido a un problema con tu conexión. Inténtalo de nuevo"</string>
+    <string name="location_change">Ahora recibiras ocurrencias de esta localidad.</string>
 
     <!-- SignUp -->
     <string name="sign_up_title">Registrate </string>
@@ -32,11 +33,13 @@
     <string name="message_password_length">La contraseña debe tener al menos 8 caracteres</string>
     <string name="message_password_equals">Las contraseñas deben coincidir y tener al menos 8 caracteres </string>
     <string name="message_mail">El formato de la dirección de correo electrónico no es válido</string>
+    <string name="register_succes">El usuario registrado</string>
 
     <!-- NavDrawer List -->
+    <string name="header"></string>
     <string name="my_events">Mis eventos</string>
     <string name="my_perfil">Mi perfil</string>
-    <string name="settings">Configurar</string>
+    <string name="settings">Configuración</string>
     <string name="about">Acerca de</string>
 
     <!-- Mainly Menu -->
@@ -72,5 +75,21 @@
     <!--Error Dialog-->
     <string name="session_error">Correo electrónico o contraseña incorrectos</string>
     <string name="session_error_confirm">vale</string>
+
+    <!--Settings Preferences-->
+    <string name="category_location_label">Localidad</string>
+    <string name="category_account_label">Configuración de la Cuenta</string>
+
+    <string name="pref_session">Cerrar sesión</string>
+
+
+    <string name="pref_location_label">Municipio</string>
+    <string name="pref_location_key" translatable="false">location</string>
+    <string name="pref_location_default" translatable="false">94043</string>
+
+    <string name="pref_units_label">Estado</string>
+    <string name="pref_units_key">units</string>
+    <string name="pref_units_metric">metric</string>
+    <string name="pref_units_imperial">imperial</string>
 
 </resources>
