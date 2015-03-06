@@ -5,6 +5,10 @@
     <color name="primary_dark">#9E9E9E</color>
     <color name="accent">#9E9E9E</color>
 
+    <!--<color name="primary">#ECEFED</color>-->
+    <!--<color name="primary_dark">#9E9E9E</color>-->
+    <!--<color name="accent">#9E9E9E</color>-->
+
     <color name="otro">#00CCAE</color>
     <color name="header">#ECEFED</color>
     <color name="color_control_app">#5f5f5f</color>

@@ -12,12 +12,9 @@
         <item name="windowActionBar">false</item>
         <item name="android:textColorSecondary">@color/font_color_app</item>
         <item name="android:textColorPrimary">@color/font_color_app</item>
-        <item name="colorControlNormal">@color/accent</item>
-        <item name="colorControlActivated">@color/primary</item>
-        <item name="colorControlHighlight">@color/primary</item>
-
-        <!--<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>-->
-        <!--<item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>-->
+        <item name="colorControlNormal">@color/primary_dark</item>
+        <item name="colorControlActivated">@color/primary_dark</item>
+        <item name="colorControlHighlight">@color/primary_dark</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
@@ -27,9 +24,8 @@
 
 
     <!-- ToolBar -->
-    <style name="Rushmore.Toolbar.Transparent" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="Erik.Toolbar.Transparent" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:windowActionBarOverlay">true</item>
-
         <!-- Support Library compability -->
         <item name="windowActionBarOverlay">true</item>
     </style>

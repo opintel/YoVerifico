@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="220dp"
-            android:background="@color/primary"
+            android:background="@color/orange"
             android:gravity="center" />
 
         <TextView
@@ -54,11 +54,11 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:text="Anota cualquier observación importante"
-                    android:textColor="@color/disable_black"
+                    android:textColor="@color/font_color_app"
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/edit_txt_observations"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView3"
@@ -76,10 +76,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/textView3"
                     android:layout_alignRight="@+id/textView3"
-                    android:layout_below="@+id/editText"
+                    android:layout_below="@+id/edit_txt_observations"
                     android:layout_marginTop="60dp"
                     android:text="CONTINUAR"
-                    android:textColor="@color/orange" />
+                    android:textColor="@color/button_cristal" />
 
 
             </RelativeLayout>

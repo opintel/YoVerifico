@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="220dp"
-        android:background="@color/primary"
+        android:background="@color/orange"
         android:gravity="center" />
 
     <TextView
@@ -28,13 +28,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
         <Button
-            android:id="@+id/btn_continue_photo"
-            style="@style/Widget.Button.Standar.Other"
+            android:id="@+id/btn_send_evidences"
+            style="@style/Widget.Button.Application"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
             android:text="Enviar evidencia" />
 
         </RelativeLayout>

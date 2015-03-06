@@ -1,6 +1,7 @@
 package la.opi.verificacionciudadana.api;
 
 import retrofit.client.Response;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -53,6 +54,10 @@ public interface ApiPitagorasService {
             @Field(EndPoint.FIELD_USER_REMEMBER_ME) String remember,
             @Field(EndPoint.FIELD_COMMIT) String commit
     );
+
+
+    @DELETE(EndPoint.USER_LOG_OUT)
+    Observable<Response> userLogOut();
 
     @GET(EndPoint.OCURRENCES)
     Observable<Response> getOcurrences();

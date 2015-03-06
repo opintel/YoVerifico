@@ -16,7 +16,7 @@
     <string name="user_mail">Correo electrónico</string>
     <string name="user_password">Contraseña</string>
     <string name="button_session">Entrar</string>
-    <string name="button_register">Registrate</string>
+    <string name="button_register">Regístrate</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="not_internet_conection">En este momento no estas conectado</string>
     <string name="not_session_succes">Se ha producido un error durante el inicio de sesión. Inténtalo de nuevo.</string>

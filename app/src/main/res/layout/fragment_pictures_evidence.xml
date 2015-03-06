@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="220dp"
-        android:background="@color/primary"
+        android:background="@color/orange"
         android:gravity="center" />
 
     <TextView
@@ -79,8 +79,8 @@
 
 
         <Button
-            android:id="@+id/btn_continue_photo"
-            style="@style/Widget.Button.Standar.Other"
+            android:id="@+id/btn_send_evidences"
+            style="@style/Widget.Button.Application"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
@@ -94,7 +94,7 @@
             android:name="la.opi.verificacionciudadana.fragments.FragmentGallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/btn_continue_photo"
+            android:layout_above="@+id/btn_send_evidences"
             android:layout_below="@+id/imageView3"
             android:layout_marginTop="37dp"
             tools:layout="@layout/fragment_gallery"
@@ -111,8 +111,8 @@
             android:layout_alignTop="@+id/imageView3"
             android:layout_marginRight="10dp"
             android:layout_marginTop="49dp"
-            fab:fab_colorNormal="@color/accent"
-            fab:fab_colorPressed="@color/accent"
+            fab:fab_colorNormal="@color/primary_dark"
+            fab:fab_colorPressed="@color/primary_dark"
             fab:fab_icon="@drawable/ic_camara"
             fab:fab_plusIconColor="@color/white" />
 

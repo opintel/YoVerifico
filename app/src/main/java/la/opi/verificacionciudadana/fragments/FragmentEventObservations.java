@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 
 /**
  * Created by Jhordan on 10/02/15.
@@ -37,6 +40,7 @@ public class FragmentEventObservations extends FragmentModel implements View.OnC
     }
 
     private TextView txtContinue;
+    private EditText editTxtObservations;
 
 
     @Override
@@ -46,6 +50,7 @@ public class FragmentEventObservations extends FragmentModel implements View.OnC
 
 
         txtContinue = (TextView) rootView.findViewById(R.id.continue_observations);
+        editTxtObservations = (EditText) rootView.findViewById(R.id.edit_txt_observations);
 
         txtContinue.setOnClickListener(this);
 
@@ -64,6 +69,8 @@ public class FragmentEventObservations extends FragmentModel implements View.OnC
 
     @Override
     public void onClick(View v) {
+
+        ConfigurationPreferences.setObservationPreference(getActivity(), editTxtObservations.getText().toString());
         fragmentTransactionReplace(FragmentEventConfirmation.newInstance(), "confirmaciones");
 
     }

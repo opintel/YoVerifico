@@ -67,12 +67,13 @@ public class RecycleViewCardView extends Fragment implements ItemListRecycleClic
 
         List<Marker> markers = Comunicater.getDatos();
 
+try {
+    for (Marker m : markers) {
+        Log.i("DATOS AHORA COMUNICADO CON RECYCLE VIEW!!", m.getTitle());
 
-            for (Marker m : markers) {
-                Log.i("DATOS AHORA COMUNICADO CON RECYCLE VIEW!!", m.getTitle());
 
-
-            }
+    }
+}catch(Exception e){}
 
 
 

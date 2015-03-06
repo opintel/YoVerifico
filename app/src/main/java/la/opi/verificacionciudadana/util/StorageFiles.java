@@ -1,6 +1,8 @@
 package la.opi.verificacionciudadana.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -65,6 +67,9 @@ public class StorageFiles {
     }
 
 
+
+
+
     public static void deleteFilesFromDirectory() {
         File[] listFile;
 
@@ -95,6 +100,8 @@ public class StorageFiles {
 
         }
     }
+
+
 
 
 }

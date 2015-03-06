@@ -13,7 +13,7 @@ public class EvidenceActivity extends BaseActivity implements ActivitySettings {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        activitySettingsToolbar();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container_evidence, new FragmentPictureEvidences())
@@ -48,15 +48,13 @@ public class EvidenceActivity extends BaseActivity implements ActivitySettings {
     }
 
 
-
-
     @Override
     public void activitySettingsToolbar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.toolbar_register));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.toolbar_register_text));
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // toolbar.setBackgroundColor(getResources().getColor(R.color.orange));
+
     }
 
 

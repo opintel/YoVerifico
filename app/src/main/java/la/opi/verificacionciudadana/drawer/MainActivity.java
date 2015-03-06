@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +21,8 @@ import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.activities.DemoActivity;
 import la.opi.verificacionciudadana.activities.LoginActivity;
 import la.opi.verificacionciudadana.adapters.NavigationDrawerRecycleAdapter;
+import la.opi.verificacionciudadana.api.ApiPitagorasService;
+import la.opi.verificacionciudadana.api.ClientServicePitagoras;
 import la.opi.verificacionciudadana.fragments.AboutFragment;
 import la.opi.verificacionciudadana.fragments.EventsFragment;
 import la.opi.verificacionciudadana.fragments.RecycleViewCardView;
@@ -28,6 +31,9 @@ import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.interfaces.ActivitySettings;
 import la.opi.verificacionciudadana.interfaces.PressedDetail;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
+import retrofit.client.Response;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 
 public class MainActivity extends ActionBarActivity
@@ -56,7 +62,8 @@ public class MainActivity extends ActionBarActivity
 
 
         if (!ConfigurationPreferences.getPlacePreference(MainActivity.this)) {
-            ConfigurationPreferences.setMunicipioPreference(MainActivity.this, "Localidad del server(Guadalajara-jalisco)");
+            ConfigurationPreferences.setStatePreference(MainActivity.this, "Localidad del server - ");
+            ConfigurationPreferences.setMunicipioPreference(MainActivity.this, "(Guadalajara-jalisco)");
             ConfigurationPreferences.setPlacePreference(MainActivity.this, true);
 
         }
@@ -181,6 +188,7 @@ public class MainActivity extends ActionBarActivity
 
                 break;
             case R.id.action_close_sesion:
+                logOut();
                 showToast("cerrar sesion");
                 ConfigurationPreferences.clearMailPreference(MainActivity.this);
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -193,6 +201,24 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+    private void logOut() {
+
+
+        ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
+        apiPitagorasService.userLogOut().observeOn(AndroidSchedulers.handlerThread(new Handler())).subscribe(new Action1<Response>() {
+            @Override
+            public void call(Response response) {
+
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+
+            }
+        });
+
+    }
 
     private void fragmentTransactionReplace(Fragment fragmentInstance) {
 

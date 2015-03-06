@@ -198,10 +198,14 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
         public void onResume() {
             super.onResume();
 
-            if (!InternetConnection.connectionState(getActivity()) && !InternetConnection.mobileConnection(getActivity())) {
+            if (InternetConnection.isNetworkMobile(getActivity())) {
+                if (!InternetConnection.connectionState(getActivity()) && !InternetConnection.mobileConnection(getActivity())) {
+                    showToast(R.string.not_internet_conection);
+                }
+            } else if (!InternetConnection.connectionState(getActivity())) {
                 showToast(R.string.not_internet_conection);
-            }
 
+            }
             textChanged();
 
         }
@@ -246,9 +250,7 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
             }
             String token = "";
 
-            String PARAMETER_COMMIT_SIGN_UP = "Save";
-            String PARAMETER_UTF8 = "&#x2713";
-            String PARAMETER_USER_ROLE = "9";
+          
             userName = editTxtName.getText().toString();
             userMail = editTxtEmail.getText().toString();
             userPassword = editTxtPassword.getText().toString();
@@ -272,8 +274,8 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
                 editTxtEmail.setText("");
             } else {
 
-                singUserRequest(token,PARAMETER_UTF8, userName, userMail, PARAMETER_USER_ROLE, userState, userMunicipio,
-                        userPassword, userConfirm, PARAMETER_COMMIT_SIGN_UP);
+                singUserRequest(token,EndPoint.PARAMETER_UTF8, userName, userMail, EndPoint.PARAMETER_USER_ROLE, userState, userMunicipio,
+                        userPassword, userConfirm, EndPoint.PARAMETER_COMMIT_SIGN_UP);
             }
 
 

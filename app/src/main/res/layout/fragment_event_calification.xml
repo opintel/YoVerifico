@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="220dp"
-        android:background="@color/primary"
+        android:background="@color/orange"
         android:gravity="center" />
 
     <TextView
@@ -49,7 +49,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="En una escala del 1 al 5"
-                android:textColor="@color/disable_black"
+                android:textColor="@color/font_color_app"
                 android:textSize="20sp" />
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/calification_event"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/disable_black"
+                android:textColor="@color/font_color_app"
                 android:textSize="20sp" />
 
             <RatingBar
@@ -95,9 +95,9 @@
         android:layout_gravity="bottom|right"
         android:layout_marginTop="49dp"
         android:layout_marginRight="10dp"
-
-        fab:fab_colorNormal="@color/orange"
-        fab:fab_colorPressed="@color/orange"
+        android:layout_marginBottom="20dp"
+        fab:fab_colorNormal="@color/cristal"
+        fab:fab_colorPressed="@color/cristal"
         fab:fab_icon="@drawable/ic_go"
         fab:fab_plusIconColor="@color/white"
    />

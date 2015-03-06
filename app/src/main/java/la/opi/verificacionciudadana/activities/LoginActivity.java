@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.io.StringWriter;
 
 import la.opi.verificacionciudadana.R;
@@ -26,7 +25,6 @@ import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
 import la.opi.verificacionciudadana.api.EndPoint;
 import la.opi.verificacionciudadana.api.HttpHelper;
-import la.opi.verificacionciudadana.api.RetrofitErrorHandler;
 import la.opi.verificacionciudadana.dialogs.ConnectionDialog;
 import la.opi.verificacionciudadana.dialogs.ErrorDialog;
 import la.opi.verificacionciudadana.drawer.MainActivity;
@@ -39,7 +37,6 @@ import la.opi.verificacionciudadana.util.StorageState;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
-import retrofit.RetrofitError;
 import retrofit.client.Response;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -60,6 +57,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         createDirectory();
         systemBarsCustom();
         widgets();
@@ -86,9 +84,16 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
-        if (!InternetConnection.connectionState(this) && !InternetConnection.mobileConnection(this)) {
+
+        if (InternetConnection.isNetworkMobile(this)) {
+            if (!InternetConnection.connectionState(this) && !InternetConnection.mobileConnection(this)) {
+                showToast(R.string.not_internet_conection);
+            }
+        } else if (!InternetConnection.connectionState(this)) {
             showToast(R.string.not_internet_conection);
+
         }
+
         enabledButtonLogin();
     }
 
@@ -112,7 +117,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
 
 
                 break;
-            case R.id.btn_continue_photo:
+            case R.id.btn_send_evidences:
                 singUp();
                 break;
         }
@@ -301,7 +306,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     private void widgets() {
 
         btnLogin = (Button) findViewById(R.id.btn_login);
-        btnRegister = (Button) findViewById(R.id.btn_continue_photo);
+        btnRegister = (Button) findViewById(R.id.btn_send_evidences);
         editTxtEmail = (EditText) findViewById(R.id.edit_txt_email);
         editTxtPassword = (EditText) findViewById(R.id.edit_txt_password);
         btnLogin.setOnClickListener(this);

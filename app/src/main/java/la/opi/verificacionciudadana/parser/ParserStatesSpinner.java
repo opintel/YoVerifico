@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import la.opi.verificacionciudadana.api.EndPoint;
 import la.opi.verificacionciudadana.models.State;
 import la.opi.verificacionciudadana.models.Town;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
@@ -31,18 +32,18 @@ public class ParserStatesSpinner {
 
                 JSONObject state = jsonArray.getJSONObject(i);
 
-                estado.setId(state.getString("id"));
-                estado.setName(state.getString("name"));
+                estado.setId(state.getString(EndPoint.PARSER_ID_STATE));
+                estado.setName(state.getString(EndPoint.PARSER_NAME_STATE));
                 arrayListState.add(estado);
 
                 ArrayList<Town> arrayListTown = new ArrayList<>();
-                JSONArray municipios = state.getJSONArray("admin2");
+                JSONArray municipios = state.getJSONArray(EndPoint.PARSER_LIST_NAME_TOWN);
 
                 for (int j = 0; j < municipios.length(); j++) {
                     Town town = new Town();
                     JSONObject towns = municipios.getJSONObject(j);
-                    town.setName(towns.getString("name"));
-                    town.setId(towns.getString("id"));
+                    town.setName(towns.getString(EndPoint.PARSER_NAME_TOWN));
+                    town.setId(towns.getString(EndPoint.PARSER_ID_TOWN));
                     arrayListTown.add(town);
 
                 }

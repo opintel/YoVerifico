@@ -133,13 +133,6 @@ public class DemoActivity extends BaseActivity implements ActivityChange, Activi
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_demo_activity, container, false);
-            // Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-
-            //((ActionBarActivity) getActivity()).setSupportActionBar(toolbar);
-
-            // ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            // ((ActionBarActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-            // toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
 
             ViewPager pager = (ViewPager) rootView.findViewById(R.id.pager);

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 
 /**
@@ -51,41 +52,31 @@ public class FragmentEventCalification extends FragmentModel implements View.OnC
     private TextView txtEvent;
     private RatingBar ratingBarEvent;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_calification, container, false);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Calificar Evento");
 
-
         txtEvent = (TextView) rootView.findViewById(R.id.calification_txt);
         txtEvent.setTypeface(VerificaCiudadFonts.typefaceRobotoRegular(getActivity()));
         btnContinue = (FloatingActionButton) rootView.findViewById(R.id.btn_continue_calification);
         ratingBarEvent = (RatingBar) rootView.findViewById(R.id.ratingBar);
-
-
-
         btnContinue.setOnClickListener(this);
 
-
         return rootView;
-
     }
 
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
     }
 
 
     @Override
     public void onClick(View v) {
 
-        float rating=ratingBarEvent.getRating();
-        Toast.makeText(getActivity(),"Ratings: " + String.valueOf(rating),Toast.LENGTH_SHORT).show();
+        ConfigurationPreferences.setRatingPreference(getActivity(), String.valueOf(Math.round(ratingBarEvent.getRating())));
         fragmentTransactionReplace(FragmentEventObservations.newInstance(), "observations");
     }
 
@@ -93,5 +84,6 @@ public class FragmentEventCalification extends FragmentModel implements View.OnC
     protected void fragmentTransactionReplace(Fragment fragmentInstance, String fragmentName) {
         super.fragmentTransactionReplace(fragmentInstance, fragmentName);
     }
+
 
 }

@@ -23,6 +23,14 @@ public class VerificaCiudadConstants {
     public final static String UTF_8= "UTF-8";
     public final static String MESSAGE = "message";
 
+    public final static String TABLE  = "CREATE TABLE EVIDENCIA (evidenceTitle TEXT , evidencePicture TEXT)";
+    public final static String ON_UPGRADE_DROP = "DROP TABLE IF EXISTS EVIDENCIA";
+    public final static String DATA_BASE_NAME = "EVIDENCIA_CURRENCIA";
+    public final static String FIELD_EVIDENCE_NAME = "evidenceTitle";
+    public final static String FIELD_EVIDENCE_PICTURE = "evidencePicture";
+    public final static String TABLE_NAME = "EVIDENCIA";
+    public final static String QUERY_PATH = "SELECT * FROM EVIDENCIA";
+
 
 
 

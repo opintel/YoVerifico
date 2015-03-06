@@ -28,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.database.ActionsDataBase;
+import la.opi.verificacionciudadana.util.StorageFiles;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 
 /**
@@ -63,6 +65,7 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
     FloatingActionButton btnCamera;
 
     View rootView;
+    String imageFileName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,7 +74,7 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_pictures_evidence, container, false);
             ((FloatingActionButton) rootView.findViewById(R.id.btn_camera)).setOnClickListener(this);
-            ((Button) rootView.findViewById(R.id.btn_continue_photo)).setOnClickListener(this);
+            ((Button) rootView.findViewById(R.id.btn_send_evidences)).setOnClickListener(this);
         }
 
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Capturar Evidencia");
@@ -89,7 +92,7 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
             case R.id.btn_camera:
                 initializedCamera();
                 break;
-            case R.id.btn_continue_photo:
+            case R.id.btn_send_evidences:
                 fragmentEventConfirmation();
                 break;
         }
@@ -154,7 +157,10 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
                     }
                 });*/
                 Log.i("CAMERA", "OK");
+                ActionsDataBase.insertDataBase(getActivity(), imageFileName, mCurrentPhotoPath);
 
+
+                /// GUARDO LOS ARCHIVOS HASTA QUE ES OK !
                 Toast.makeText(getActivity(), "Evidencia ha sido guardada", Toast.LENGTH_SHORT).show();
             } else if (resultCode == getActivity().RESULT_CANCELED) {
                 // User cancelled the image capture
@@ -180,6 +186,8 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
             File photoFile = null;
             try {
                 photoFile = createImageFile();
+
+
             } catch (IOException ex) {
                 // Error occurred while creating the File
 
@@ -200,11 +208,12 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
 
         String timeData = new SimpleDateFormat(VerificaCiudadConstants.DATA_FORMAT).format(new Date());
         //LUEGO VEO QUE NOMBRE PONER
-        String imageFileName = VerificaCiudadConstants.IMAGE_NAME_DEFOULT + timeData;
+        imageFileName = VerificaCiudadConstants.IMAGE_NAME_DEFOULT + timeData;
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + VerificaCiudadConstants.DIRECTORY_EVIDENCE);
         File image = File.createTempFile(imageFileName, VerificaCiudadConstants.JPG_EXTENSION, storageDir);
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
+
 
         return image;
     }

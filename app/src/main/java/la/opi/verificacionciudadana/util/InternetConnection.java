@@ -1,9 +1,11 @@
 package la.opi.verificacionciudadana.util;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -38,6 +40,7 @@ public class InternetConnection {
 
         ConnectivityManager connec = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
+
         if (connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() != NetworkInfo.State.CONNECTED) {
 
             return false;
@@ -45,6 +48,18 @@ public class InternetConnection {
 
         return true;
 
+    }
+
+
+    public static Boolean isNetworkMobile(Context context){
+
+        PackageManager packageManager = context.getPackageManager();
+        if (!packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CDMA)) {
+            Log.i("CAMERA", "ESTE DISPOSITIVO NO TIENE CAMERA");
+            return false;
+        }
+
+        return true;
     }
 
 }

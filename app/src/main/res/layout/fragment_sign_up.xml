@@ -155,7 +155,7 @@
             android:id="@+id/btn_register_user"
             style="@style/Widget.Button.Standar"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/button_register_sing_up" />

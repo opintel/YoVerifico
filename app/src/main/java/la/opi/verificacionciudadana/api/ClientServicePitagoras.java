@@ -18,7 +18,7 @@ public class ClientServicePitagoras {
     private static RestAdapter restAdapter;
     private static String html;
 
-    public static RestAdapter simplePitagorasRestAdapter() {
+    private static RestAdapter simplePitagorasRestAdapter() {
 
 
         RequestInterceptor requestInterceptor = new RequestInterceptor() {

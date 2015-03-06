@@ -25,6 +25,11 @@ public class ConfigurationPreferences {
     public static final String STATE_PREFERENCE = "State_Pitagoras";
     public static final String USER_STATE = "user_state";
     public static final String STATE_EMPITY = "estado";
+    public static final String EVIDENCE_PREFERENCE = "Evidence_Pitagoras";
+    public static final String EVIDENCE_PREFERENCE_TWO = "Evidence_Pitagoras_two";
+    public static final String USER_RATING = "user_rating";
+    public static final String USER_OBSERVATION = "user_observation";
+    public static final String EVIDENCE_EMPITY = "evidence_empity";
 
 
     public static void setTokenPreference(Context context, String token) {
@@ -105,6 +110,33 @@ public class ConfigurationPreferences {
     public static Boolean getPlacePreference(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PLACE_PREFERENCE, Context.MODE_PRIVATE);
         return prefs.getBoolean(USER_PLACE, PLACE_EMPITY);
+    }
+
+    public static void setRatingPreference(Context context, String rating) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(EVIDENCE_PREFERENCE, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_RATING, rating);
+        editor.commit();
+
+    }
+
+    public static String getRatingPreference(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(EVIDENCE_PREFERENCE, Context.MODE_PRIVATE);
+        return prefs.getString(USER_RATING, EVIDENCE_EMPITY);
+    }
+
+
+    public static void setObservationPreference(Context context, String observation) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_OBSERVATION, observation);
+        editor.commit();
+
+    }
+
+    public static String getObservationPreference(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, Context.MODE_PRIVATE);
+        return prefs.getString(USER_OBSERVATION, EVIDENCE_EMPITY);
     }
 
 

@@ -13,6 +13,7 @@ public class EndPoint {
     public final static String OCURRENCES = "/occurrences.json";
     public final static String UPDATE_USER_DATA= "/users/{:id}/update.json";
     public final static String OPI_WEB= "http://opi.la";
+    public final static String USER_LOG_OUT= "/users/sign_out";
 
 
     public final static String FIELD_AUTHENTICITY_TOKEN = "authenticity_token";
@@ -35,6 +36,19 @@ public class EndPoint {
     public final static String PARAMETER_COMMIT_SIGN_UP = "Save";
     public final static String PARAMETER_UTF8 = "&#x2713";
     public final static String PARAMETER_USER_ROLE = "9";
+
+
+    // PARSER
+
+    public final static String PARSER_ID_STATE = "id";
+    public final static String PARSER_NAME_STATE= "name";
+    public final static String PARSER_LIST_NAME_TOWN= "admin2";
+    public final static String PARSER_NAME_TOWN= "name";
+    public final static String PARSER_ID_TOWN= "id";
+    public final static String PARSER_REGISTER_ID = "id";
+    public final static String PARSER_REGISTER_NAME = "name";
+    public final static String PARSER_REGISTER_MAIL = "email";
+
 
 
 }
