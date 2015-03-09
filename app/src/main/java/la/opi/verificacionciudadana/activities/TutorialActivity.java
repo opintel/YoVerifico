@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.drawer.MainActivity;
+import la.opi.verificacionciudadana.drawer.HomeMain;
 import la.opi.verificacionciudadana.fragments.TutorialFragment;
 import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
@@ -30,7 +30,7 @@ public class TutorialActivity extends BaseActivity implements ActivityChange {
 
         if (ConfigurationPreferences.getTutorialPreference(this)) {
 
-            if (g != null && g.equals("showme_tutorial")) {
+            if (g != null && g.equals("showme_tutorial") || g != null && g.equals("showme_tutorial_login")) {
                 Log.e("tutorial", "showmetutorial");
 
                 if (savedInstanceState == null) {
@@ -38,8 +38,9 @@ public class TutorialActivity extends BaseActivity implements ActivityChange {
                             .add(R.id.container, TutorialFragment.newInstance())
                             .commit();
 
-
                 }
+
+
             } else {
                 startActivity(new Intent(TutorialActivity.this, LoginScreenActivity.class));
                 finish();
@@ -85,13 +86,26 @@ public class TutorialActivity extends BaseActivity implements ActivityChange {
             case android.R.id.home:
                 if (g != null && g.equals("showme_tutorial")) {
                     login();
+                } else if (g != null && g.equals("showme_tutorial_login")) {
+
+                    home();
+
                 } else {
                     super.onBackPressed();
                 }
+
                 break;
 
             case R.id.action_omited:
-                login();
+                if (g != null && g.equals("showme_tutorial")) {
+                    login();
+                } else if (g != null && g.equals("showme_tutorial_login")) {
+
+                    home();
+
+                }else{
+                    login();
+                }
                 break;
         }
 
@@ -105,12 +119,22 @@ public class TutorialActivity extends BaseActivity implements ActivityChange {
 
         if (g != null && g.equals("showme_tutorial")) {
             login();
+        } else if (g != null && g.equals("showme_tutorial_login")) {
+
+            home();
+
         } else {
             super.onBackPressed();
         }
 
     }
 
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void home() {
+        startActivity(new Intent(TutorialActivity.this, HomeMain.class), activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
+        finish();
+    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void login() {

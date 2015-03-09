@@ -27,7 +27,7 @@ import la.opi.verificacionciudadana.api.EndPoint;
 import la.opi.verificacionciudadana.api.HttpHelper;
 import la.opi.verificacionciudadana.dialogs.ConnectionDialog;
 import la.opi.verificacionciudadana.dialogs.ErrorDialog;
-import la.opi.verificacionciudadana.drawer.MainActivity;
+import la.opi.verificacionciudadana.drawer.HomeMain;
 import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.models.User;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
@@ -68,7 +68,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, HomeMain.class));
             }
         });
 
@@ -150,7 +150,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void activitiesChanged() {
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        startActivity(new Intent(LoginActivity.this, HomeMain.class));
         finish();
     }
 

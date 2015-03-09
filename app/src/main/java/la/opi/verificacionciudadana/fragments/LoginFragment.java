@@ -1,5 +1,6 @@
 package la.opi.verificacionciudadana.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.drawer.HomeMain;
 
 /**
  * Created by Jhordan on 08/03/15.
@@ -43,6 +46,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         ((Button) rootView.findViewById(R.id.btn_session)).setOnClickListener(this);
         ((Button) rootView.findViewById(R.id.btn_register)).setOnClickListener(this);
+        ((ImageView) rootView.findViewById(R.id.pruebas)).setOnClickListener(this);
 
         return rootView;
     }
@@ -63,6 +67,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 fragmentTransactionReplace(RegisterFragment.newInstance(), "register_fragment");
 
                 break;
+
+            case R.id.pruebas:
+                Intent intent = new Intent(getActivity(), HomeMain.class);
+                startActivity(intent);
+                break;
         }
 
     }
@@ -75,6 +84,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 .replace(R.id.login_container, fragmentInstance).addToBackStack(fragmentname)
                 .commit();
 
-
     }
+
+
 }

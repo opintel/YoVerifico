@@ -35,7 +35,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 
-public class MainActivity extends ActionBarActivity
+public class HomeMain extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActivityChange, PressedDetail, ActivitySettings, NavigationDrawerRecycleAdapter.ItemRecycleClickListener {
 
     /**
@@ -60,10 +60,10 @@ public class MainActivity extends ActionBarActivity
         //estoy prbando a preferencia
 
 
-        if (!ConfigurationPreferences.getPlacePreference(MainActivity.this)) {
-            ConfigurationPreferences.setStatePreference(MainActivity.this, "Localidad del server - ");
-            ConfigurationPreferences.setMunicipioPreference(MainActivity.this, "(Guadalajara-jalisco)");
-            ConfigurationPreferences.setPlacePreference(MainActivity.this, true);
+        if (!ConfigurationPreferences.getPlacePreference(HomeMain.this)) {
+            ConfigurationPreferences.setStatePreference(HomeMain.this, "Localidad del server - ");
+            ConfigurationPreferences.setMunicipioPreference(HomeMain.this, "(Guadalajara-jalisco)");
+            ConfigurationPreferences.setPlacePreference(HomeMain.this, true);
 
         }
 
@@ -182,15 +182,14 @@ public class MainActivity extends ActionBarActivity
         switch (id) {
             case R.id.action_demo:
 
-                showToast("soy un demo");
-                showDemo();
+                tutorial();
 
                 break;
             case R.id.action_close_sesion:
                 logOut();
                 showToast("cerrar sesion");
-                ConfigurationPreferences.clearMailPreference(MainActivity.this);
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                ConfigurationPreferences.clearMailPreference(HomeMain.this);
+                startActivity(new Intent(HomeMain.this, LoginActivity.class));
 
                 break;
 
@@ -241,9 +240,11 @@ public class MainActivity extends ActionBarActivity
      * calls activitiesChanged add two arguments
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void showDemo() {
+    private void tutorial() {
 
-        startActivity(new Intent(MainActivity.this, TutorialActivity.class), activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
+        Intent intent = new Intent(HomeMain.this, TutorialActivity.class);
+        intent = intent.putExtra("tutorial", "showme_tutorial_login");
+        startActivity(intent, activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
         finish();
 
     }
