@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="la.opi.verificacionciudadana.activities.DemoActivity">
+    tools:context="la.opi.verificacionciudadana.activities.TutorialActivity">
 
     <item android:id="@+id/action_omited"
         android:title="@string/action_omited"

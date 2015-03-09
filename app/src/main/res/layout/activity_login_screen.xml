@@ -1,34 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
-    android:orientation="vertical"
-    tools:context="la.opi.verificacionciudadana.activities.TutorialActivity">
-
-
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="la.opi.verificacionciudadana.activities.TutorialActivity"
-        tools:ignore="MergeRootFrame" />
+    android:background="@drawable/angell"
+    tools:context="la.opi.verificacionciudadana.activities.LoginScreenActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="@dimen/status_bar"
         android:background="@android:color/transparent"
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/Erik.Toolbar.Transparent" />
+
+    <FrameLayout
+        android:id="@+id/login_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        tools:ignore="UselessLeaf" />
 
     <View
         android:id="@+id/statusBarBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</FrameLayout>
 
-
+</RelativeLayout>

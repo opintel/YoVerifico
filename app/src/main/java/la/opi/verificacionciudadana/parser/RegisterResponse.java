@@ -13,6 +13,31 @@ public class RegisterResponse {
     private String email;
     private static String name;
 
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        RegisterResponse.name = name;
+    }
+
     public static void registerResponseError(String response) {
 
         try {
@@ -45,29 +70,5 @@ public class RegisterResponse {
 
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public static String getName() {
-        return name;
-    }
-
-    public static void setName(String name) {
-        RegisterResponse.name = name;
-    }
 
 }

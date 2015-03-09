@@ -30,7 +30,8 @@ public class ConfigurationPreferences {
     public static final String USER_RATING = "user_rating";
     public static final String USER_OBSERVATION = "user_observation";
     public static final String EVIDENCE_EMPITY = "evidence_empity";
-
+    public static final String TUTORIAL_PREFERENCE = "tutorial_preference";
+    public static final String TUTORIAL = "tutorial_state";
 
     public static void setTokenPreference(Context context, String token) {
 
@@ -137,6 +138,19 @@ public class ConfigurationPreferences {
     public static String getObservationPreference(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, Context.MODE_PRIVATE);
         return prefs.getString(USER_OBSERVATION, EVIDENCE_EMPITY);
+    }
+
+    public static void setTutorialPreference(Context context, Boolean observation) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(TUTORIAL_PREFERENCE, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(TUTORIAL, observation);
+        editor.commit();
+
+    }
+
+    public static Boolean getTutorialPreference(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(TUTORIAL_PREFERENCE, Context.MODE_PRIVATE);
+        return prefs.getBoolean(TUTORIAL, PLACE_EMPITY);
     }
 
 

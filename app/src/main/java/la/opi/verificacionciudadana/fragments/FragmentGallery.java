@@ -1,7 +1,6 @@
 package la.opi.verificacionciudadana.fragments;
 
 import android.app.LoaderManager;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,8 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
+import java.util.ArrayList;
+
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.adapters.EvidencesImagesAdapter;
+import la.opi.verificacionciudadana.database.ActionsDataBase;
+import la.opi.verificacionciudadana.models.ImageEvidence;
 
 /**
  * Created by Jhordan on 07/02/15.
@@ -86,7 +89,7 @@ public class FragmentGallery extends Fragment implements LoaderManager.LoaderCal
     public void onResume() {
         super.onResume();
 
-     /*   System.out.println("SE EJECUTO ON RESUME");
+       System.out.println("SE EJECUTO ON RESUME");
         ActionsDataBase.queryDataBase(getActivity());
         ActionsDataBase.getTitleEvidence();
         ActionsDataBase.getPhotoEvidence();
@@ -115,7 +118,7 @@ public class FragmentGallery extends Fragment implements LoaderManager.LoaderCal
         }
 
         EvidencesImagesAdapter evidencesImagesAdapter = new EvidencesImagesAdapter(getActivity(), imageEvidences);
-        gridView.setAdapter(evidencesImagesAdapter);*/
+        gridView.setAdapter(evidencesImagesAdapter);
 
 
     }

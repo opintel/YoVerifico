@@ -48,8 +48,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:text="En una escala del 1 al 5"
-                android:textColor="@color/font_color_app"
+                android:text="@string/scale_txt"
+                android:textColor="@color/accent"
                 android:textSize="20sp" />
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/calification_event"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/font_color_app"
+                android:textColor="@color/accent"
                 android:textSize="20sp" />
 
             <RatingBar

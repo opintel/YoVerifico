@@ -5,7 +5,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimaryDark">@color/color_app</item>
         <item name="colorAccent">@color/primary</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowNoTitle">true</item>
@@ -32,6 +32,22 @@
 
 
     <!--Login Activity-->
+
+    <style name="Widget.TextView.Login" parent="android:Widget">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="Widget.Button.Login" parent="android:Widget">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:background">@drawable/button_login</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
 
     <style name="Widget.Button.Standar" parent="android:Widget">
         <item name="android:gravity">center_vertical|center_horizontal</item>

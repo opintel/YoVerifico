@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -18,7 +17,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.activities.DemoActivity;
+import la.opi.verificacionciudadana.activities.TutorialActivity;
 import la.opi.verificacionciudadana.activities.LoginActivity;
 import la.opi.verificacionciudadana.adapters.NavigationDrawerRecycleAdapter;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
@@ -244,7 +243,7 @@ public class MainActivity extends ActionBarActivity
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void showDemo() {
 
-        startActivity(new Intent(MainActivity.this, DemoActivity.class), activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
+        startActivity(new Intent(MainActivity.this, TutorialActivity.class), activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
         finish();
 
     }

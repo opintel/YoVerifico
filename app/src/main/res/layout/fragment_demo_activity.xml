@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/mex"
     android:orientation="vertical"
-    tools:context="la.opi.verificacionciudadana.activities.DemoActivity$DemoFragment">
+    tools:context="la.opi.verificacionciudadana.activities.TutorialActivity$DemoFragment">
 
 
     <android.support.v4.view.ViewPager

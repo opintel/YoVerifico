@@ -9,11 +9,11 @@ public class EndPoint {
     public final static String MEXICO_STATES = "/api/admin1/index_with_admin2";
     public final static String USER_SIGN_UP = "/users/create.json";
     public final static String USER_SIGN_IN = "/users/sign_in";
-    public final static String HOME= "/home";
+    public final static String HOME = "/home";
     public final static String OCURRENCES = "/occurrences.json";
-    public final static String UPDATE_USER_DATA= "/users/{:id}/update.json";
-    public final static String OPI_WEB= "http://opi.la";
-    public final static String USER_LOG_OUT= "/users/sign_out";
+    public final static String UPDATE_USER_DATA = "/users/{:id}/update.json";
+    public final static String OPI_WEB = "http://opi.la";
+    public final static String USER_LOG_OUT = "/users/sign_out";
 
 
     public final static String FIELD_AUTHENTICITY_TOKEN = "authenticity_token";
@@ -41,14 +41,21 @@ public class EndPoint {
     // PARSER
 
     public final static String PARSER_ID_STATE = "id";
-    public final static String PARSER_NAME_STATE= "name";
-    public final static String PARSER_LIST_NAME_TOWN= "admin2";
-    public final static String PARSER_NAME_TOWN= "name";
-    public final static String PARSER_ID_TOWN= "id";
+    public final static String PARSER_NAME_STATE = "name";
+    public final static String PARSER_LIST_NAME_TOWN = "admin2";
+    public final static String PARSER_NAME_TOWN = "name";
+    public final static String PARSER_ID_TOWN = "id";
     public final static String PARSER_REGISTER_ID = "id";
     public final static String PARSER_REGISTER_NAME = "name";
     public final static String PARSER_REGISTER_MAIL = "email";
 
+    public final static String PROFILE_ID = "id";
+    public final static String PROFILE_NAME = "name";
+    public final static String PROFILE_EMAIL = "email";
+    public final static String PROFILE_STATE_ID = "ciudadano_admin1_id";
+    public final static String PROFILE_TWON_ID = "ciudadano_admin2_id";
+    public final static String PROFILE_STATE_NAME = "ciudadano_admin2_name";
+    public final static String PROFILE_TWON_NAME = "ciudadano_admin2_name";
 
 
 }
