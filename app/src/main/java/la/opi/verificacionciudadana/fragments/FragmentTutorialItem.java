@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 
@@ -14,8 +13,8 @@ import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 /**
  * Created by Jhordan on 30/12/14.
  */
-public class FragmentPagerDemoItem extends Fragment {
-    public FragmentPagerDemoItem() {
+public class FragmentTutorialItem extends Fragment {
+    public FragmentTutorialItem() {
     }
 
     public static String IMG_URL = "img_url";
@@ -24,8 +23,8 @@ public class FragmentPagerDemoItem extends Fragment {
     public static String SUBTITLE = "subtitle";
 
 
-    public static FragmentPagerDemoItem newInstance(int title, int subtitle) {
-        FragmentPagerDemoItem fragmentDemoApp = new FragmentPagerDemoItem();
+    public static FragmentTutorialItem newInstance(int title, int subtitle) {
+        FragmentTutorialItem fragmentDemoApp = new FragmentTutorialItem();
         Bundle extraArguments = new Bundle();
         extraArguments.putInt(TITLE, title);
         extraArguments.putInt(SUBTITLE, subtitle);

@@ -60,11 +60,14 @@
 
             <Button
                 android:id="@+id/btn_evidence"
-                style="@style/Widget.Button.Application"
+                style="@style/Widget.Button.Standar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="15dp"
-                android:text="Recopilar evidencia" />
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/recopilate_evidence" />
+
+
 
 
         </LinearLayout>

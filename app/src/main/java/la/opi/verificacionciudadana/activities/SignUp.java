@@ -385,6 +385,11 @@ public class SignUp extends BaseActivity implements ActivityChange, ActivitySett
 
         }
 
+
+
+
+
+
         private void dialogCustom(int message) {
 
             android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

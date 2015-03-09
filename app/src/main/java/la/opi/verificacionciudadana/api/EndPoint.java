@@ -36,6 +36,7 @@ public class EndPoint {
     public final static String PARAMETER_COMMIT_SIGN_UP = "Save";
     public final static String PARAMETER_UTF8 = "&#x2713";
     public final static String PARAMETER_USER_ROLE = "9";
+    public final static String PARAMETER_TOKEN = "";
 
 
     // PARSER

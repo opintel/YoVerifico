@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.widget.Toast;
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.fragments.LoginFragment;
 import la.opi.verificacionciudadana.interfaces.ActivityChange;
+import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 
 /**
@@ -24,8 +24,21 @@ public class LoginScreenActivity extends BaseActivity implements ActivityChange 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         systemBarsCustom();
-
         getSupportFragmentManager().beginTransaction().replace(R.id.login_container, LoginFragment.newInstance()).commit();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (InternetConnection.isNetworkMobile(this)) {
+            if (!InternetConnection.connectionState(this) && !InternetConnection.mobileConnection(this)) {
+                showToast(R.string.not_internet_conection);
+            }
+        } else if (!InternetConnection.connectionState(this)) {
+            showToast(R.string.not_internet_conection);
+        }
 
     }
 
@@ -61,12 +74,10 @@ public class LoginScreenActivity extends BaseActivity implements ActivityChange 
 
     }
 
-
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_login_screen;
     }
-
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void tutorial() {
@@ -82,6 +93,9 @@ public class LoginScreenActivity extends BaseActivity implements ActivityChange 
         return ActivityOptions.makeCustomAnimation(this, R.animator.animator_enter, R.animator.animator_exit).toBundle();
     }
 
+    private void showToast(int message) {
+        Toast.makeText(this, getResources().getString(message), Toast.LENGTH_SHORT).show();
+    }
 
     private void systemBarsCustom() {
         SystemConfigurationBars systemConfigurationBars = new SystemConfigurationBars(this);

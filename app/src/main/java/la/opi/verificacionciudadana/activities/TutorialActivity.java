@@ -14,6 +14,8 @@ import la.opi.verificacionciudadana.drawer.HomeMain;
 import la.opi.verificacionciudadana.fragments.TutorialFragment;
 import la.opi.verificacionciudadana.interfaces.ActivityChange;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
+import la.opi.verificacionciudadana.util.StorageFiles;
+import la.opi.verificacionciudadana.util.StorageState;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 
 public class TutorialActivity extends BaseActivity implements ActivityChange {
@@ -24,6 +26,7 @@ public class TutorialActivity extends BaseActivity implements ActivityChange {
         super.onCreate(savedInstanceState);
         systemBarsCustom();
         super.getToolbar().setTitleTextColor(getResources().getColor(R.color.transparent));
+        createDirectory();
 
 
         g = getIntent().getStringExtra("tutorial");
@@ -151,6 +154,19 @@ public class TutorialActivity extends BaseActivity implements ActivityChange {
     private void systemBarsCustom() {
         SystemConfigurationBars systemConfigurationBars = new SystemConfigurationBars(this);
         systemConfigurationBars.configurationNavigationBar();
+    }
+
+
+    private void createDirectory() {
+
+        // FALTA VALIDAR CUANDO ESTA LLENA LA MEMORIA
+        if (StorageState.validateStorage(this)) {
+            Log.i("DIRECTORY", "se puede crear ");
+            StorageFiles.createDirectory(this);
+
+        } else {
+            Log.i("DIRECTORY", "no se puede crear");
+        }
     }
 
 

@@ -27,12 +27,12 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="20dp"
             android:paddingLeft="10dp"
             android:text="Colonia Juárez 24 julio 16:00"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/item_selector_drawer"
-            android:textSize="12sp" />
+            android:textColor="@color/button_cristal"
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/comunity"

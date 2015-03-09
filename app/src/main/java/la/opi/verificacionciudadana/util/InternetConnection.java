@@ -55,7 +55,6 @@ public class InternetConnection {
 
         PackageManager packageManager = context.getPackageManager();
         if (!packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CDMA)) {
-            Log.i("CAMERA", "ESTE DISPOSITIVO NO TIENE CAMERA");
             return false;
         }
 

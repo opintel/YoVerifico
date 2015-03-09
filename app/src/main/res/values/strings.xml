@@ -17,6 +17,9 @@
     <string name="tutorial_menu">Cómo funciona</string>
     <string name="tutorial_menu_two">Ayuda</string>
 
+    <!-- detail -->
+    <string name="recopilate_evidence">Recopilar evidencia</string>
+
     <!-- LoginActivity -->
     <string name="user_mail">Correo electrónico</string>
     <string name="user_password">Contraseña</string>
@@ -81,6 +84,8 @@
     <string name="camera_instruction">Captura una o varias fotos del evento.</string>
     <string name="calification_event">¿Comó calificarías el evento?</string>
     <string name="title_activity_municipal">MunicipalActivity</string>
+    <string name="progress_dialog_session">Iniciando sesión, espera un momento por favor.</string>
+    <string name="progress_dialog_sing_up">Creando cuenta, espera un momento por favor.</string>
 
     <!-- Error Dialog -->
     <string name="session_error">Correo electrónico o contraseña incorrectos</string>
