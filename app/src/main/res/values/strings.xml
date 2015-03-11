@@ -86,6 +86,8 @@
     <string name="title_activity_municipal">MunicipalActivity</string>
     <string name="progress_dialog_session">Iniciando sesión, espera un momento por favor.</string>
     <string name="progress_dialog_sing_up">Creando cuenta, espera un momento por favor.</string>
+    <string name="progress_dialog_help">Descargando datos, espera un momento por favor.</string>
+    <string name="url_nosmuevelapaz">http://nosmuevelapaz.org/</string>
 
     <!-- Error Dialog -->
     <string name="session_error">Correo electrónico o contraseña incorrectos</string>

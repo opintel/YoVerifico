@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/orange"
+        android:background="@color/primary_e"
         app:theme="@style/Erik.Toolbar.Transparent">
     </android.support.v7.widget.Toolbar>
 

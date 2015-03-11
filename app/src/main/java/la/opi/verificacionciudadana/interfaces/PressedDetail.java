@@ -5,5 +5,6 @@ package la.opi.verificacionciudadana.interfaces;
  */
 public interface PressedDetail {
 
+
     public void onPressedDetail(Boolean pressed);
 }

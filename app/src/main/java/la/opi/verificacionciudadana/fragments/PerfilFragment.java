@@ -37,10 +37,17 @@ public class PerfilFragment extends Fragment {
 
     }
 
+    android.support.v4.widget.SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_perfil, container, false);
 
+        swipeRefreshLayout = (android.support.v4.widget.SwipeRefreshLayout)
+                rootView.findViewById(R.id.swipe_refresh_layout);
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.primary_dark, R.color.primary, R.color.accent);
+        swipeRefreshLayout.setRefreshing(false);
         return rootView;
     }
 }

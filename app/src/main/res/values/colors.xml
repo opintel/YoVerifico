@@ -5,23 +5,26 @@
     <color name="primary_dark">#9E9E9E</color>
     <color name="accent">#9E9E9E</color>
 
-    <!--<color name="primary">#ECEFED</color>-->
+    <!--<color name="primary">#1DE9B6</color>-->
     <!--<color name="primary_dark">#9E9E9E</color>-->
     <!--<color name="accent">#9E9E9E</color>-->
+
+    <color name="primary_e">#FF9800</color>
+    <color name="primary_dark_e">#F57C00</color>
+    <color name="accent_e">#9E9E9E</color>
+
+
+    <color name="item_list">#50BDBDBD</color>
 
     <color name="otro">#00CCAE</color>
     <color name="header">#ECEFED</color>
     <color name="color_control_app">#5f5f5f</color>
-    <!--<color name="primary">#00CCAE</color>-->
-    <!--<color name="primary_dark">#00BFA5</color>-->
-    <!--<color name="accent">#9E9E9E</color>-->
+
     <color name="disable_black">#42000000</color>
     <color name="disable_black_two">#32000000</color>
     <color name="font_color_app">#5f5f5f</color>
     <color name="color_app">#5f5f5f</color>
-    <!--<color name="primary_dark">#ff4da485</color>-->
-    <!--<color name="primary">#E0E0E0</color>-->
-    <!--<color name="accent">#00BFA5</color>-->
+
 
     <color name="white">#ffffff</color>
     <color name="white_nitido">#90ffffff</color>
@@ -43,8 +46,10 @@
     <color name="white_selector">#00BFA5</color>
     <color name="white_other_selector">#FF69E9C0</color>
     <color name="button_cristal">#1DE9B6</color>
+    <color name="toolbar_cristal">#1DE9B6</color>
     <color name="btn_enabled">#64FFDA</color>
     <color name="btn_other_enabled">#A7FFEB</color>
     <color name="cristal">#4FBC9D</color>
+    <color name="selector_tab">#212121</color>
 
 </resources>

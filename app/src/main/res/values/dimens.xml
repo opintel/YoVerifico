@@ -16,4 +16,7 @@
     <dimen name="item_width">192dp</dimen>
     <dimen name="item_height">192dp</dimen>
     <dimen name="spacing_large">16dp</dimen>
+
+    <dimen name="custom_profile_image">20dp</dimen>
+    <dimen name="custom_profile_padding">2dp</dimen>
 </resources>

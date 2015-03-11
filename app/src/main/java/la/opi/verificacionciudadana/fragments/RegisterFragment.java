@@ -95,14 +95,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
-
-
-
-    }
 
     @Override
     public void onClick(View v) {

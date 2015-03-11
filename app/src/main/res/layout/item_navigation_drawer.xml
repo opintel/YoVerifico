@@ -13,7 +13,7 @@
         android:id="@+id/imageViewContentIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
+        android:layout_marginLeft="16dp"
         android:src="@drawable/ic_profile"
         android:contentDescription="@string/app_name"
         tools:ignore="RtlHardcoded" />
@@ -26,6 +26,7 @@
         android:textColor="@color/font_color_app"
         android:textSize="14sp"
         android:text="dgfhj"
+        android:textStyle="bold"
         tools:ignore="RtlHardcoded,RtlSymmetry" />
 
 </LinearLayout>

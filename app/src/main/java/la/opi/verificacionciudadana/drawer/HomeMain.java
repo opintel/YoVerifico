@@ -17,8 +17,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.activities.LoginScreenActivity;
 import la.opi.verificacionciudadana.activities.TutorialActivity;
-import la.opi.verificacionciudadana.activities.LoginActivity;
 import la.opi.verificacionciudadana.adapters.NavigationDrawerRecycleAdapter;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
@@ -26,7 +26,7 @@ import la.opi.verificacionciudadana.fragments.AboutFragment;
 import la.opi.verificacionciudadana.fragments.EventsFragment;
 import la.opi.verificacionciudadana.fragments.RecycleViewCardView;
 import la.opi.verificacionciudadana.fragments.SettingsFragment;
-import la.opi.verificacionciudadana.interfaces.ActivityChange;
+import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
 import la.opi.verificacionciudadana.interfaces.ActivitySettings;
 import la.opi.verificacionciudadana.interfaces.PressedDetail;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
@@ -36,7 +36,7 @@ import rx.functions.Action1;
 
 
 public class HomeMain extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActivityChange, PressedDetail, ActivitySettings, NavigationDrawerRecycleAdapter.ItemRecycleClickListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActivityAnimate, PressedDetail, ActivitySettings, NavigationDrawerRecycleAdapter.ItemRecycleClickListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -189,7 +189,7 @@ public class HomeMain extends ActionBarActivity
                 logOut();
                 showToast("cerrar sesion");
                 ConfigurationPreferences.clearMailPreference(HomeMain.this);
-                startActivity(new Intent(HomeMain.this, LoginActivity.class));
+                startActivity(new Intent(HomeMain.this, LoginScreenActivity.class));
 
                 break;
 
@@ -236,22 +236,19 @@ public class HomeMain extends ActionBarActivity
     }
 
 
-    /**
-     * calls activitiesChanged add two arguments
-     */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void tutorial() {
 
         Intent intent = new Intent(HomeMain.this, TutorialActivity.class);
         intent = intent.putExtra("tutorial", "showme_tutorial_login");
-        startActivity(intent, activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
+        startActivity(intent, animateActivity(R.animator.animator_enter, R.animator.animator_exit));
         finish();
 
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public Bundle activitiesChanged(int animateEnter, int animateExit) {
+    public Bundle animateActivity(int animateEnter, int animateExit) {
         return ActivityOptions.makeCustomAnimation(this, R.animator.animator_enter, R.animator.animator_exit).toBundle();
     }
 

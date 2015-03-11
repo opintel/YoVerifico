@@ -1,12 +1,20 @@
 package la.opi.verificacionciudadana.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -14,9 +22,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterManager;
+import com.google.maps.android.ui.IconGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +36,8 @@ import java.util.List;
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.interfaces.MapChangeState;
 import la.opi.verificacionciudadana.util.Comunicater;
-import la.opi.verificacionciudadana.util.OtroComunicator;
+import la.opi.verificacionciudadana.views.MarkerGoogleMap;
+import la.opi.verificacionciudadana.views.MyItem;
 
 /**
  * Created by Jhordan on 07/02/15.
@@ -137,8 +150,6 @@ public class EventsFragment extends Fragment implements MapChangeState {
             if (googleMap != null) {
 
 
-
-
                 markerList = new ArrayList<>();
 
                 double lat[] = {19.415334, 19.412084, 19.411084, 19.410054, 19.402014, 19.392084};
@@ -157,14 +168,21 @@ public class EventsFragment extends Fragment implements MapChangeState {
 
     }
 
-    private void marker(int i, double LATITUD, double LONGITUD) {
+    private void marker(final int i, double LATITUD, double LONGITUD) {
 
 
         LatLng opiLatLng = new LatLng(LATITUD, LONGITUD);
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(opiLatLng, CAMERA_ZOOM);
 
-        marker = googleMap.addMarker(new MarkerOptions().position(opiLatLng).title("Rateritos " + Integer.toString(i)));
+
+
+
+        marker = googleMap.addMarker(new MarkerOptions().position(opiLatLng)
+                .icon(BitmapDescriptorFactory.fromBitmap(MarkerGoogleMap.customMarker(getActivity(),Integer.toString(i)))));
+
         googleMap.animateCamera(update);
+
+
 
         markerList.add(marker);
         Comunicater.setDatos(markerList);
@@ -173,11 +191,17 @@ public class EventsFragment extends Fragment implements MapChangeState {
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-                Toast.makeText(getActivity(), "HOLA", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), marker.getId(), Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
     }
+
+
+
+
+
+
 
 
     @Override
@@ -196,4 +220,6 @@ public class EventsFragment extends Fragment implements MapChangeState {
 
 
     }
+
+
 }

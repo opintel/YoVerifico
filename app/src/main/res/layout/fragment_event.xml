@@ -14,14 +14,14 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="@color/recycle_events_background" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".6"
-        android:background="@color/recycle_events_background"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <FrameLayout
@@ -35,7 +35,7 @@
                 android:name="la.opi.verificacionciudadana.fragments.RecycleViewCardView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout="@layout/fragment_list_recycle_view" />
+                tools:layout="@layout/fragment_ocurrences" />
 
         </FrameLayout>
 

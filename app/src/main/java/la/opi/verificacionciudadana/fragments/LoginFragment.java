@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.drawer.HomeMain;
+import la.opi.verificacionciudadana.tabs.HomeTabs;
 
 /**
  * Created by Jhordan on 08/03/15.
@@ -69,7 +69,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.pruebas:
-                Intent intent = new Intent(getActivity(), HomeMain.class);
+                Intent intent = new Intent(getActivity(), HomeTabs.class);
                 startActivity(intent);
                 break;
         }

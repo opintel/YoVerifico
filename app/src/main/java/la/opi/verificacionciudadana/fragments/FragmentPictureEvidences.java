@@ -29,7 +29,6 @@ import java.util.Date;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.database.ActionsDataBase;
-import la.opi.verificacionciudadana.util.StorageFiles;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 
 /**

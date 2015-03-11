@@ -9,16 +9,17 @@ import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.fragments.LoginFragment;
-import la.opi.verificacionciudadana.interfaces.ActivityChange;
+import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
 import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 
 /**
  * Created by Jhordan on 08/03/15.
  */
-public class LoginScreenActivity extends BaseActivity implements ActivityChange {
+public class LoginScreenActivity extends BaseActivity implements ActivityAnimate {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,11 @@ public class LoginScreenActivity extends BaseActivity implements ActivityChange 
                 tutorial();
                 break;
 
+            case R.id.help:
+                help();
+                break;
+
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -79,17 +85,25 @@ public class LoginScreenActivity extends BaseActivity implements ActivityChange 
         return R.layout.activity_login_screen;
     }
 
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void help() {
+        Intent intent = new Intent(LoginScreenActivity.this, HelpActivity.class);
+        startActivity(intent, animateActivity(R.animator.animator_enter, R.animator.animator_exit));
+        finish();
+    }
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void tutorial() {
         Intent intent = new Intent(LoginScreenActivity.this, TutorialActivity.class);
         intent = intent.putExtra("tutorial", "showme_tutorial");
-        startActivity(intent, activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
+        startActivity(intent, animateActivity(R.animator.animator_enter, R.animator.animator_exit));
         finish();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public Bundle activitiesChanged(int animateEnter, int animateExit) {
+    public Bundle animateActivity(int animateEnter, int animateExit) {
         return ActivityOptions.makeCustomAnimation(this, R.animator.animator_enter, R.animator.animator_exit).toBundle();
     }
 

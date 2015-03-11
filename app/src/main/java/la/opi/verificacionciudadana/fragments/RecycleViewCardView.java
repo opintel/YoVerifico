@@ -3,7 +3,6 @@ package la.opi.verificacionciudadana.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.SharedElementCallback;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +19,6 @@ import java.util.List;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.adapters.RecycleAdapter;
-import la.opi.verificacionciudadana.interfaces.EventFragmentComunicate;
 import la.opi.verificacionciudadana.interfaces.ItemListRecycleClickListener;
 import la.opi.verificacionciudadana.interfaces.MapChangeState;
 import la.opi.verificacionciudadana.interfaces.PressedDetail;
@@ -54,7 +52,7 @@ public class RecycleViewCardView extends Fragment implements ItemListRecycleClic
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_list_recycle_view, container, false);
+        rootView = inflater.inflate(R.layout.fragment_ocurrences, container, false);
 
 
         return rootView;
@@ -67,15 +65,14 @@ public class RecycleViewCardView extends Fragment implements ItemListRecycleClic
 
         List<Marker> markers = Comunicater.getDatos();
 
-try {
-    for (Marker m : markers) {
-        Log.i("DATOS AHORA COMUNICADO CON RECYCLE VIEW!!", m.getTitle());
+        try {
+            for (Marker m : markers) {
+                Log.i("RECYCLE VIEW!!", m.getTitle());
 
 
-    }
-}catch(Exception e){}
-
-
+            }
+        } catch (Exception e) {
+        }
 
 
         personaArrayList = new ArrayList<>();
@@ -98,7 +95,7 @@ try {
         }
 
 
-        recycleAdapter = new RecycleAdapter(personaArrayList, R.layout.card_view_item_list);
+        recycleAdapter = new RecycleAdapter(personaArrayList, R.layout.item_list_ocurrences);
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
 //        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(recycleAdapter);
@@ -106,13 +103,14 @@ try {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        onPressedDetail = (PressedDetail) activity;
-        mapChangeState = (MapChangeState) getActivity().getSupportFragmentManager().findFragmentById(R.id.container);
+        // onPressedDetail = (PressedDetail) activity;
+        // mapChangeState = (MapChangeState) getActivity().getSupportFragmentManager().findFragmentById(R.id.container_home);
     }
 
 
@@ -123,7 +121,9 @@ try {
         Toast.makeText(getActivity(), n + " " + name, Toast.LENGTH_SHORT).show();
 
 
-        fragmentTransactionReplace(FragmentAccionDetail.newInstance());
+
+
+        //fragmentTransactionReplace(FragmentAccionDetail.newInstance());
 
 
     }
@@ -139,8 +139,8 @@ try {
                         .replace(R.id.container_detail, fragmentInstance).addToBackStack("hola")
                         .commit();
 
-                onPressedDetail.onPressedDetail(true);
-                mapChangeState.onMapChangeState(true);
+                //  onPressedDetail.onPressedDetail(true);
+                //    mapChangeState.onMapChangeState(true);
 
 
             }

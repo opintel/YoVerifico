@@ -25,7 +25,6 @@ import org.apache.commons.io.IOUtils;
 import java.io.StringWriter;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.activities.LoginScreenActivity;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
 import la.opi.verificacionciudadana.api.EndPoint;
@@ -33,8 +32,7 @@ import la.opi.verificacionciudadana.api.HttpHelper;
 import la.opi.verificacionciudadana.dialogs.ConnectionDialog;
 import la.opi.verificacionciudadana.dialogs.ErrorDialog;
 import la.opi.verificacionciudadana.drawer.HomeMain;
-import la.opi.verificacionciudadana.interfaces.ActivityChange;
-import la.opi.verificacionciudadana.models.User;
+import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
@@ -46,7 +44,7 @@ import rx.functions.Action1;
 /**
  * Created by Jhordan on 08/03/15.
  */
-public class SessionFragment extends Fragment implements View.OnClickListener, ActivityChange {
+public class SessionFragment extends Fragment implements View.OnClickListener, ActivityAnimate {
 
     public SessionFragment() {
     }
@@ -233,13 +231,13 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
     //<editor-fold desc="login success go home">
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void home() {
-        getActivity().startActivity(new Intent(getActivity(), HomeMain.class), activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
+        getActivity().startActivity(new Intent(getActivity(), HomeMain.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
         getActivity().finish();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public Bundle activitiesChanged(int animateEnter, int animateExit) {
+    public Bundle animateActivity(int animateEnter, int animateExit) {
         return ActivityOptions.makeCustomAnimation(getActivity(), R.animator.animator_enter, R.animator.animator_exit).toBundle();
     }
     //</editor-fold>

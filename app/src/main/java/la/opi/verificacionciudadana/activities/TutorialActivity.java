@@ -12,13 +12,13 @@ import android.view.MenuItem;
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.drawer.HomeMain;
 import la.opi.verificacionciudadana.fragments.TutorialFragment;
-import la.opi.verificacionciudadana.interfaces.ActivityChange;
+import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.StorageFiles;
 import la.opi.verificacionciudadana.util.StorageState;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 
-public class TutorialActivity extends BaseActivity implements ActivityChange {
+public class TutorialActivity extends BaseActivity implements ActivityAnimate {
     String g;
 
     @Override
@@ -135,19 +135,19 @@ public class TutorialActivity extends BaseActivity implements ActivityChange {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void home() {
-        startActivity(new Intent(TutorialActivity.this, HomeMain.class), activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
+        startActivity(new Intent(TutorialActivity.this, HomeMain.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
         finish();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void login() {
-        startActivity(new Intent(TutorialActivity.this, LoginScreenActivity.class), activitiesChanged(R.animator.animator_enter, R.animator.animator_exit));
+        startActivity(new Intent(TutorialActivity.this, LoginScreenActivity.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
         finish();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public Bundle activitiesChanged(int animateEnter, int animateExit) {
+    public Bundle animateActivity(int animateEnter, int animateExit) {
         return ActivityOptions.makeCustomAnimation(this, R.animator.animator_enter, R.animator.animator_exit).toBundle();
     }
 

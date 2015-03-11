@@ -1,25 +1,25 @@
 package la.opi.verificacionciudadana.dialogs;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
-import android.view.Window;
 import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.activities.EvidenceActivity;
+import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
 
 /**
  * Created by Jhordan on 11/02/15.
  */
-public class QuestionDialog extends DialogFragment {
+public class QuestionDialog extends DialogFragment implements ActivityAnimate {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,16 +46,24 @@ public class QuestionDialog extends DialogFragment {
 
                         dialog.cancel();
 
-                        Toast.makeText(getActivity(), "El gobierno  miente !! fuck!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Gracias por la información tu opinion es importante!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
         return builder.create();
     }
 
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void evidence() {
-        startActivity(new Intent(getActivity(), EvidenceActivity.class));
+        getActivity().startActivity(new Intent(getActivity(), EvidenceActivity.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
+        getActivity().finish();
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public Bundle animateActivity(int animateEnter, int animateExit) {
+        return ActivityOptions.makeCustomAnimation(getActivity(), R.animator.animator_enter, R.animator.animator_exit).toBundle();
+    }
 
 }

@@ -13,6 +13,16 @@ import java.util.List;
 public class Comunicater {
     static List<Marker> arrayList;
 
+    public static String getDatoMarker() {
+        return datoMarker;
+    }
+
+    public static void setDatoMarker(String datoMarker) {
+        Comunicater.datoMarker = datoMarker;
+    }
+
+    static String datoMarker;
+
     public static List<Marker> getDatos() {
         return arrayList;
     }
