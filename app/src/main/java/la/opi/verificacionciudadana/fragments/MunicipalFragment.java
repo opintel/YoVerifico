@@ -4,7 +4,9 @@ package la.opi.verificacionciudadana.fragments;
  * Created by Jhordan on 09/03/15.
  */
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -17,16 +19,23 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import org.apache.commons.io.IOUtils;
+
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
+
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.adapters.SpinnerCustomAdapter;
+import la.opi.verificacionciudadana.adapters.SpinnerCustomTownAdapter;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
+import la.opi.verificacionciudadana.api.HttpHelper;
 import la.opi.verificacionciudadana.dialogs.CustomDialog;
 import la.opi.verificacionciudadana.models.State;
+import la.opi.verificacionciudadana.models.Town;
 import la.opi.verificacionciudadana.parser.ParserStatesSpinner;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
@@ -51,6 +60,9 @@ public class MunicipalFragment extends Fragment {
     Spinner spinnerMunicipal, spinnerStates;
     Button btnSavePreferences;
     String estado;
+    String municipio;
+    String idState;
+    String idTwon;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,17 +93,56 @@ public class MunicipalFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String municipio = String.valueOf(spinnerMunicipal.getSelectedItem());
-                ConfigurationPreferences.setStatePreference(getActivity(), estado);
-                ConfigurationPreferences.setMunicipioPreference(getActivity(), municipio);
-                Toast.makeText(getActivity(), estado + " - " + municipio, Toast.LENGTH_LONG).show();
+
+
+
+               // ConfigurationPreferences.setStatePreference(getActivity(), estado);
+               // ConfigurationPreferences.setMunicipioPreference(getActivity(), municipio);
+                Toast.makeText(getActivity(), idState + "-" +estado + " " + idTwon + "-" + municipio, Toast.LENGTH_LONG).show();
                 dialogCustom(R.string.location_change);
+
+                // aqui esta el enn point1  userUpdate("599", "27", "1993");
 
 
             }
         });
 
     }
+
+
+    private void userUpdate(String idUser, String idState, String idTwon) {
+
+        //final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.progress_dialog_session), true);
+        ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
+        apiPitagorasService.userUpdate(idUser, idState, idTwon)
+                .observeOn(AndroidSchedulers.handlerThread(new Handler())).subscribe(new Action1<Response>() {
+            @Override
+            public void call(Response response) {
+
+                try {
+                    final StringWriter writer = new StringWriter();
+                    IOUtils.copy(response.getBody().in(), writer, VerificaCiudadConstants.UTF_8);
+
+
+                    System.out.println("RESPONSE UPDATE" + writer.toString());
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+
+
+            }
+        });
+
+    }
+
 
     private void requestStates() {
 
@@ -102,6 +153,7 @@ public class MunicipalFragment extends Fragment {
 
 
                 try {
+
                     final StringWriter writer = new StringWriter();
                     IOUtils.copy(response.getBody().in(), writer, "UTF-8");
 
@@ -113,22 +165,24 @@ public class MunicipalFragment extends Fragment {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                            estado = getState((State) spinnerStates.getItemAtPosition(position));
+                            estado = ((State) spinnerStates.getItemAtPosition(position)).getName();
+                            idState = ((State) spinnerStates.getItemAtPosition(position)).getId();
 
-                            ArrayList<String> town = getNameTown((State) spinnerStates.getItemAtPosition(position));
-                            Collections.sort(town);
-                            final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                                    R.layout.item_spinner_mexico,
-                                    R.id.item_spinner,
-                                    town);
+                            ArrayList<Town> townArrayList = ((State) spinnerStates.getItemAtPosition(position)).getTownArrayList();
 
-                            spinnerMunicipal.setAdapter(adapter);
+                            final SpinnerCustomTownAdapter spinnerCustomTownAdapter = new SpinnerCustomTownAdapter(getActivity(), townArrayList);
+
+                            Collections.sort(townArrayList, new ParserStatesSpinner.CustomComparator());
+
+                            spinnerMunicipal.setAdapter(spinnerCustomTownAdapter);
 
                             spinnerMunicipal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                                    //  userMunicipio = adapter.getItem(position);
+                                    idTwon = ((Town) spinnerMunicipal.getItemAtPosition(position)).getId();
+                                    municipio = ((Town) spinnerMunicipal.getItemAtPosition(position)).getName();
+
                                 }
 
                                 @Override
@@ -161,15 +215,6 @@ public class MunicipalFragment extends Fragment {
     }
 
 
-    private ArrayList<String> getNameTown(State state) {
-        return state.getTown();
-    }
-
-    private String getState(State state) {
-        return state.getName();
-    }
-
-
     private void dialogCustom(int message) {
 
         android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -177,7 +222,6 @@ public class MunicipalFragment extends Fragment {
         dialog.show(fragmentManager, VerificaCiudadConstants.DIALOG_TEXT);
 
     }
-
 
 
 }

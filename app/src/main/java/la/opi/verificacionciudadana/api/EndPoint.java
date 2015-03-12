@@ -6,6 +6,7 @@ package la.opi.verificacionciudadana.api;
 public class EndPoint {
 
     public final static String PITAGORAS_API = "http://staging.pitagoras.opi.la";
+    public final static String PITAGORAS_API_DEV = "http://10.230.20.77:3000";
     public final static String MEXICO_STATES = "/api/admin1/index_with_admin2";
     public final static String USER_SIGN_UP = "/users/create.json";
     public final static String USER_SIGN_IN = "/users/sign_in";
@@ -14,6 +15,8 @@ public class EndPoint {
     public final static String UPDATE_USER_DATA = "/users/{:id}/update.json";
     public final static String OPI_WEB = "http://opi.la";
     public final static String USER_LOG_OUT = "/users/sign_out";
+    public final static String USER_PROFILE_TEST = "/users/599.json";
+    public final static String USER_PROFILE = "/users/get_info.json";
 
 
     public final static String FIELD_AUTHENTICITY_TOKEN = "authenticity_token";
@@ -55,7 +58,7 @@ public class EndPoint {
     public final static String PROFILE_EMAIL = "email";
     public final static String PROFILE_STATE_ID = "ciudadano_admin1_id";
     public final static String PROFILE_TWON_ID = "ciudadano_admin2_id";
-    public final static String PROFILE_STATE_NAME = "ciudadano_admin2_name";
+    public final static String PROFILE_STATE_NAME = "ciudadano_admin1_name";
     public final static String PROFILE_TWON_NAME = "ciudadano_admin2_name";
 
 

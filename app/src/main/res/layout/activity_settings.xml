@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/recycle_events_background"
+    android:orientation="vertical"
+    tools:context="la.opi.verificacionciudadana.activities.HelpActivity">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container_settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="la.opi.verificacionciudadana.activities.SettingsActivity"
+        tools:ignore="MergeRootFrame" />
+
+
+</LinearLayout>
+
+
+
+
+

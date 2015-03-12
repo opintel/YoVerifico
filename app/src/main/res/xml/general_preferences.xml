@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/category_location_label">
-
+    <PreferenceCategory android:title="@string/category_account_label">
 
         <Preference
             android:defaultValue="Guadalajara Chivas"
             android:key="@string/pref_location_key"
-            android:title="Estado - Municipio">
+            android:title="Mi Localidad">
 
             <intent android:action=".activities.MunicipalActivity" />
         </Preference>
 
+        <Preference android:title="@string/pref_profile" />
     </PreferenceCategory>
 
 
-    <PreferenceCategory android:title="@string/category_account_label">
+    <PreferenceCategory android:title="@string/category_about_label">
+        <Preference android:title="@string/pref_about" />
         <Preference android:title="@string/pref_session" />
     </PreferenceCategory>
-
 
 </PreferenceScreen>

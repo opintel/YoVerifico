@@ -90,6 +90,16 @@ public class PerfilParser {
             setProfileTownName(jsonObject.getString(EndPoint.PROFILE_TWON_NAME));
 
 
+            System.out.println(getProfileId());
+            System.out.println(getProfileName());
+            System.out.println(getProfileMail());
+
+            System.out.println(getProfileStateId());
+            System.out.println(getProfileTownId());
+            System.out.println(getProfileStateName());
+            System.out.println(getProfileName());
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

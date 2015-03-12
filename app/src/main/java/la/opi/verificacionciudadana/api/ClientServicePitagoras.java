@@ -16,7 +16,7 @@ public class ClientServicePitagoras {
 
     private static OkClient serviceClient;
     private static RestAdapter restAdapter;
-    private static String html;
+
 
     private static RestAdapter simplePitagorasRestAdapter() {
 
@@ -37,6 +37,7 @@ public class ClientServicePitagoras {
                 .build();
         return restAdapter;
     }
+
 
     public static RestAdapter getRestAdapter() {
         if (restAdapter == null || serviceClient == null) {

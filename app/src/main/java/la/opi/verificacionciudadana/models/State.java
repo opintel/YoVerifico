@@ -10,6 +10,7 @@ public class State {
     private String id;
     private String name;
     private ArrayList<String> town;
+    private ArrayList<Town> townArrayList;
 
 
     public String getId() {
@@ -35,6 +36,15 @@ public class State {
     public void setTown(ArrayList<String> town) {
         this.town = town;
     }
+
+    public ArrayList<Town> getTownArrayList() {
+        return townArrayList;
+    }
+
+    public void setTownArrayList(ArrayList<Town> townArrayList) {
+        this.townArrayList = townArrayList;
+    }
+
 
 
 

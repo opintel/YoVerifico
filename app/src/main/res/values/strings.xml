@@ -16,6 +16,7 @@
     <string name="sessión_with_email">Inicia sesíon con tu correo</string>
     <string name="tutorial_menu">Cómo funciona</string>
     <string name="tutorial_menu_two">Ayuda</string>
+    <string name="settings_tabs">Configuración</string>
 
     <!-- detail -->
     <string name="recopilate_evidence">Recopilar evidencia</string>
@@ -96,6 +97,9 @@
     <!-- Settings Preferences -->
     <string name="category_location_label">Localidad</string>
     <string name="category_account_label">Configuración de la Cuenta</string>
+    <string name="category_about_label">Acerca de</string>
+    <string name="pref_profile">Edita tu perfil</string>
+    <string name="pref_about">Acerca de YoVerifico</string>
     <string name="pref_session">Cerrar sesión</string>
     <string name="pref_location_label">Municipio</string>
     <string name="pref_location_key" translatable="false">location</string>

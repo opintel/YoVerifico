@@ -1,18 +1,26 @@
 package la.opi.verificacionciudadana.tabs;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.activities.LoginScreenActivity;
+import la.opi.verificacionciudadana.activities.SettingsActivity;
 import la.opi.verificacionciudadana.fragments.EventsFragment;
 import la.opi.verificacionciudadana.fragments.RecycleViewCardView;
+import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
 import la.opi.verificacionciudadana.interfaces.PressedDetail;
 
-public class HomeTabs extends ActionBarActivity implements PressedDetail{
-    private boolean onPressedDetail = false;
+public class HomeTabs extends ActionBarActivity implements ActivityAnimate {
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,39 +44,42 @@ public class HomeTabs extends ActionBarActivity implements PressedDetail{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_login, menu);
+        getMenuInflater().inflate(R.menu.menu_tabs, menu);
         return true;
 
     }
 
-
     @Override
-    public void onBackPressed() {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (onPressedDetail) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container_detail, RecycleViewCardView.newInstance()).commit();
+        int id = item.getItemId();
 
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container_home, EventsFragment.newInstance()).commit();
+        switch (id) {
+            case R.id.settings_home:
 
-            onPressedDetail = false;
+                settings();
 
-        } else {
-            finish();
+                break;
 
         }
 
 
+        return super.onOptionsItemSelected(item);
     }
 
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void settings() {
+        startActivity(new Intent(HomeTabs.this, SettingsActivity.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
+        finish();
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void onPressedDetail(Boolean pressed) {
-        onPressedDetail = pressed;
-
-
+    public Bundle animateActivity(int animateEnter, int animateExit) {
+        return ActivityOptions.makeCustomAnimation(this, R.animator.animator_enter, R.animator.animator_exit).toBundle();
     }
-
 
 
 }

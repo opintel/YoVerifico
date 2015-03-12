@@ -6,6 +6,8 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
+import retrofit.http.Path;
 import rx.Observable;
 
 /**
@@ -61,6 +63,20 @@ public interface ApiPitagorasService {
 
     @GET(EndPoint.OCURRENCES)
     Observable<Response> getOcurrences();
+
+    @GET(EndPoint.USER_PROFILE)
+    Observable<Response> getProfile();
+
+    @FormUrlEncoded
+    @PUT("/users/{id}/update.json")
+    Observable<Response> userUpdate(
+
+            @Path("id") String id,
+            @Field(EndPoint.FIELD_USER_STATE) String State,
+            @Field(EndPoint.FIELD_USER_TOWN) String twon
+    );
+
+
 
 
 }

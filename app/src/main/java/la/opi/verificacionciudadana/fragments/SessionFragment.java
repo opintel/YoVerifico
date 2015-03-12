@@ -33,6 +33,7 @@ import la.opi.verificacionciudadana.dialogs.ConnectionDialog;
 import la.opi.verificacionciudadana.dialogs.ErrorDialog;
 import la.opi.verificacionciudadana.drawer.HomeMain;
 import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
+import la.opi.verificacionciudadana.tabs.HomeTabs;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
@@ -231,7 +232,7 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
     //<editor-fold desc="login success go home">
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void home() {
-        getActivity().startActivity(new Intent(getActivity(), HomeMain.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
+        getActivity().startActivity(new Intent(getActivity(), HomeTabs.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
         getActivity().finish();
     }
 

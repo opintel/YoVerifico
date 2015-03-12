@@ -4,8 +4,7 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,24 +18,68 @@
             android:orientation="vertical"
             android:padding="20dp">
 
+
+
             <TextView
+                android:id="@+id/mail_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="150dp"
-                android:text="Erik Jhordan Rey Caffrey"
+                android:text="mail"
                 android:textColor="@color/font_color_app"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/name_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="8dp"
-                android:gravity="center"
-                android:text="México Distrito Federal , Iztacalco"
-                android:textColor="@color/font_color_app" />
+                android:text="Tu nombre"
+                android:textColor="@color/font_color_app"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/state_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="estado"
+                android:textColor="@color/font_color_app"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/twon_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Municipio"
+                android:textColor="@color/font_color_app"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="150dp"-->
+            <!--android:text="Erik Jhordan Rey Caffrey"-->
+            <!--android:textColor="@color/font_color_app"-->
+            <!--android:textSize="25sp"-->
+            <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="México Distrito Federal , Iztacalco"-->
+            <!--android:textColor="@color/font_color_app" />-->
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"

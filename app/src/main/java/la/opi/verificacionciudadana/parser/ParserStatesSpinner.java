@@ -7,6 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 
 import la.opi.verificacionciudadana.api.EndPoint;
 import la.opi.verificacionciudadana.models.State;
@@ -17,6 +19,8 @@ import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
  * Created by Jhordan on 25/02/15.
  */
 public class ParserStatesSpinner {
+
+
 
 
     public static ArrayList<State> paserState(String response) {
@@ -48,6 +52,8 @@ public class ParserStatesSpinner {
 
                 }
                 estado.setTown(getTown(arrayListTown));
+                estado.setTownArrayList(arrayListTown);
+
 
             }
 
@@ -65,8 +71,18 @@ public class ParserStatesSpinner {
 
         for (Town town : arrayListTowns) {
             townArrayListMex.add(town.getName());
-
         }
         return townArrayListMex;
     }
+
+
+    public static class CustomComparator implements Comparator<Town> {
+        @Override
+        public int compare(Town town1, Town town2) {
+            return town1.getName().compareTo(town2.getName());
+        }
+    }
+
+
+
 }

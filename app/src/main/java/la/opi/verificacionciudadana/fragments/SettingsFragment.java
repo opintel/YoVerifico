@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +32,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // needed to indicate that the fragment would
-        // like to add items to the Options Menu
-        setHasOptionsMenu(true);
 
+        setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.general_preferences);
 
 
@@ -51,7 +50,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-        view.setBackgroundColor(getResources().getColor(R.color.recycle_events_background));
+        view.setBackgroundColor(getResources().getColor(R.color.white));
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.settings_tabs));
 
         return view;
     }
