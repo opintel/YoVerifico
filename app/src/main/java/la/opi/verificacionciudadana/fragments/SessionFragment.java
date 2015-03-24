@@ -31,12 +31,11 @@ import la.opi.verificacionciudadana.api.EndPoint;
 import la.opi.verificacionciudadana.api.HttpHelper;
 import la.opi.verificacionciudadana.dialogs.ConnectionDialog;
 import la.opi.verificacionciudadana.dialogs.ErrorDialog;
-import la.opi.verificacionciudadana.drawer.HomeMain;
 import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
 import la.opi.verificacionciudadana.tabs.HomeTabs;
+import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.InternetConnection;
-import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 import retrofit.client.Response;
 import rx.android.schedulers.AndroidSchedulers;
@@ -151,14 +150,14 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
 
                 try {
                     final StringWriter writer = new StringWriter();
-                    IOUtils.copy(response.getBody().in(), writer, VerificaCiudadConstants.UTF_8);
+                    IOUtils.copy(response.getBody().in(), writer, Config.UTF_8);
 
                     String token = "";
                     try {
                         html = writer.toString();
                         token = HttpHelper.regexToken(html);
                     } catch (Exception e) {
-                        Log.e(VerificaCiudadConstants.ERROR_REGULAR_EXPRESION, e.toString());
+                        Log.e(Config.ERROR_REGULAR_EXPRESION, e.toString());
                     }
 
                     userToken = token;
@@ -176,7 +175,7 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
         }, new Action1<Throwable>() {
             @Override
             public void call(Throwable throwable) {
-                Log.e(VerificaCiudadConstants.ERROR_RETROFIT, throwable.getMessage());
+                Log.e(Config.ERROR_RETROFIT, throwable.getMessage());
             }
         });
 
@@ -194,7 +193,7 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
 
                 try {
                     final StringWriter writer = new StringWriter();
-                    IOUtils.copy(response.getBody().in(), writer, VerificaCiudadConstants.UTF_8);
+                    IOUtils.copy(response.getBody().in(), writer, Config.UTF_8);
                     if (HttpHelper.regexLoginSuccess(writer.toString())) {
 
                         home();
@@ -327,14 +326,14 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
 
         android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         ConnectionDialog dialog = new ConnectionDialog();
-        dialog.show(fragmentManager, VerificaCiudadConstants.DIALOG_TEXT);
+        dialog.show(fragmentManager, Config.DIALOG_TEXT);
     }
 
     private void dialogError() {
 
         android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         ErrorDialog dialogo = new ErrorDialog();
-        dialogo.show(fragmentManager, VerificaCiudadConstants.DIALOG_TEXT);
+        dialogo.show(fragmentManager, Config.DIALOG_TEXT);
     }
 
     private boolean isEmailValid(CharSequence email) {

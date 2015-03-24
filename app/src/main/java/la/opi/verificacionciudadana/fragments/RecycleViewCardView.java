@@ -115,7 +115,7 @@ public class RecycleViewCardView extends Fragment implements ItemListRecycleClic
 
 
     @Override
-    public void itemRecycleClicked(int position, String name) {
+    public void itemRecycleClicked(int position, Bundle name) {
 
         String n = Integer.toString(position);
         Toast.makeText(getActivity(), n + " " + name, Toast.LENGTH_SHORT).show();

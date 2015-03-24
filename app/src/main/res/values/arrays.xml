@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="unit_options">
-        <item>"Metric"</item>
-        <item>"Imperial"</item>
+    <string-array name="evaluation">
+        <item>En una escala 1 a 5</item>
+        <item>1. Malo</item>
+        <item>2. Bueno</item>
+        <item>3. Regular</item>
+        <item>4. Muy bueno</item>
+        <item>5. Excelente</item>
     </string-array>
-    <string-array name="unit_option_values">
-        <item>"metric"</item>
-        <item>"imperial"</item>
-    </string-array>
+
 </resources>

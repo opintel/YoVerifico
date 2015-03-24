@@ -56,7 +56,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.MunicipalActivity"
+            android:name=".activities.TownActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_municipal"
             android:screenOrientation="portrait">
@@ -67,7 +67,18 @@
         </activity>
 
         <activity
-            android:name=".activities.LoginScreenActivity"
+            android:name=".activities.AboutActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name=".activities.AboutActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".activities.LoginActivity"
             android:configChanges="orientation"
             android:label="@string/activity_login_screen_name"
             android:screenOrientation="portrait" />
@@ -104,6 +115,11 @@
 
         <activity
             android:name=".activities.SettingsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.InformacionActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 

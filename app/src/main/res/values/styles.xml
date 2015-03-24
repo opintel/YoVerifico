@@ -5,15 +5,15 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/color_app</item>
-        <item name="colorAccent">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:textColorSecondary">@color/font_color_app</item>
-        <item name="android:textColorPrimary">@color/font_color_app</item>
-        <item name="colorControlNormal">@color/color_control_app</item>
-        <item name="colorControlActivated">@color/color_control_app</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
         <item name="colorControlHighlight">@color/color_control_app</item>
 
 
@@ -27,8 +27,8 @@
 
 
     <style name="AppThemeEvidence" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/primary_e</item>
-        <item name="colorPrimaryDark">@color/primary_dark_e</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -73,15 +73,15 @@
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:background">@drawable/button_evidence</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
-        <item name="android:textColor">@color/button_cristal</item>
+        <item name="android:textColor">@color/accent</item>
         <item name="android:textStyle">bold</item>
 
     </style>
 
     <style name="Widget.Button.Standar" parent="android:Widget">
         <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="android:background">@drawable/button_pruebas</item>
-        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:background">@drawable/button_map</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
 
@@ -105,8 +105,8 @@
 
     <style name="Widget.EditText.Login" parent="android:Widget">
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
-        <item name="android:textColor">@color/font_color_app</item>
-        <item name="android:textColorHint">@color/accent</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textColorHint">@color/secondary_text</item>
 
     </style>
 
@@ -115,9 +115,11 @@
         <item name="android:textColor">@color/font_color_app</item>
     </style>
 
-    <style name="marker_style_custom">
-        <item name="android:textSize">14sp</item>
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+
 
 </resources>

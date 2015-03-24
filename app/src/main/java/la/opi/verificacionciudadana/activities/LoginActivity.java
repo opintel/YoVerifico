@@ -13,13 +13,14 @@ import android.widget.Toast;
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.fragments.LoginFragment;
 import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
+import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 
 /**
  * Created by Jhordan on 08/03/15.
  */
-public class LoginScreenActivity extends BaseActivity implements ActivityAnimate {
+public class LoginActivity extends BaseActivity implements ActivityAnimate {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +62,20 @@ public class LoginScreenActivity extends BaseActivity implements ActivityAnimate
 
                 break;
             case R.id.tutorial:
-                tutorial();
+
+                Intent intento = new Intent(LoginActivity.this, TutorialActivity.class);
+                intento.putExtra(Config.TUTORIAL, Config.SHOWME_TUTORIAL);
+                startActivity(intento);
+                overridePendingTransition(R.animator.open_next, R.animator.close_main);
+
                 break;
 
             case R.id.help:
-                help();
+
+                Intent intent = new Intent(LoginActivity.this, HelpActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.animator.open_next, R.animator.close_main);
+
                 break;
 
 
@@ -88,14 +98,14 @@ public class LoginScreenActivity extends BaseActivity implements ActivityAnimate
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void help() {
-        Intent intent = new Intent(LoginScreenActivity.this, HelpActivity.class);
+        Intent intent = new Intent(LoginActivity.this, HelpActivity.class);
         startActivity(intent, animateActivity(R.animator.animator_enter, R.animator.animator_exit));
         finish();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void tutorial() {
-        Intent intent = new Intent(LoginScreenActivity.this, TutorialActivity.class);
+        Intent intent = new Intent(LoginActivity.this, TutorialActivity.class);
         intent = intent.putExtra("tutorial", "showme_tutorial");
         startActivity(intent, animateActivity(R.animator.animator_enter, R.animator.animator_exit));
         finish();

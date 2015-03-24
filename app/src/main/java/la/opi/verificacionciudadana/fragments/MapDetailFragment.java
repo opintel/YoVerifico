@@ -40,9 +40,9 @@ public class MapDetailFragment extends Fragment implements MarkerClickListener {
         ViewPager pager = (ViewPager) rootView.findViewById(R.id.pager);
         PagerAdapterDemo pagerAdapterImages;
         pagerAdapterImages = new PagerAdapterDemo(getFragmentManager());
-        pagerAdapterImages.addFragment(FragmentInfoWindowMap.newInstance("hola"));
-        pagerAdapterImages.addFragment(FragmentInfoWindowMap.newInstance("hola 2"));
-        pagerAdapterImages.addFragment(FragmentInfoWindowMap.newInstance("hola 3"));
+      //  pagerAdapterImages.addFragment(FragmentInfoWindowMap.newInstance("hola"));
+      //  pagerAdapterImages.addFragment(FragmentInfoWindowMap.newInstance("hola 2"));
+      //  pagerAdapterImages.addFragment(FragmentInfoWindowMap.newInstance("hola 3"));
 
 
         pager.setAdapter(pagerAdapterImages);

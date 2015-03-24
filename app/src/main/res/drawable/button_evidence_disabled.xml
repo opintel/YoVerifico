@@ -14,6 +14,6 @@
         />
     <stroke
         android:width="8dp"
-        android:color="@color/button_cristal"
+        android:color="@color/accent"
         />
 </shape>

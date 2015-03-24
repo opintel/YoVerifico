@@ -13,7 +13,7 @@ import java.util.HashMap;
 import la.opi.verificacionciudadana.api.EndPoint;
 import la.opi.verificacionciudadana.models.State;
 import la.opi.verificacionciudadana.models.Town;
-import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
+import la.opi.verificacionciudadana.util.Config;
 
 /**
  * Created by Jhordan on 25/02/15.
@@ -21,9 +21,15 @@ import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 public class ParserStatesSpinner {
 
 
+    private static HashMap<Integer, String> statehashMap;
 
+    public static HashMap<Integer, String> getStatehashMap() {
+        return statehashMap;
+    }
 
     public static ArrayList<State> paserState(String response) {
+
+        statehashMap = new HashMap<>();
 
         ArrayList<State> arrayListState = new ArrayList<>();
 
@@ -35,10 +41,12 @@ public class ParserStatesSpinner {
                 State estado = new State();
 
                 JSONObject state = jsonArray.getJSONObject(i);
-
                 estado.setId(state.getString(EndPoint.PARSER_ID_STATE));
                 estado.setName(state.getString(EndPoint.PARSER_NAME_STATE));
+
                 arrayListState.add(estado);
+
+                statehashMap.put(i, estado.getId());
 
                 ArrayList<Town> arrayListTown = new ArrayList<>();
                 JSONArray municipios = state.getJSONArray(EndPoint.PARSER_LIST_NAME_TOWN);
@@ -58,7 +66,7 @@ public class ParserStatesSpinner {
             }
 
         } catch (JSONException e) {
-            Log.e(VerificaCiudadConstants.ERROR_PARSER, e.toString());
+            Log.e(Config.ERROR_PARSER, e.toString());
 
         }
 
@@ -82,7 +90,6 @@ public class ParserStatesSpinner {
             return town1.getName().compareTo(town2.getName());
         }
     }
-
 
 
 }

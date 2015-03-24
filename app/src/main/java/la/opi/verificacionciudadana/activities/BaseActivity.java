@@ -22,14 +22,16 @@ public abstract class BaseActivity extends ActionBarActivity {
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         }
     }
 
     protected abstract int getLayoutResource();
 
-    public Toolbar getToolbar () {
+    public Toolbar getToolbar() {
         return toolbar;
     }
+
     protected void setActionBarIcon(int iconRes) {
         toolbar.setNavigationIcon(iconRes);
     }

@@ -37,6 +37,9 @@ public class Ocurrence {
     private String users;
     private String flow;
     private String answers;
+    private String latitude;
+    private String Longitude;
+    private int positionPager;
 
 
     public String getId() {
@@ -293,6 +296,31 @@ public class Ocurrence {
 
     public void setAnswers(String answers) {
         this.answers = answers;
+    }
+
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        Longitude = longitude;
+    }
+
+    public int getPositionPager() {
+        return positionPager;
+    }
+
+    public void setPositionPager(int positionPager) {
+        this.positionPager = positionPager;
     }
 
 

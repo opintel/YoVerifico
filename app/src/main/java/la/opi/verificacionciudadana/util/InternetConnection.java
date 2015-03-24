@@ -33,8 +33,6 @@ public class InternetConnection {
 
         return false;
     }
-
-
     public static Boolean mobileConnection(Context context) {
 
 
@@ -49,8 +47,6 @@ public class InternetConnection {
         return true;
 
     }
-
-
     public static Boolean isNetworkMobile(Context context){
 
         PackageManager packageManager = context.getPackageManager();

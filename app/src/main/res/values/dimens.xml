@@ -14,9 +14,18 @@
     <dimen name="corner_radius">3dp</dimen>
 
     <dimen name="item_width">192dp</dimen>
-    <dimen name="item_height">192dp</dimen>
-    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="item_height">152dp</dimen>
+    <dimen name="spacing_large">12dp</dimen>
 
     <dimen name="custom_profile_image">20dp</dimen>
     <dimen name="custom_profile_padding">2dp</dimen>
+
+    <dimen name="padding_item">20dp</dimen>
+    <dimen name="padding_item_detail">10dp</dimen>
+
+    <dimen name="margin_left_detail">16dp</dimen>
+    <dimen name="margin_top_detail">25dp</dimen>
+    <dimen name="margin_right_det_icon">24dp</dimen>
+    <dimen name="divider_left">80dp</dimen>
+    <dimen name="divider_top">20dp</dimen>
 </resources>

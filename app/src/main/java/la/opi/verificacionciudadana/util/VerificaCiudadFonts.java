@@ -8,16 +8,16 @@ import android.graphics.Typeface;
  */
 public class VerificaCiudadFonts {
     public static Typeface typefaceRobotoMedium(Context context) {
-        return Typeface.createFromAsset(context.getResources().getAssets(), VerificaCiudadConstants.ROBOTO_MEDIUM);
+        return Typeface.createFromAsset(context.getResources().getAssets(), Config.ROBOTO_MEDIUM);
     }
 
     public static Typeface typefaceRobotoRegular(Context context) {
 
-        return Typeface.createFromAsset(context.getResources().getAssets(), VerificaCiudadConstants.ROBOTO_REGULAR);
+        return Typeface.createFromAsset(context.getResources().getAssets(), Config.ROBOTO_REGULAR);
     }
 
     public static Typeface typefaceRobotoBold(Context context) {
 
-        return Typeface.createFromAsset(context.getResources().getAssets(), VerificaCiudadConstants.ROBOTO_BOLD);
+        return Typeface.createFromAsset(context.getResources().getAssets(), Config.ROBOTO_BOLD);
     }
 }

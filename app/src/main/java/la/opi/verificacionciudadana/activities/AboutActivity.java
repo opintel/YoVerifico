@@ -1,38 +1,29 @@
 package la.opi.verificacionciudadana.activities;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.fragments.MunicipalFragment;
+import la.opi.verificacionciudadana.fragments.AboutFragment;
 
-
-public class MunicipalActivity extends BaseActivity {
+public class AboutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, MunicipalFragment.newInstance())
+                    .add(R.id.container_about, AboutFragment.newInstance())
                     .commit();
         }
+
+
     }
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_municipal;
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-
-        getMenuInflater().inflate(R.menu.menu_municipal, menu);
-        return true;
+        return R.layout.activity_about;
     }
 
     @Override
@@ -44,7 +35,6 @@ public class MunicipalActivity extends BaseActivity {
                 break;
 
         }
-
 
         return super.onOptionsItemSelected(item);
     }

@@ -4,7 +4,6 @@ package la.opi.verificacionciudadana.fragments;
  * Created by Jhordan on 09/03/15.
  */
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -12,8 +11,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,23 +22,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.adapters.PagerAdapterDemo;
-import la.opi.verificacionciudadana.interfaces.ItemListRecycleClickListener;
-import la.opi.verificacionciudadana.interfaces.MapClick;
-import la.opi.verificacionciudadana.interfaces.MarkerClickListener;
-import la.opi.verificacionciudadana.interfaces.PressedDetail;
 import la.opi.verificacionciudadana.models.Ocurrence;
-import la.opi.verificacionciudadana.models.Persona;
 import la.opi.verificacionciudadana.util.Comunicater;
+import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.views.MarkerGoogleMap;
 
 
@@ -60,42 +48,27 @@ public class MapFragment extends Fragment {
 
     private GoogleMap googleMap;
     private MapView mapView;
-    private static final double LATITUD_OPI = 19.415334;
-    private static final double LONGITUG_OPI = -99.166063;
     // private static final int CAMERA_ZOOM = 16; la ideal
     private static final int CAMERA_ZOOM = 11;
-
-    Boolean mapChanger;
     Marker marker;
-    List<Marker> markerList;
     View rootView;
-    MarkerClickListener markerClickListener;
-
-
-    TextView textView;
     ViewPager pager;
     PagerAdapterDemo pagerAdapterImages;
-    ViewPager vpViewPager;
-    HashMap<Marker, Ocurrence> ocurrenceMarker;
+    HashMap<Marker, Ocurrence> markerOcurrenceHashMap;
     Ocurrence ocurrencess;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("México");
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.mexico));
 
 
         pager = (ViewPager) rootView.findViewById(R.id.pager);
         pagerAdapterImages = new PagerAdapterDemo(getFragmentManager());
         mapView = (MapView) rootView.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
-        // googleMap = mapView.getMap();
 
-        //  googleMap.setMyLocationEnabled(true);
-
-        // googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        // googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         try {
 
 
@@ -103,6 +76,8 @@ public class MapFragment extends Fragment {
 
 
         } catch (Exception e) {
+
+            e.printStackTrace();
 
         }
 
@@ -114,7 +89,6 @@ public class MapFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mapView.onResume();
-
 
 
     }
@@ -144,62 +118,55 @@ public class MapFragment extends Fragment {
             if (googleMap != null) {
 
 
-                markerList = new ArrayList<>();
-
-                double lat[] = {19.415334, 19.412084, 19.411084, 19.410054, 19.402014, 19.392084};
-                double lon[] = {-99.166063, -99.180576, -99.200576, -99.210576, -99.230576, -99.250576};
+                markerOcurrenceHashMap = new HashMap<>();
+                int i = 0;
 
 
-                ocurrenceMarker = new HashMap<Marker, Ocurrence>();
 
-                for (int i = 0; i <= lat.length && i <= lon.length; i++) {
+                for (Ocurrence ocurrence : Comunicater.getOcurrencesList()) {
 
+                    if (i != 0) {
 
-                    Ocurrence ocurrence = new Ocurrence();
-
-                    ocurrence.setDescription("Ocurrencia: " + Integer.toString(i));
-                    ocurrence.setId(Integer.toString(i));
-                    ocurrenceMarker.put(marker(i, lat[i], lon[i]), ocurrence);
-                    pagerAdapterImages.addFragment(FragmentInfoWindowMap.newInstance("id: "+ocurrence.getId() + ocurrence.getDescription()));
-
-
+                        ocurrence.setPositionPager(i);
+                        markerOcurrenceHashMap.put(marker(i, ocurrence.getLatitude(), ocurrence.getLongitude()), ocurrence);
+                        pagerAdapterImages.addFragment(FragmentInfoWindowMap.newInstance(ocurrence.getPositionPager()+". "+ ocurrence.getAction() ,
+                                bundleOcurrences((Ocurrence) Comunicater.getOcurrencesList().get(i) )));
+                    }
+                    i++;
                 }
 
 
             }
+
         }
 
 
     }
 
-    private Marker marker(final int i, double LATITUD, double LONGITUD) {
+    private Marker marker(final int i, String latitude, String longitude) {
 
 
-        LatLng opiLatLng = new LatLng(LATITUD, LONGITUD);
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(opiLatLng, CAMERA_ZOOM);
-
-
-        marker = googleMap.addMarker(new MarkerOptions().position(opiLatLng)
+        LatLng positionOcurrence = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(positionOcurrence, CAMERA_ZOOM);
+        marker = googleMap.addMarker(new MarkerOptions().position(positionOcurrence)
                 .icon(BitmapDescriptorFactory.fromBitmap(MarkerGoogleMap.customMarker(getActivity(), Integer.toString(i)))));
 
         googleMap.animateCamera(update);
-
-
-        markerList.add(marker);
-
-
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-
-                ocurrencess = ocurrenceMarker.get(marker);
-            //    Toast.makeText(getActivity(), ocurrencess.getId(), Toast.LENGTH_SHORT).show();
-                pager.setCurrentItem(Integer.parseInt(ocurrencess.getId()));
-
-
+                ocurrencess = markerOcurrenceHashMap.get(marker);
+                pager.setCurrentItem(ocurrencess.getPositionPager() - 1);
                 return false;
             }
         });
+
+        pagerListener();
+
+        return marker;
+    }
+
+    private void pagerListener() {
 
 
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -211,29 +178,21 @@ public class MapFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
 
-                for (Map.Entry<Marker, Ocurrence> entry : ocurrenceMarker.entrySet()) {
-                    // do something with the entry
-                    System.out.println(entry.getKey() + " - " + entry.getValue());
-                    // the getters are typed:
-                   Marker key = entry.getKey();
-                   Ocurrence value = entry.getValue();
+                for (Map.Entry<Marker, Ocurrence> entry : markerOcurrenceHashMap.entrySet()) {
 
-                    System.out.println(value.getId());
-                    key.setIcon(BitmapDescriptorFactory.fromBitmap(MarkerGoogleMap.customMarker(getActivity(), value.getId())));
-                    if(Integer.parseInt(value.getId()) == position){
+                    Marker key = entry.getKey();
+                    Ocurrence value = entry.getValue();
 
-                        key.setIcon(BitmapDescriptorFactory.fromBitmap(MarkerGoogleMap.customMarkerSelected(getActivity(), value.getId())));
+                    key.setIcon(BitmapDescriptorFactory.fromBitmap(MarkerGoogleMap.customMarker(getActivity(), Integer.toString(value.getPositionPager()))));
+                    if ((value.getPositionPager() - 1) == position) {
+
+                        key.setIcon(BitmapDescriptorFactory.fromBitmap(MarkerGoogleMap.customMarkerSelected(getActivity(), Integer.toString(value.getPositionPager()))));
                         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(key.getPosition(), CAMERA_ZOOM);
                         googleMap.animateCamera(update);
 
                     }
 
                 }
-
-
-
-
-
 
 
             }
@@ -245,10 +204,19 @@ public class MapFragment extends Fragment {
         });
 
 
-        return marker;
     }
 
+    private Bundle bundleOcurrences(Ocurrence ocurrence) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Config.TITLE_OCURRENCE, ocurrence.getAction());
+        bundle.putString(Config.DATA_OCURRENCE, ocurrence.getOcurrenceData());
+        bundle.putString(Config.TIME_OCURRENCE, ocurrence.getToHour() + " - " + ocurrence.getFromHour());
+        bundle.putString(Config.DESCRIPTION_OCURRENCE, ocurrence.getDescription() + "\n \n" + ocurrence.getStrategyDescription());
+        bundle.putString(Config.PLACE_OCURRENCE, ocurrence.getCalle() + " ," + ocurrence.getColonia() + " " + ocurrence.getAdmin2());
+        bundle.putString(Config.CONTACT_OCURRENCE, ocurrence.getContactInfo());
+        return bundle;
 
+    }
 
 
 }

@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.activities.LoginScreenActivity;
+import la.opi.verificacionciudadana.activities.LoginActivity;
 import la.opi.verificacionciudadana.activities.TutorialActivity;
 import la.opi.verificacionciudadana.adapters.NavigationDrawerRecycleAdapter;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
@@ -189,7 +189,7 @@ public class HomeMain extends ActionBarActivity
                 logOut();
                 showToast("cerrar sesion");
                 ConfigurationPreferences.clearMailPreference(HomeMain.this);
-                startActivity(new Intent(HomeMain.this, LoginScreenActivity.class));
+                startActivity(new Intent(HomeMain.this, LoginActivity.class));
 
                 break;
 

@@ -7,11 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.activities.DetailActivity;
-import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
+import la.opi.verificacionciudadana.util.Config;
 
 
 /**
@@ -22,33 +21,58 @@ public class FragmentInfoWindowMap extends Fragment {
     }
 
     public static String TITLE = "title";
+    public static String BUNDLE = "bundle";
 
-    public static FragmentInfoWindowMap newInstance(String title) {
+    public static FragmentInfoWindowMap newInstance(String title, Bundle bundle) {
         FragmentInfoWindowMap fragmentInfoWindowMap = new FragmentInfoWindowMap();
         Bundle extraArguments = new Bundle();
         extraArguments.putString(TITLE, title);
+        extraArguments.putBundle(BUNDLE, bundle);
         fragmentInfoWindowMap.setArguments(extraArguments);
         return fragmentInfoWindowMap;
     }
 
     TextView txtTitle;
-
     String argumentTitle;
+    Bundle bundle;
+    String activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_info_window, container, false);
 
 
-        txtTitle = (TextView) rootView.findViewById(R.id.text_view_title);
+        if (getActivity().getIntent().getStringExtra(Config.KEY_INTENT) != null) {
+            activity = getActivity().getIntent().getStringExtra(Config.KEY_INTENT);
+            System.out.println(activity);
+        } else {
+            activity = "null";
+            System.out.println(activity);
+        }
+
+
+        bundle = getArguments().getBundle(BUNDLE);
+        txtTitle = (TextView) rootView.findViewById(R.id.txt_title_detail);
         argumentTitle = getArguments().getString(TITLE);
         txtTitle.setText(argumentTitle);
 
         txtTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "detail", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getActivity(), DetailActivity.class));
+
+
+                if (activity.equals(Config.DETAIL_FRAGMENT)) {
+                    getActivity().onBackPressed();
+
+                } else {
+                    Intent intent = new Intent(getActivity(), DetailActivity.class);
+                    intent.putExtra(Config.BUNDLE_OCURRENCE, bundle);
+                    intent.putExtra(Config.KEY_INTENT, Config.WINDOINFO_FRAGMENT);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.animator.open_next, R.animator.close_main);
+                }
+
+
             }
         });
 
@@ -63,4 +87,6 @@ public class FragmentInfoWindowMap extends Fragment {
 
 
     }
+
+
 }

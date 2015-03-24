@@ -1,24 +1,24 @@
 package la.opi.verificacionciudadana.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.activities.DetailActivity;
 import la.opi.verificacionciudadana.activities.MapaActivity;
 import la.opi.verificacionciudadana.interfaces.ItemListRecycleClickListener;
 import la.opi.verificacionciudadana.models.Ocurrence;
-import la.opi.verificacionciudadana.models.Persona;
+import la.opi.verificacionciudadana.util.Config;
+import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 
 
 public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.ViewHolder> {
@@ -43,7 +43,7 @@ public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.Vi
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public OcurrencesAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
         ViewHolder viewHolderItem, viewHolderHeader;
 
@@ -69,24 +69,32 @@ public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.Vi
 
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(OcurrencesAdapter.ViewHolder viewHolder, int position) {
 
-        Ocurrence course = ocurrenceArrayList.get(position);
+
+        final Ocurrence ocurrence = ocurrenceArrayList.get(position);
 
         if (viewHolder.typeHolder == ITEM) {
 
-            viewHolder.name.setText(course.getComments());
-            viewHolder.description.setText(course.getDescription());
-            viewHolder.image.setText(course.getId());
+            viewHolder.txtTitleOcurrence.setTypeface(VerificaCiudadFonts.typefaceRobotoBold(context));
+            viewHolder.txtDescriptionOcurrence.setTypeface(VerificaCiudadFonts.typefaceRobotoRegular(context));
+            viewHolder.txtColoniaOcurrence.setTypeface(VerificaCiudadFonts.typefaceRobotoRegular(context));
+            viewHolder.txtTitleOcurrence.setText(ocurrence.getAction());
+            viewHolder.txtDescriptionOcurrence.setText(ocurrence.getDescription());
+            viewHolder.txtColoniaOcurrence.setText(ocurrence.getCalle() + " ," + ocurrence.getColonia() + " " + ocurrence.getAdmin2());
+
 
         } else if (viewHolder.typeHolder == HEADER) {
 
 
-            viewHolder.explorer.setOnClickListener(new View.OnClickListener() {
+          viewHolder.explorer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Activity activity = (Activity) context;
+                    Intent intent = new Intent(context, MapaActivity.class);
+                    context.startActivity(intent);
+                    activity.overridePendingTransition(R.animator.open_next, R.animator.close_main);
 
-                    context.startActivity(new Intent(context, MapaActivity.class));
                 }
             });
         }
@@ -117,9 +125,7 @@ public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         int typeHolder;
-        public TextView image;
-        public TextView name;
-        public TextView description;
+        public TextView txtTitleOcurrence, txtDescriptionOcurrence, txtColoniaOcurrence;
         public Button explorer;
 
         public ViewHolder(View itemView, int viewType) {
@@ -130,10 +136,8 @@ public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.Vi
                 public void onClick(View v) {
                     if (itemListRecycleClickListener != null) {
 
-                        Ocurrence course = ocurrenceArrayList.get(getPosition());
 
-
-                        itemListRecycleClickListener.itemRecycleClicked(getPosition(), course.getComments());
+                        itemListRecycleClickListener.itemRecycleClicked(getPosition(), bundleOcurrences((Ocurrence) ocurrenceArrayList.get(getPosition())));
 
 
                     }
@@ -141,9 +145,10 @@ public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.Vi
             });
 
             if (viewType == ITEM) {
-                image = (TextView) itemView.findViewById(R.id.texto);
-                name = (TextView) itemView.findViewById(R.id.calification_txt);
-                description = (TextView) itemView.findViewById(R.id.comunity);
+
+                txtTitleOcurrence = (TextView) itemView.findViewById(R.id.txt_title);
+                txtDescriptionOcurrence = (TextView) itemView.findViewById(R.id.txt_description);
+                txtColoniaOcurrence = (TextView) itemView.findViewById(R.id.txt_colonia);
 
                 typeHolder = ITEM;
             } else if (viewType == HEADER) {
@@ -156,6 +161,20 @@ public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.Vi
 
         }
 
+
+    }
+
+
+    private Bundle bundleOcurrences(Ocurrence ocurrence) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Config.TITLE_OCURRENCE, ocurrence.getAction());
+        bundle.putString(Config.DATA_OCURRENCE, ocurrence.getOcurrenceData());
+        bundle.putString(Config.TIME_OCURRENCE, ocurrence.getToHour() + " - " + ocurrence.getFromHour());
+        bundle.putString(Config.DESCRIPTION_OCURRENCE, ocurrence.getDescription() + "\n \n" + ocurrence.getStrategyDescription());
+        bundle.putString(Config.PLACE_OCURRENCE, ocurrence.getCalle() + " ," + ocurrence.getColonia() + " " + ocurrence.getAdmin2());
+        bundle.putString(Config.CONTACT_OCURRENCE, ocurrence.getContactInfo());
+        bundle.putString(Config.ID_OCURRENCE, ocurrence.getId());
+        return bundle;
 
     }
 

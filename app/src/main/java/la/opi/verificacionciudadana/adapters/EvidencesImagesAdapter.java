@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.models.ImageEvidence;
+import la.opi.verificacionciudadana.util.BitmapTransform;
 
 /**
  * Created by Jhordan on 01/03/15.
@@ -56,20 +57,44 @@ public class EvidencesImagesAdapter extends ArrayAdapter<ImageEvidence> {
 
         holder.txtTitlePath.setText(evidence.getTitle());
 
-       Picasso.with(getContext()).load(evidence.getEvidence())
-              .into(holder.imageEvidencePath);
-      holder.imageEvidencePath.setImageBitmap(avatarConvertBitmap(evidence.getEvidence()));
+       int MAX_WIDTH = 1024;
+       int MAX_HEIGHT = 768;
+
+        int size = (int) Math.ceil(Math.sqrt(MAX_WIDTH * MAX_HEIGHT));
+
+
+
+
+
+         Picasso.with(getContext()).load("file://" + evidence.getEvidence())
+                 .transform(new BitmapTransform(MAX_WIDTH, MAX_HEIGHT))
+                 .skipMemoryCache()
+                 .resize(size, size)
+                 .centerInside()
+                 .into(holder.imageEvidencePath);
+
+       // holder.imageEvidencePath.setImageBitmap(avatarConvertBitmap(evidence.getEvidence()));
 
 
         return convertView;
     }
 
     private Bitmap avatarConvertBitmap(String path) {
+        // BitmapFactory.Options options = new BitmapFactory.Options();
+        // options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        options.inSampleSize = 8;
         Bitmap bitmapAvatar = BitmapFactory.decodeFile(path, options);
+
+        if (bitmapAvatar != null) {
+            bitmapAvatar.recycle();
+            bitmapAvatar = null;
+        }
+
         return bitmapAvatar;
     }
+
 
     public static class ViewHolder {
         TextView txtTitlePath;

@@ -5,9 +5,10 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
+
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.drawer.HomeMain;
 import la.opi.verificacionciudadana.fragments.FragmentPictureEvidences;
 import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
 
@@ -32,14 +33,23 @@ public class EvidenceActivity extends BaseActivity implements ActivityAnimate {
         return R.layout.activity_evidence;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                home();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+
+                System.out.println(fragmentManager.getBackStackEntryCount());
+
+             /*   if (fragmentManager.getBackStackEntryCount() > 0) {
+                    fragmentManager.popBackStack();
+                } else {
+                    finish();
+                }*/
+
+
                 break;
         }
 
@@ -48,14 +58,13 @@ public class EvidenceActivity extends BaseActivity implements ActivityAnimate {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        home();
-    }
+
+
+
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void home() {
-        startActivity(new Intent(EvidenceActivity.this, HomeMain.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
+        startActivity(new Intent(EvidenceActivity.this, DetailActivity.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
         finish();
     }
 

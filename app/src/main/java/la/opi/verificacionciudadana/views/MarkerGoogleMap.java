@@ -27,7 +27,7 @@ public class MarkerGoogleMap {
         textMarker.setText(titleMarker);
         textMarker.setTextColor(context.getResources().getColor(R.color.white));
         iconGenerator.setContentView(textMarker);
-        iconGenerator.setColor(context.getResources().getColor(R.color.button_cristal));
+        iconGenerator.setColor(context.getResources().getColor(R.color.primary));
 
         return iconGenerator.makeIcon();
     }
@@ -45,7 +45,7 @@ public class MarkerGoogleMap {
         textMarker.setText(titleMarker);
         textMarker.setTextColor(context.getResources().getColor(R.color.white));
         iconGenerator.setContentView(textMarker);
-        iconGenerator.setColor(context.getResources().getColor(R.color.orange));
+        iconGenerator.setColor(context.getResources().getColor(R.color.accent));
 
         return iconGenerator.makeIcon();
     }

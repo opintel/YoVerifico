@@ -17,9 +17,21 @@
     <string name="tutorial_menu">Cómo funciona</string>
     <string name="tutorial_menu_two">Ayuda</string>
     <string name="settings_tabs">Configuración</string>
+    <string name="mexico">México</string>
+    <string name="event_title">Evento</string>
 
     <!-- detail -->
     <string name="recopilate_evidence">Recopilar evidencia</string>
+    <string name="data_detail">Fecha</string>
+    <string name="time_detail">Hora</string>
+    <string name="description_detail">Descripción</string>
+    <string name="place_detail">Lugar</string>
+    <string name="contact_detail">Contacto</string>
+    <string name="data_detail_lorem">22-12-2015</string>
+    <string name="time_detail_lorem">12:00 - 24:00</string>
+    <string name="description_detail_lorem">Descripción</string>
+    <string name="place_detail_lorem">Lugar</string>
+    <string name="contact_detail_lorem">opi@mail.com</string>
 
     <!-- LoginActivity -->
     <string name="user_mail">Correo electrónico</string>
@@ -71,24 +83,26 @@
     <!-- Evidence Activity and Fragment -->
 
     <string name="title_evidence">Yo Reviso</string>
-    <string name="question">¿Se está realizando el evento descrito?</string>
-
+    <string name="question">¿Deseas capturar evidencia del evento descrito en este momento? Recuerda que es necesario que te encuentres en el lugar donde se esta realizando el evento.</string>
     <!-- Calification Event -->
     <string name="scale_txt">En una escala del 1 al 5</string>
 
     <!-- Messages -->
-
+i
     <string name="not_avaliable">Memoria no esta disponible , verifica que tengas espacio</string>
     <string name="only_reading">Al parecer Memoria se encuentra solo en modo lectura</string>
     <string name="yes_dialog">Por supuesto</string>
     <string name="no_dialog">No lo creo</string>
-    <string name="camera_instruction">Captura una o varias fotos del evento.</string>
+    <string name="camera_instruction">Captura todas las fotos  que desees acerca del evento , llena la información solicitada y envia la evidencia</string>
+    <string name="camera_instruction_two">Presiona la camara para tomar una foto.</string>
+    <string name="hasnot_camera">Al parecer este dispositivo no tiene una camara.</string>
     <string name="calification_event">¿Comó calificarías el evento?</string>
     <string name="title_activity_municipal">MunicipalActivity</string>
     <string name="progress_dialog_session">Iniciando sesión, espera un momento por favor.</string>
     <string name="progress_dialog_sing_up">Creando cuenta, espera un momento por favor.</string>
     <string name="progress_dialog_help">Descargando datos, espera un momento por favor.</string>
     <string name="url_nosmuevelapaz">http://nosmuevelapaz.org/</string>
+    <string name="info_contact">No hay información de contacto</string>
 
     <!-- Error Dialog -->
     <string name="session_error">Correo electrónico o contraseña incorrectos</string>
@@ -100,7 +114,9 @@
     <string name="category_about_label">Acerca de</string>
     <string name="pref_profile">Edita tu perfil</string>
     <string name="pref_about">Acerca de YoVerifico</string>
-    <string name="pref_session">Cerrar sesión</string>
+    <string name="pref_tutorial">Cómo funciona</string>
+    <string name="pref_location">Localidad Actual</string>
+    <string name="pref_session">Finalizar sesión</string>
     <string name="pref_location_label">Municipio</string>
     <string name="pref_location_key" translatable="false">location</string>
     <string name="pref_location_default" translatable="false">94043</string>
@@ -108,6 +124,8 @@
     <string name="pref_units_key">units</string>
     <string name="pref_units_metric">metric</string>
     <string name="pref_units_imperial">imperial</string>
+    <string name="pref_close_session_key">session</string>
+    <string name="pref_tutorial_key">tutorial</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

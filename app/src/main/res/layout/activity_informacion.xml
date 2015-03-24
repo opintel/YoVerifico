@@ -1,0 +1,40 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical"
+    tools:context="la.opi.verificacionciudadana.activities.InformacionActivity">
+
+
+    <FrameLayout
+        android:id="@+id/container_informacion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="la.opi.verificacionciudadana.activities.InformacionActivity"
+        tools:ignore="MergeRootFrame" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/Erik.Toolbar.Transparent" />
+
+
+</FrameLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,4 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ripple="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent"
@@ -30,7 +28,7 @@
                 android:background="@color/white"
                 android:ems="10"
                 android:hint="@string/user_name"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:padding="10dp" />
 
 
@@ -73,7 +71,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
-                android:background="@color/disable_black_two" />
+                android:background="@color/disable_black_two"/>
 
             <EditText
                 android:id="@+id/edit_txt_password_confirm"
@@ -107,7 +105,7 @@
                     android:padding="10dp"
                     android:text="Estado"
                     android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@color/accent" />
+                    android:textColor="@color/secondary_text" />
 
                 <Spinner
                     android:id="@+id/spinner_state"
@@ -138,7 +136,7 @@
                     android:padding="10dp"
                     android:text="Municipio"
                     android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@color/accent" />
+                    android:background="@color/white" />
 
                 <Spinner
                     android:id="@+id/spinner_municipal"

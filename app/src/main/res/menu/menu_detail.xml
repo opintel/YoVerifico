@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="la.opi.verificacionciudadana.activities.LoginActivity">
+
+
+    <item
+        android:id="@+id/map"
+        android:orderInCategory="100"
+        android:title="@string/tutorial_menu_two"
+        android:icon="@drawable/ic_maps_toolbar"
+        app:showAsAction="always" />
+</menu>

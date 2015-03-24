@@ -22,7 +22,6 @@ import android.widget.Toast;
 import org.apache.commons.io.IOUtils;
 
 import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -31,14 +30,13 @@ import la.opi.verificacionciudadana.adapters.SpinnerCustomAdapter;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
 import la.opi.verificacionciudadana.api.EndPoint;
-import la.opi.verificacionciudadana.dialogs.ConnectionDialog;
 import la.opi.verificacionciudadana.dialogs.ConnectionRegisterDialog;
 import la.opi.verificacionciudadana.dialogs.CustomDialog;
 import la.opi.verificacionciudadana.models.State;
 import la.opi.verificacionciudadana.parser.ParserStatesSpinner;
 import la.opi.verificacionciudadana.parser.RegisterResponse;
+import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.util.InternetConnection;
-import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 import retrofit.client.Response;
 import rx.android.schedulers.AndroidSchedulers;
@@ -204,7 +202,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     progressDialog.dismiss();
 
                 }else{
-                    Log.e(VerificaCiudadConstants.ERROR_RETROFIT, throwable.getMessage());
+                    Log.e(Config.ERROR_RETROFIT, throwable.getMessage());
                     showToast(R.string.expected_error);
                     progressDialog.dismiss();
                 }
@@ -237,7 +235,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         }, new Action1<Throwable>() {
             @Override
             public void call(Throwable throwable) {
-                Log.e(VerificaCiudadConstants.ERROR_RETROFIT, throwable.getMessage());
+                Log.e(Config.ERROR_RETROFIT, throwable.getMessage());
             }
         });
 
@@ -312,14 +310,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         ConnectionRegisterDialog dialog = new ConnectionRegisterDialog();
-        dialog.show(fragmentManager, VerificaCiudadConstants.DIALOG_TEXT);
+        dialog.show(fragmentManager, Config.DIALOG_TEXT);
     }
 
     private void dialogCustom(int message) {
 
         android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         CustomDialog dialog = CustomDialog.newInstance(message);
-        dialog.show(fragmentManager, VerificaCiudadConstants.DIALOG_TEXT);
+        dialog.show(fragmentManager, Config.DIALOG_TEXT);
     }
 
     private void buttonEnabled() {

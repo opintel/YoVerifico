@@ -3,20 +3,30 @@
     <PreferenceCategory android:title="@string/category_account_label">
 
         <Preference
-            android:defaultValue="Guadalajara Chivas"
             android:key="@string/pref_location_key"
-            android:title="Mi Localidad">
+            android:title="@string/pref_location">
 
             <intent android:action=".activities.MunicipalActivity" />
         </Preference>
 
-        <Preference android:title="@string/pref_profile" />
+        <Preference
+            android:key="@string/pref_tutorial_key"
+            android:title="@string/pref_tutorial">
+
+        </Preference>
+
+
     </PreferenceCategory>
 
 
     <PreferenceCategory android:title="@string/category_about_label">
-        <Preference android:title="@string/pref_about" />
-        <Preference android:title="@string/pref_session" />
+        <Preference android:title="@string/pref_about">
+
+            <intent android:action=".activities.AboutActivity" />
+        </Preference>
+        <Preference
+            android:key="@string/pref_close_session_key"
+            android:title="@string/pref_session" />
     </PreferenceCategory>
 
 </PreferenceScreen>

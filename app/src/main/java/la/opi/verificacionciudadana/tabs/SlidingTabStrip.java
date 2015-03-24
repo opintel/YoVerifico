@@ -59,8 +59,8 @@ class SlidingTabStrip extends LinearLayout {
 
         //Compatibilidad con Android < Lollipop
         final int themeBackground = getResources().getColor(R.color.primary);
-        final int accentColor = getResources().getColor(R.color.button_cristal);
-        final int accentColors = getResources().getColor(R.color.font_color_app);
+        final int accentColor = getResources().getColor(R.color.white);
+        final int accentColors = getResources().getColor(R.color.divider_color);
 
 
         mDefaultBottomBorderColor = setColorAlpha(themeForegroundColor,

@@ -1,17 +1,11 @@
 package la.opi.verificacionciudadana.util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-
-import la.opi.verificacionciudadana.exceptions.ExceptionsYoVerifico;
 
 /**
  * Created by Jhordan on 11/02/15.
@@ -19,7 +13,7 @@ import la.opi.verificacionciudadana.exceptions.ExceptionsYoVerifico;
 public class StorageFiles {
 
     final static private String mobilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
-    final static private String directoryPath = mobilePath + VerificaCiudadConstants.DIRECTORY_EVIDENCE;
+    final static private String directoryPath = mobilePath + Config.DIRECTORY_EVIDENCE;
 
     public static String getDirectoryPath() {
         return directoryPath;
@@ -28,15 +22,11 @@ public class StorageFiles {
     public static void createDirectory(Context context) {
 
         try {
-
             File directory = new File(directoryPath);
             if (!directory.exists()) {
                 directory.mkdirs();
-
-
             }
         } catch (Exception e) {
-            Log.e(ExceptionsYoVerifico.WRITE_ERROR, e.toString());
 
         }
 
@@ -47,12 +37,12 @@ public class StorageFiles {
 
         try {
 
-            File myFile = new File(path, VerificaCiudadConstants.TXT_YO_VERIFICO);
+            File myFile = new File(path, Config.TXT_YO_VERIFICO);
 
             if (!myFile.exists()) {
 
                 OutputStreamWriter opiWriteTxt = new OutputStreamWriter(new FileOutputStream(myFile));
-                opiWriteTxt.write(VerificaCiudadConstants.CONDITIONS_AND_TERMS);
+                opiWriteTxt.write(Config.CONDITIONS_AND_TERMS);
                 opiWriteTxt.close();
 
             }
@@ -60,15 +50,10 @@ public class StorageFiles {
 
         } catch (Exception e) {
 
-            Log.e(ExceptionsYoVerifico.WRITE_ERROR, e.toString());
 
         }
 
     }
-
-
-
-
 
     public static void deleteFilesFromDirectory() {
         File[] listFile;
@@ -96,12 +81,28 @@ public class StorageFiles {
 
 
         } catch (Exception e) {
-            Log.e(ExceptionsYoVerifico.WRITE_ERROR, e.toString());
+
 
         }
     }
 
 
+    public static Boolean empityDirectory() {
+
+        try {
+            File directory = new File(directoryPath);
+            if (directory.exists()) {
+                File[] filesList = directory.listFiles();
+                if (filesList == null) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return false;
+
+    }
 
 
 }

@@ -71,6 +71,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             case R.id.pruebas:
                 Intent intent = new Intent(getActivity(), HomeTabs.class);
                 startActivity(intent);
+                getActivity().finish();
                 break;
         }
 

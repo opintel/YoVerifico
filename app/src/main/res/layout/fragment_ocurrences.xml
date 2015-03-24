@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:scrollbars="vertical" />
+        android:background="@color/recycle_events_background">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:scrollbars="vertical" />
+
+        <!--<com.getbase.floatingactionbutton.FloatingActionButton-->
+            <!--android:id="@+id/btn_maps"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom|right"-->
+            <!--android:layout_marginBottom="7dp"-->
+            <!--android:layout_marginRight="7dp"-->
+            <!--fab:fab_colorNormal="@color/float_button"-->
+            <!--fab:fab_colorPressed="@color/float_button"-->
+            <!--fab:fab_icon="@drawable/ic_map_even"-->
+            <!--fab:fab_plusIconColor="@color/white" />-->
 
 
-</FrameLayout>
+    </FrameLayout>
+
+
+</android.support.v4.widget.SwipeRefreshLayout>
 
 
 

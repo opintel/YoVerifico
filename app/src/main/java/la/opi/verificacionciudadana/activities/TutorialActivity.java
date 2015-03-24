@@ -1,25 +1,21 @@
 package la.opi.verificacionciudadana.activities;
 
-import android.annotation.TargetApi;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.drawer.HomeMain;
 import la.opi.verificacionciudadana.fragments.TutorialFragment;
-import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
+import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.StorageFiles;
 import la.opi.verificacionciudadana.util.StorageState;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 
-public class TutorialActivity extends BaseActivity implements ActivityAnimate {
-    String g;
+public class TutorialActivity extends BaseActivity {
+    String activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,43 +24,26 @@ public class TutorialActivity extends BaseActivity implements ActivityAnimate {
         super.getToolbar().setTitleTextColor(getResources().getColor(R.color.transparent));
         createDirectory();
 
+        if (getIntent().getStringExtra(Config.FRAGMENT_TUTORIAL) != null) {
+            activity = getIntent().getStringExtra(Config.FRAGMENT_TUTORIAL);
+        } else {
+            activity = "null";
+        }
 
-        g = getIntent().getStringExtra("tutorial");
 
         if (ConfigurationPreferences.getTutorialPreference(this)) {
-
-            if (g != null && g.equals("showme_tutorial") || g != null && g.equals("showme_tutorial_login")) {
-                Log.e("tutorial", "showmetutorial");
-
-                if (savedInstanceState == null) {
-                    getSupportFragmentManager().beginTransaction()
-                            .add(R.id.container, TutorialFragment.newInstance())
-                            .commit();
-
-                }
-
-
+            if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)) {
+                showTutorial(savedInstanceState);
             } else {
-                startActivity(new Intent(TutorialActivity.this, LoginScreenActivity.class));
+                startActivity(new Intent(TutorialActivity.this, LoginActivity.class));
                 finish();
             }
 
         } else {
-
-            Log.e("tutorial", "mostrar el tutorial");
-            if (savedInstanceState == null) {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container, TutorialFragment.newInstance())
-                        .commit();
-
-
-            }
-
+            showTutorial(savedInstanceState);
         }
 
-
         ConfigurationPreferences.setTutorialPreference(this, true);
-
 
     }
 
@@ -72,7 +51,6 @@ public class TutorialActivity extends BaseActivity implements ActivityAnimate {
     protected int getLayoutResource() {
         return R.layout.activity_demo;
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,75 +65,63 @@ public class TutorialActivity extends BaseActivity implements ActivityAnimate {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (g != null && g.equals("showme_tutorial")) {
-                    login();
-                } else if (g != null && g.equals("showme_tutorial_login")) {
 
-                    home();
-
-                } else {
+                if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)){
                     super.onBackPressed();
+                    overridePendingTransition(R.animator.open_main, R.animator.close_next);
                 }
 
                 break;
 
             case R.id.action_omited:
-                if (g != null && g.equals("showme_tutorial")) {
-                    login();
-                } else if (g != null && g.equals("showme_tutorial_login")) {
 
-                    home();
+                if (activity.equals("null")) {
 
-                }else{
-                    login();
+                    Intent intent = new Intent(TutorialActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.animator.open_next, R.animator.close_main);
+
+                }else if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)){
+                    super.onBackPressed();
+                    overridePendingTransition(R.animator.open_main, R.animator.close_next);
                 }
+
+
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public void onBackPressed() {
 
 
-        if (g != null && g.equals("showme_tutorial")) {
-            login();
-        } else if (g != null && g.equals("showme_tutorial_login")) {
-
-            home();
-
-        } else {
+        if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)){
             super.onBackPressed();
+            overridePendingTransition(R.animator.open_main, R.animator.close_next);
         }
-
     }
 
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void home() {
-        startActivity(new Intent(TutorialActivity.this, HomeMain.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
-        finish();
+    private void signIn() {
+        super.onBackPressed();
+        overridePendingTransition(R.animator.open_main, R.animator.close_next);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void login() {
-        startActivity(new Intent(TutorialActivity.this, LoginScreenActivity.class), animateActivity(R.animator.animator_enter, R.animator.animator_exit));
-        finish();
-    }
+    private void showTutorial(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, TutorialFragment.newInstance())
+                    .commit();
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    @Override
-    public Bundle animateActivity(int animateEnter, int animateExit) {
-        return ActivityOptions.makeCustomAnimation(this, R.animator.animator_enter, R.animator.animator_exit).toBundle();
+        }
     }
 
     private void systemBarsCustom() {
         SystemConfigurationBars systemConfigurationBars = new SystemConfigurationBars(this);
         systemConfigurationBars.configurationNavigationBar();
     }
-
 
     private void createDirectory() {
 

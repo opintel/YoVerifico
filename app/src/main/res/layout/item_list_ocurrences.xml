@@ -1,55 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/item_list_background"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    >
+  >
 
 
     <TextView
-        android:id="@+id/calification_txt"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center|right"
-        android:paddingLeft="10dp"
-        android:text="Colonia Juárez 24 julio 16:00"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/font_color_app"
-        android:textSize="13sp" />
-
-    <TextView
-        android:id="@+id/comunity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
+        android:gravity="left"
+        android:maxLines="2"
         android:text="Atención a consumidores problematicos"
-        android:textColor="@color/item_selector_drawer"
-        android:textSize="16sp" />
+        android:textColor="@color/primary"
+        android:textSize="16sp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+ />
 
     <TextView
-        android:id="@+id/texto"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_colonia"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginTop="3dp"
+        android:gravity="left"
+        android:maxLines="1"
+        android:text="Roma Norte , Guadalajara 21  "
+        android:textColor="@color/primary_text"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/txt_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:maxLines="3"
         android:text="@string/lorem"
-        android:textColor="@color/item_selector_drawer"
-        android:textSize="16sp" />
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@color/disable_black_two" />
 
+
 </LinearLayout>
-
-
 

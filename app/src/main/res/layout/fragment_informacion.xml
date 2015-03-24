@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center|left"
+                    android:text="Fotos"
+                    android:textColor="@color/primary"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/disable_black_two" />
+
+                <GridView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:numColumns="2" />
+
+
+
+            </LinearLayout>
+
+            <com.getbase.floatingactionbutton.FloatingActionsMenu
+                android:id="@+id/take_pictue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                fab:fab_addButtonColorNormal="@color/orange"
+                fab:fab_addButtonColorPressed="@color/orange"
+                fab:fab_plusIconColor="@color/white">
+
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/tae"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="16dp"
+                    fab:fab_colorNormal="@color/accent"
+                    fab:fab_colorPressed="@color/accent"
+                    fab:fab_icon="@drawable/ic_camara"
+                    fab:fab_plusIconColor="@color/white"
+                    />
+
+            </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+

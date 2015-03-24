@@ -4,7 +4,7 @@ import android.util.Log;
 
 import java.net.ConnectException;
 
-import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
+import la.opi.verificacionciudadana.util.Config;
 import retrofit.ErrorHandler;
 import retrofit.RetrofitError;
 
@@ -20,7 +20,7 @@ public class RetrofitErrorHandler implements ErrorHandler {
     public Throwable handleError(RetrofitError cause) {
 
 
-        Log.e(VerificaCiudadConstants.ERROR_REQUEST, cause.getMessage());
+        Log.e(Config.ERROR_REQUEST, cause.getMessage());
         if (cause.getKind() == RetrofitError.Kind.NETWORK)
             return new ConnectException(cause.getMessage());
 

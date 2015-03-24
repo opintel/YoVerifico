@@ -25,11 +25,11 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.database.ActionsDataBase;
-import la.opi.verificacionciudadana.util.VerificaCiudadConstants;
+import la.opi.verificacionciudadana.util.Config;
 
 /**
  * Created by Jhordan on 10/02/15.
@@ -71,9 +71,9 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
 
 
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_pictures_evidence, container, false);
-            ((FloatingActionButton) rootView.findViewById(R.id.btn_camera)).setOnClickListener(this);
-            ((Button) rootView.findViewById(R.id.btn_send_evidences)).setOnClickListener(this);
+            rootView = inflater.inflate(R.layout.fragment_informacion, container, false);
+           // ((FloatingActionButton) rootView.findViewById(R.id.btn_camera)).setOnClickListener(this);
+           // ((Button) rootView.findViewById(R.id.btn_send_evidences)).setOnClickListener(this);
         }
 
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Capturar Evidencia");
@@ -89,10 +89,10 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
 
         switch (v.getId()) {
             case R.id.btn_camera:
-                initializedCamera();
+            //    initializedCamera();
                 break;
             case R.id.btn_send_evidences:
-                fragmentEventConfirmation();
+             //   fragmentEventConfirmation();
                 break;
         }
 
@@ -205,11 +205,15 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
     // Create an image file name
     private File createImageFile() throws IOException {
 
-        String timeData = new SimpleDateFormat(VerificaCiudadConstants.DATA_FORMAT).format(new Date());
-        //LUEGO VEO QUE NOMBRE PONER
-        imageFileName = VerificaCiudadConstants.IMAGE_NAME_DEFOULT + timeData;
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + VerificaCiudadConstants.DIRECTORY_EVIDENCE);
-        File image = File.createTempFile(imageFileName, VerificaCiudadConstants.JPG_EXTENSION, storageDir);
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat timeData = new SimpleDateFormat(Config.DATA_FORMAT_PICTURE);
+        timeData.getDateFormatSymbols();
+        String datePicture = timeData.format(c.getTime());
+
+        imageFileName = Config.IMAGE_NAME_DEFOULT + datePicture;
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + Config.DIRECTORY_EVIDENCE);
+        File image = File.createTempFile(imageFileName, Config.PNG_EXTENSION, storageDir);
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
 
@@ -239,12 +243,7 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
         }
     }
 
-    /**
-     * Scale the photo down and fit it to our image views.
-     * <p/>
-     * "Drastically increases performance" to set images using this technique.
-     * Read more:http://developer.android.com/training/camera/photobasics.html
-     */
+
     private void setFullImageFromFilePath(String imagePath, ImageView imageView) {
 
 
@@ -272,6 +271,9 @@ public class FragmentPictureEvidences extends FragmentModel implements View.OnCl
 
         imageView.setImageBitmap(bitmap);
     }
+
+
+
 
     /**
      * Add the picture to the photo gallery.

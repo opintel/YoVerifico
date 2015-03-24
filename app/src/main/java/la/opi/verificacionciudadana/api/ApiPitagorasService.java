@@ -37,13 +37,6 @@ public interface ApiPitagorasService {
             @Field(EndPoint.FIELD_COMMIT) String commit
     );
 
-    @FormUrlEncoded
-    @POST(EndPoint.UPDATE_USER_DATA)
-    Observable<Response> userUpdate(
-
-            @Field(EndPoint.FIELD_USER_STATE) String State,
-            @Field(EndPoint.FIELD_USER_TOWN) String twon
-    );
 
     @FormUrlEncoded
     @POST(EndPoint.USER_SIGN_IN)
@@ -76,6 +69,13 @@ public interface ApiPitagorasService {
             @Field(EndPoint.FIELD_USER_TOWN) String twon
     );
 
+    @FormUrlEncoded
+    @POST("/answers")
+    Observable<Response> sentAnswers(
+            @Field("json") String json,
+            @Field("authenticity_token") String auth_token,
+            @Field("form_authenticity_token") String form_auth_token,
+            @Field("utf8") String utf);
 
 
 

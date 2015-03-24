@@ -30,6 +30,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@color/white"
                 android:ems="10"
+                android:text="ciudadano-movil@mail.com"
                 android:hint="@string/user_mail"
                 android:inputType="textEmailAddress"
                 android:padding="10dp" />
@@ -49,6 +50,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@color/white"
                 android:ems="10"
+                android:text="ciudadano"
                 android:hint="@string/user_password"
                 android:inputType="textPassword"
                 android:padding="10dp" />
