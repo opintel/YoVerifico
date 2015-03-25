@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
@@ -32,14 +33,6 @@ public class EvidenceTwoFragment extends FragmentModel implements View.OnClickLi
         return evidenceTwoFragment;
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
     private FloatingActionButton btnContinue;
     private TextView txtEvent;
     private RatingBar ratingBarEvent;
@@ -60,8 +53,14 @@ public class EvidenceTwoFragment extends FragmentModel implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        ConfigurationPreferences.setRatingPreference(getActivity(), String.valueOf(Math.round(ratingBarEvent.getRating())));
-        fragmentTransactionReplace(EvidenceThreeFragment.newInstance(), getResources().getString(R.string.evidence_three_fragment));
+
+        if(Math.round(ratingBarEvent.getRating()) > 0){
+            ConfigurationPreferences.setRatingPreference(getActivity(), String.valueOf(Math.round(ratingBarEvent.getRating())));
+            fragmentTransactionReplace(EvidenceThreeFragment.newInstance(), getResources().getString(R.string.evidence_three_fragment));
+        }else{
+            Toast.makeText(getActivity(), "Es necesario calificar el evento por favor.", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override

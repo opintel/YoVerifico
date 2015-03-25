@@ -5,12 +5,14 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -19,10 +21,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.api.PitagorasMultimediaService;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
 import la.opi.verificacionciudadana.database.ActionsDataBase;
@@ -31,6 +37,7 @@ import la.opi.verificacionciudadana.util.BitmapTransform;
 import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import retrofit.client.Response;
+import retrofit.mime.TypedFile;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
@@ -50,34 +57,16 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
         return fragmentEventConfirmation;
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
     private Button sendEvidences;
-    private TextView txtComments, txtEvaluation, txtPhotos;
+    private TextView txtComments, txtEvaluation, txtPhotos, txtDate;
     private FrameLayout frameLayout;
     private CircleImageView circleImageView;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_confirmation, container, false);
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Tu Reporte");
-
-        sendEvidences = (Button) rootView.findViewById(R.id.btn_evidence);
-        txtComments = (TextView) rootView.findViewById(R.id.txt_observations);
-        txtEvaluation = (TextView) rootView.findViewById(R.id.txt_evaluation);
-        txtPhotos = (TextView) rootView.findViewById(R.id.txt_photos);
-        circleImageView = (CircleImageView)rootView.findViewById(R.id.circleView);
-        frameLayout = (FrameLayout) getActivity().findViewById(R.id.container_informacion);
-        frameLayout.setBackgroundColor(getResources().getColor(R.color.primary));
-
-
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.evidence_four_fragment));
+        uiWidgets(rootView);
         return rootView;
 
     }
@@ -85,29 +74,21 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        String ratingEvaluation = ConfigurationPreferences.getRatingPreference(getActivity());
-        String eventComments = ConfigurationPreferences.getObservationPreference(getActivity());
-        String photosTotalSize = ConfigurationPreferences.getPhotosSizePreference(getActivity());
-        txtEvaluation.setText(ratingEvaluation);
-        txtComments.setText(eventComments);
-        txtPhotos.setText(photosTotalSize);
-        sendEvidences.setOnClickListener(this);
-        pictureReport();
-
-
+        setValuesUI();
     }
+
 
     @Override
     public void onClick(View v) {
 
 
-        //   Toast.makeText(getActivity(), a + b, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getActivity(), a + b, Toast.LENGTH_SHORT).show();
         // StorageFiles.deleteFilesFromDirectory();
 
 
         // answers(myJson(), EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_UTF8);
-
-
+        uploadFiles();
+        //myJson();
     }
 
 
@@ -145,7 +126,6 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
         });
 
     }
-
 
     public String myJson() {
 
@@ -226,15 +206,15 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
         return aux;
     }
 
-    private void pictureReport(){
+    private void pictureReport() {
 
-       ActionsDataBase.queryDataBase(getActivity());
+        ActionsDataBase.queryDataBase(getActivity());
 
         for (int i = 0; i < ActionsDataBase.getTitleEvidence().size() && i < ActionsDataBase.getPhotoEvidence().size(); i++) {
 
             String[] photo = new String[ActionsDataBase.getPhotoEvidence().size()];
             photo = ActionsDataBase.getPhotoEvidence().toArray(photo);
-            if(i==0){
+            if (i == 0) {
 
                 int MAX_WIDTH = 1024;
                 int MAX_HEIGHT = 768;
@@ -251,5 +231,71 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
 
     }
 
+    private void uiWidgets(View rootView) {
+
+        sendEvidences = (Button) rootView.findViewById(R.id.btn_evidence);
+        txtComments = (TextView) rootView.findViewById(R.id.txt_observations);
+        txtEvaluation = (TextView) rootView.findViewById(R.id.txt_evaluation);
+        txtDate = (TextView) rootView.findViewById(R.id.txt_date);
+        txtPhotos = (TextView) rootView.findViewById(R.id.txt_photos);
+        circleImageView = (CircleImageView) rootView.findViewById(R.id.circleView);
+        frameLayout = (FrameLayout) getActivity().findViewById(R.id.container_informacion);
+        frameLayout.setBackgroundColor(getResources().getColor(R.color.primary));
+
+    }
+
+    private void setValuesUI() {
+
+        String ratingEvaluation = ConfigurationPreferences.getRatingPreference(getActivity());
+        String eventComments = ConfigurationPreferences.getObservationPreference(getActivity());
+        String photosTotalSize = ConfigurationPreferences.getPhotosSizePreference(getActivity());
+        txtEvaluation.setText(ratingEvaluation);
+        txtComments.setText(eventComments);
+        txtPhotos.setText(photosTotalSize);
+        SimpleDateFormat timeData = new SimpleDateFormat(Config.DATA_FORMAT_PICTURE_FECHA);
+        txtDate.setText(timeData.format(Calendar.getInstance().getTime()));
+        sendEvidences.setOnClickListener(this);
+        pictureReport();
+
+    }
+
+    private void uploadFiles() {
+
+        ActionsDataBase.queryDataBase(getActivity());
+        ActionsDataBase.getPhotoEvidence();
+
+        PitagorasMultimediaService multimediaService =
+                ClientServicePitagoras.getMultimediaRestAdapter().create(PitagorasMultimediaService.class);
+
+        for (int i = 0; i < ActionsDataBase.getPhotoEvidence().size(); i++) {
+
+
+            String[] photo = new String[ActionsDataBase.getPhotoEvidence().size()];
+            photo = ActionsDataBase.getPhotoEvidence().toArray(photo);
+            System.out.println("arreglo" + photo[i]);
+            final File foto = new File(photo[i]);
+            TypedFile file = new TypedFile("png", foto);
+            multimediaService.uploadMedia(file).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<Response>() {
+                        @Override
+                        public void call(Response response) {
+
+
+                            Log.i("response status: ", Integer.toString(response.getStatus()));
+                            if (response.getStatus() == 200) {
+                                Toast.makeText(getActivity(), "Imagenes alojadas en el S3 vato!", Toast.LENGTH_LONG).show();
+
+                            }
+
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            Log.e(Config.ERROR_RETROFIT, throwable.getMessage());
+                        }
+                    });
+
+        }
+    }
 
 }

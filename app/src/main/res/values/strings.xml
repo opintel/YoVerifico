@@ -22,10 +22,10 @@
     <string name="evindece_three_instruccions">Anota cualquier observación importante</string>
     <string name="evindece_three_instruccions_a">Agregar comentario</string>
     <string name="evindece_three_instruccions_btn">CONTINUAR</string>
-
-    <string name="evidence_one_fragment">Capturar Fotos de Evidencia</string>
+    <string name="evidence_one_fragment">Capturar Fotos </string>
     <string name="evidence_two_fragment">Calificar Evento</string>
     <string name="evidence_three_fragment">Agregar Observaciones</string>
+    <string name="evidence_four_fragment">Tu Reporte</string>
 
 
 

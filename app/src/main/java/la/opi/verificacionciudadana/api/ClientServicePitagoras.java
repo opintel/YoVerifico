@@ -38,7 +38,6 @@ public class ClientServicePitagoras {
         return restAdapter;
     }
 
-
     public static RestAdapter getRestAdapter() {
         if (restAdapter == null || serviceClient == null) {
             restAdapter = simplePitagorasRestAdapter();
@@ -58,6 +57,15 @@ public class ClientServicePitagoras {
 
         return serviceClient;
     }
+
+    public static RestAdapter getMultimediaRestAdapter(){
+
+        return new RestAdapter.Builder()
+                .setErrorHandler(new RetrofitErrorHandler())
+                .setEndpoint(EndPoint.AWS_S3_PITAGORAS)
+                .build();
+    }
+
 
 
 

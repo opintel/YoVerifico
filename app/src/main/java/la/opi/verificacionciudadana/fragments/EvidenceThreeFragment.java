@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
@@ -20,7 +21,6 @@ public class EvidenceThreeFragment extends FragmentModel implements View.OnClick
 
     public EvidenceThreeFragment() {
     }
-
     public static EvidenceThreeFragment newInstance() {
 
         EvidenceThreeFragment fragmentEventObservations = new EvidenceThreeFragment();
@@ -28,48 +28,32 @@ public class EvidenceThreeFragment extends FragmentModel implements View.OnClick
         fragmentEventObservations.setArguments(extraArguments);
         return fragmentEventObservations;
     }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
     private TextView txtContinue;
     private EditText editTxtObservations;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_observation, container, false);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.evidence_three_fragment));
-
-
         txtContinue = (TextView) rootView.findViewById(R.id.continue_observations);
         editTxtObservations = (EditText) rootView.findViewById(R.id.edit_txt_observations);
-
         txtContinue.setOnClickListener(this);
-
-
         return rootView;
 
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-
-    }
-
-
-    @Override
     public void onClick(View v) {
 
-        ConfigurationPreferences.setObservationPreference(getActivity(), editTxtObservations.getText().toString());
-        fragmentTransactionReplace(EvidenceFourFragment.newInstance(), "confirmaciones");
+
+        if(!editTxtObservations.getText().toString().equals("")){
+            ConfigurationPreferences.setObservationPreference(getActivity(), editTxtObservations.getText().toString());
+            fragmentTransactionReplace(EvidenceFourFragment.newInstance(), getResources().getString(R.string.evidence_four_fragment));
+        }else{
+            Toast.makeText(getActivity(), "Es necesario agregar un comentario por favor.", Toast.LENGTH_LONG).show();
+        }
+
+
 
     }
 

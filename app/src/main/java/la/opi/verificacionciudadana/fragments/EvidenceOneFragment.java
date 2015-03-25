@@ -53,9 +53,10 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
     String mCurrentPhotoPath;
     View rootView;
     String imageFileName;
-    String datePicture;
-    GridView gridView;
-    FrameLayout frameLayout;
+    private String datePicture;
+    private GridView gridView;
+    private FrameLayout frameLayout;
+    private int sizeArrayPictures;
 
 
     @Override
@@ -70,8 +71,6 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
         frameLayout.setBackgroundColor(getResources().getColor(R.color.recycle_events_background));
 
 
-
-
         return rootView;
 
     }
@@ -84,7 +83,13 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
                 initializedCamera();
                 break;
             case R.id.btn_continue:
-                fragmentTransactionReplace(EvidenceTwoFragment.newInstance(), getResources().getString(R.string.evidence_two_fragment));
+
+                if (sizeArrayPictures > 0){
+                    fragmentTransactionReplace(EvidenceTwoFragment.newInstance(), getResources().getString(R.string.evidence_two_fragment));
+                }else{
+                    Toast.makeText(getActivity(),"Es necesario tomar al menos una fotografia por favor.",Toast.LENGTH_LONG).show();
+                }
+
                 break;
 
         }
@@ -100,7 +105,8 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
         ActionsDataBase.queryDataBase(getActivity());
         ActionsDataBase.getTitleEvidence();
         ActionsDataBase.getPhotoEvidence();
-       ConfigurationPreferences.setPhotosSizePreference(getActivity(),Integer.toString(ActionsDataBase.getTitleEvidence().size()));
+        ConfigurationPreferences.setPhotosSizePreference(getActivity(), Integer.toString(ActionsDataBase.getTitleEvidence().size()));
+        sizeArrayPictures = ActionsDataBase.getTitleEvidence().size();
 
         for (String ss : ActionsDataBase.getTitleEvidence()) {
             System.out.println("se ejecuto el for");
@@ -134,36 +140,16 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("CAMERA", "ACTIVITY RESULT");
+
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == getActivity().RESULT_OK) {
-                // Image captured and saved to fileUri specified in the Intent
-                //   Bundle b = data.getExtras();
-                // Bitmap bit = (Bitmap) b.get("data");
-                //  img.setImageBitmap(bit);
 
-                //  img.setImageBitmap(yo(mCurrentPhotoPath));
-
-                // setFullImageFromFilePath(mCurrentPhotoPath, img);
-
-               /* img.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        StorageFiles.deleteFilesFromDirectory();
-                    }
-                });*/
-                Log.i("CAMERA", "OK");
                 ActionsDataBase.insertDataBase(getActivity(), imageFileName, mCurrentPhotoPath);
-
-
-                /// GUARDO LOS ARCHIVOS HASTA QUE ES OK !
                 Toast.makeText(getActivity(), "Evidencia ha sido guardada", Toast.LENGTH_SHORT).show();
             } else if (resultCode == getActivity().RESULT_CANCELED) {
 
-                Log.i("CAMERA", "CANCEL");
             } else {
-                // Image capture failed, advise user
-                Log.i("CAMERA", "EXPECTED");
+
             }
         }
 
@@ -189,7 +175,6 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
     }
 
     private void takePictures() {
-
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -219,6 +204,7 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
         imageFileName = Config.IMAGE_NAME_DEFOULT + datePicture;
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + Config.DIRECTORY_EVIDENCE);
         File image = File.createTempFile(imageFileName, Config.PNG_EXTENSION, storageDir);
+        System.out.println("NOMBRE Imagen" + image.getName());
         mCurrentPhotoPath = image.getAbsolutePath();
 
 
