@@ -27,7 +27,9 @@ public class ConfigurationPreferences {
     public static final String STATE_EMPITY = "estado";
     public static final String EVIDENCE_PREFERENCE = "Evidence_Pitagoras";
     public static final String EVIDENCE_PREFERENCE_TWO = "Evidence_Pitagoras_two";
+    public static final String EVIDENCE_PREFERENCE_PICTURES = "evidence_pitagoras_photos";
     public static final String USER_RATING = "user_rating";
+    public static final String USER_PHOTOS_SIZE = "user_photos_size";
     public static final String USER_OBSERVATION = "user_observation";
     public static final String EVIDENCE_EMPITY = "evidence_empity";
     public static final String TUTORIAL_PREFERENCE = "tutorial_preference";
@@ -124,6 +126,19 @@ public class ConfigurationPreferences {
     public static String getRatingPreference(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(EVIDENCE_PREFERENCE, Context.MODE_PRIVATE);
         return prefs.getString(USER_RATING, EVIDENCE_EMPITY);
+    }
+
+    public static void setPhotosSizePreference(Context context, String size) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(EVIDENCE_PREFERENCE_PICTURES, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_PHOTOS_SIZE, size);
+        editor.commit();
+
+    }
+
+    public static String getPhotosSizePreference(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(EVIDENCE_PREFERENCE_PICTURES, Context.MODE_PRIVATE);
+        return prefs.getString(USER_PHOTOS_SIZE, EVIDENCE_EMPITY);
     }
 
 

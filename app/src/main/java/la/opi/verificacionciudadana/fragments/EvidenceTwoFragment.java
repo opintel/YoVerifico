@@ -7,18 +7,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.RatingBar;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
@@ -27,17 +19,17 @@ import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 /**
  * Created by Jhordan on 10/02/15.
  */
-public class FragmentEventCalification extends FragmentModel implements View.OnClickListener {
+public class EvidenceTwoFragment extends FragmentModel implements View.OnClickListener {
 
-    public FragmentEventCalification() {
+    public EvidenceTwoFragment() {
     }
 
-    public static FragmentEventCalification newInstance() {
+    public static EvidenceTwoFragment newInstance() {
 
-        FragmentEventCalification fragmentEventCalification = new FragmentEventCalification();
+        EvidenceTwoFragment evidenceTwoFragment = new EvidenceTwoFragment();
         Bundle extraArguments = new Bundle();
-        fragmentEventCalification.setArguments(extraArguments);
-        return fragmentEventCalification;
+        evidenceTwoFragment.setArguments(extraArguments);
+        return evidenceTwoFragment;
     }
 
 
@@ -55,7 +47,7 @@ public class FragmentEventCalification extends FragmentModel implements View.OnC
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_calification, container, false);
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Calificar Evento");
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.evidence_two_fragment));
 
         txtEvent = (TextView) rootView.findViewById(R.id.calification_txt);
         txtEvent.setTypeface(VerificaCiudadFonts.typefaceRobotoRegular(getActivity()));
@@ -66,18 +58,10 @@ public class FragmentEventCalification extends FragmentModel implements View.OnC
         return rootView;
     }
 
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-
     @Override
     public void onClick(View v) {
-
         ConfigurationPreferences.setRatingPreference(getActivity(), String.valueOf(Math.round(ratingBarEvent.getRating())));
-        fragmentTransactionReplace(FragmentEventObservations.newInstance(), "observations");
+        fragmentTransactionReplace(EvidenceThreeFragment.newInstance(), getResources().getString(R.string.evidence_three_fragment));
     }
 
     @Override

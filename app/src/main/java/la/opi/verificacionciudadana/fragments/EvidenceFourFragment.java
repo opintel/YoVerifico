@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -17,11 +21,15 @@ import org.json.JSONObject;
 
 import java.io.StringWriter;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
-import la.opi.verificacionciudadana.api.EndPoint;
+import la.opi.verificacionciudadana.database.ActionsDataBase;
+import la.opi.verificacionciudadana.models.ImageEvidence;
+import la.opi.verificacionciudadana.util.BitmapTransform;
 import la.opi.verificacionciudadana.util.Config;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import retrofit.client.Response;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -29,14 +37,14 @@ import rx.functions.Action1;
 /**
  * Created by Jhordan on 10/02/15.
  */
-public class FragmentEventConfirmation extends Fragment implements View.OnClickListener {
+public class EvidenceFourFragment extends Fragment implements View.OnClickListener {
 
-    public FragmentEventConfirmation() {
+    public EvidenceFourFragment() {
     }
 
-    public static FragmentEventConfirmation newInstance() {
+    public static EvidenceFourFragment newInstance() {
 
-        FragmentEventConfirmation fragmentEventConfirmation = new FragmentEventConfirmation();
+        EvidenceFourFragment fragmentEventConfirmation = new EvidenceFourFragment();
         Bundle extraArguments = new Bundle();
         fragmentEventConfirmation.setArguments(extraArguments);
         return fragmentEventConfirmation;
@@ -51,13 +59,23 @@ public class FragmentEventConfirmation extends Fragment implements View.OnClickL
     }
 
     private Button sendEvidences;
+    private TextView txtComments, txtEvaluation, txtPhotos;
+    private FrameLayout frameLayout;
+    private CircleImageView circleImageView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_confirmation, container, false);
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Reporte Final");
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Tu Reporte");
 
-        sendEvidences = (Button) rootView.findViewById(R.id.btn_send_evidences);
+        sendEvidences = (Button) rootView.findViewById(R.id.btn_evidence);
+        txtComments = (TextView) rootView.findViewById(R.id.txt_observations);
+        txtEvaluation = (TextView) rootView.findViewById(R.id.txt_evaluation);
+        txtPhotos = (TextView) rootView.findViewById(R.id.txt_photos);
+        circleImageView = (CircleImageView)rootView.findViewById(R.id.circleView);
+        frameLayout = (FrameLayout) getActivity().findViewById(R.id.container_informacion);
+        frameLayout.setBackgroundColor(getResources().getColor(R.color.primary));
 
 
         return rootView;
@@ -67,8 +85,14 @@ public class FragmentEventConfirmation extends Fragment implements View.OnClickL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        String ratingEvaluation = ConfigurationPreferences.getRatingPreference(getActivity());
+        String eventComments = ConfigurationPreferences.getObservationPreference(getActivity());
+        String photosTotalSize = ConfigurationPreferences.getPhotosSizePreference(getActivity());
+        txtEvaluation.setText(ratingEvaluation);
+        txtComments.setText(eventComments);
+        txtPhotos.setText(photosTotalSize);
         sendEvidences.setOnClickListener(this);
+        pictureReport();
 
 
     }
@@ -76,13 +100,12 @@ public class FragmentEventConfirmation extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
 
-    /*    String a = ConfigurationPreferences.getRatingPreference(getActivity());
-        String b = ConfigurationPreferences.getObservationPreference(getActivity());
-        Toast.makeText(getActivity(), a + b, Toast.LENGTH_SHORT).show();
-        StorageFiles.deleteFilesFromDirectory();*/
+
+        //   Toast.makeText(getActivity(), a + b, Toast.LENGTH_SHORT).show();
+        // StorageFiles.deleteFilesFromDirectory();
 
 
-        answers(myJson(), EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_UTF8);
+        // answers(myJson(), EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_UTF8);
 
 
     }
@@ -179,6 +202,53 @@ public class FragmentEventConfirmation extends Fragment implements View.OnClickL
         }
 
         return jsonArray.toString();
+    }
+
+    private String evaluacion(int i) {
+        String aux = "";
+        switch (i) {
+            case 1:
+                aux = getString(R.string.malo_ponderation);
+                break;
+            case 2:
+                aux = getString(R.string.bueno_ponderation);
+                break;
+            case 3:
+                aux = getString(R.string.regular_ponderation);
+                break;
+            case 4:
+                aux = getString(R.string.my_bueno_ponderation);
+                break;
+            case 5:
+                aux = getString(R.string.excelente_ponderation);
+                break;
+        }
+        return aux;
+    }
+
+    private void pictureReport(){
+
+       ActionsDataBase.queryDataBase(getActivity());
+
+        for (int i = 0; i < ActionsDataBase.getTitleEvidence().size() && i < ActionsDataBase.getPhotoEvidence().size(); i++) {
+
+            String[] photo = new String[ActionsDataBase.getPhotoEvidence().size()];
+            photo = ActionsDataBase.getPhotoEvidence().toArray(photo);
+            if(i==0){
+
+                int MAX_WIDTH = 1024;
+                int MAX_HEIGHT = 768;
+                int size = (int) Math.ceil(Math.sqrt(MAX_WIDTH * MAX_HEIGHT));
+                Picasso.with(getActivity()).load("file://" + photo[0])
+                        .transform(new BitmapTransform(MAX_WIDTH, MAX_HEIGHT))
+                        .skipMemoryCache()
+                        .resize(size, size)
+                        .centerInside()
+                        .into(circleImageView);
+            }
+
+        }
+
     }
 
 

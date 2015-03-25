@@ -15,7 +15,7 @@ public abstract class FragmentModel extends Fragment {
     protected void fragmentTransactionReplace(Fragment fragmentInstance, String fragmentName) {
 
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container_evidence, fragmentInstance).addToBackStack(fragmentName)
+                .replace(R.id.container_informacion, fragmentInstance).addToBackStack(fragmentName)
                 .commit();
 
     }

@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.fragments.FragmentPictureEvidences;
+import la.opi.verificacionciudadana.fragments.EvidenceOneFragment;
 import la.opi.verificacionciudadana.interfaces.ActivityAnimate;
 
 
@@ -21,7 +21,7 @@ public class EvidenceActivity extends BaseActivity implements ActivityAnimate {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container_evidence, new FragmentPictureEvidences())
+                    .add(R.id.container_evidence, new EvidenceOneFragment())
                     .commit();
         }
 

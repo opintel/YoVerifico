@@ -17,7 +17,7 @@
         android:id="@+id/text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="112dp"
         android:background="@color/black_grid"
         android:padding="@dimen/spacing_large"
         android:textColor="@color/white" />

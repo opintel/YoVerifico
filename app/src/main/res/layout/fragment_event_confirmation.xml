@@ -1,134 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/recycle_events_background"
-    android:orientation="vertical">
+    android:background="@color/primary">
 
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="220dp"
-        android:background="@color/orange"
-        android:gravity="center" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:text="4 de 4"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-        <Button
-            android:id="@+id/btn_send_evidences"
-            style="@style/Widget.Button.Application"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:text="Enviar evidencia" />
-
-        </RelativeLayout>
-
-
-    <android.support.v7.widget.CardView
-
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="120dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        card_view:cardCornerRadius="2dp">
+        android:layout_height="match_parent"
+        android:background="@color/primary"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="24-marzo-2015"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/mexico" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:text="Construcción parke skate"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_observations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/lorem"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="@dimen/margin_left_login"
+            android:layout_marginRight="@dimen/margin_left_login"
+            android:layout_marginStart="@dimen/divider_left"
+            android:layout_marginTop="@dimen/divider_top"
+            android:background="@color/button_shadow_map_press" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="Se está realizando el evento?"
-                android:textColor="@color/disable_black"
-                android:textSize="20sp" />
+                android:layout_weight=".5"
+                android:gravity="center"
+                android:text="Fotos"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <TextView
-
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="Captura de fotos"
-                android:textColor="@color/disable_black"
-                android:textSize="20sp" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="Calificacion"
-                android:textColor="@color/disable_black"
-                android:textSize="20sp" />
-
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="Observaciones"
-                android:textColor="@color/disable_black"
-                android:textSize="20sp" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/continue_observations"
-                android:background="@color/recycle_events_background" />
-
-
+                android:layout_weight=".5"
+                android:gravity="center"
+                android:text="Calificación"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_margin="40dp"
-        android:gravity="center"
-        android:text="@string/lorem"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_photos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="center"
+                android:text="6 capturas"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_evaluation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="center"
+                android:text="Regular"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
 
 
 
-</FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="@dimen/margin_left_login"
+            android:layout_marginRight="@dimen/margin_left_login"
+            android:layout_marginStart="@dimen/divider_left"
+            android:layout_marginTop="@dimen/divider_top"
+            android:background="@color/button_shadow_map_press" />
+
+        <Button
+            android:id="@+id/btn_evidence"
+            style="@style/Widget.Button.Standar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="56dp"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            android:text="Enviar evidencia" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>
+
+
 
 

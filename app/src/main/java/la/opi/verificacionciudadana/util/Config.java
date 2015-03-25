@@ -12,8 +12,8 @@ public class Config {
     public final static String TXT_YO_VERIFICO = "YoVerifico.txt";
     public final static String CONDITIONS_AND_TERMS = "Aplicación desarrollada by opi.la";
     public final static String DATA_FORMAT = "yyyyMMdd_HHmmss";
-    public final static String DATA_FORMAT_PICTURE = "dd-MMM-yyyy - HH:mm:ss -";
-    public final static String IMAGE_NAME_DEFOULT = "evidence -";
+    public final static String DATA_FORMAT_PICTURE = "dd-MMM-yyyy - HH:mm:ss ";
+    public final static String IMAGE_NAME_DEFOULT = "IMG_Evidence -";
     public final static String JPG_EXTENSION = ".jpg";
     public final static String PNG_EXTENSION = ".png";
     public final static String ERROR_PARSER = "parser error States";

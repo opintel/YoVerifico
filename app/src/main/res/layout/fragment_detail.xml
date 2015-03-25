@@ -270,8 +270,8 @@
             android:layout_marginRight="10dp"
             android:layout_gravity="right"
             fab:fab_icon="@drawable/ic_lapiz"
-            fab:fab_colorNormal="@color/orange"
-            fab:fab_colorPressed="@color/orange"
+            fab:fab_colorNormal="@color/accent"
+            fab:fab_colorPressed="@color/accent"
             fab:fab_plusIconColor="@color/white" />
     </FrameLayout>
 

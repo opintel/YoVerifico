@@ -7,10 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
@@ -18,14 +16,14 @@ import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 /**
  * Created by Jhordan on 10/02/15.
  */
-public class FragmentEventObservations extends FragmentModel implements View.OnClickListener {
+public class EvidenceThreeFragment extends FragmentModel implements View.OnClickListener {
 
-    public FragmentEventObservations() {
+    public EvidenceThreeFragment() {
     }
 
-    public static FragmentEventObservations newInstance() {
+    public static EvidenceThreeFragment newInstance() {
 
-        FragmentEventObservations fragmentEventObservations = new FragmentEventObservations();
+        EvidenceThreeFragment fragmentEventObservations = new EvidenceThreeFragment();
         Bundle extraArguments = new Bundle();
         fragmentEventObservations.setArguments(extraArguments);
         return fragmentEventObservations;
@@ -46,7 +44,7 @@ public class FragmentEventObservations extends FragmentModel implements View.OnC
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_observation, container, false);
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Agregar Observación");
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.evidence_three_fragment));
 
 
         txtContinue = (TextView) rootView.findViewById(R.id.continue_observations);
@@ -71,7 +69,7 @@ public class FragmentEventObservations extends FragmentModel implements View.OnC
     public void onClick(View v) {
 
         ConfigurationPreferences.setObservationPreference(getActivity(), editTxtObservations.getText().toString());
-        fragmentTransactionReplace(FragmentEventConfirmation.newInstance(), "confirmaciones");
+        fragmentTransactionReplace(EvidenceFourFragment.newInstance(), "confirmaciones");
 
     }
 
