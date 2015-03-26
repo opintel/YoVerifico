@@ -34,6 +34,9 @@ public class ConfigurationPreferences {
     public static final String EVIDENCE_EMPITY = "evidence_empity";
     public static final String TUTORIAL_PREFERENCE = "tutorial_preference";
     public static final String TUTORIAL = "tutorial_state";
+    public static final String HOUR_COMMENT = "comment_evidence_hour";
+    public static final String HOUR_CALIFICATION = "calification_evidence_hour";
+    public static final String HOUR_TAKE_PHOTOS = "photos_hour";
 
     public static void setTokenPreference(Context context, String token) {
 
@@ -155,6 +158,47 @@ public class ConfigurationPreferences {
         return prefs.getString(USER_OBSERVATION, EVIDENCE_EMPITY);
     }
 
+
+
+    public static void setHourCommentPreference(Context context, String hour) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(HOUR_COMMENT, hour);
+        editor.commit();
+
+    }
+
+    public static String getHourCommentPreference(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, Context.MODE_PRIVATE);
+        return prefs.getString(HOUR_COMMENT, EVIDENCE_EMPITY);
+    }
+
+    public static void setHourCalificationPreference(Context context, String hour) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(HOUR_CALIFICATION, hour);
+        editor.commit();
+
+    }
+
+    public static String getHourCalificationPreference(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, Context.MODE_PRIVATE);
+        return prefs.getString(HOUR_CALIFICATION, EVIDENCE_EMPITY);
+    }
+
+    public static void setPhotosHourPreference(Context context, String hour) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(HOUR_TAKE_PHOTOS, hour);
+        editor.commit();
+
+    }
+
+    public static String getPhotosHourPreference(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, Context.MODE_PRIVATE);
+        return prefs.getString(HOUR_TAKE_PHOTOS, EVIDENCE_EMPITY);
+    }
+
     public static void setTutorialPreference(Context context, Boolean observation) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(TUTORIAL_PREFERENCE, context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -167,6 +211,9 @@ public class ConfigurationPreferences {
         SharedPreferences prefs = context.getSharedPreferences(TUTORIAL_PREFERENCE, Context.MODE_PRIVATE);
         return prefs.getBoolean(TUTORIAL, PLACE_EMPITY);
     }
+
+
+
 
 
 }

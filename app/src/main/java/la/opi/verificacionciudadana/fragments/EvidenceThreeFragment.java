@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
+import la.opi.verificacionciudadana.util.DataConfig;
 
 /**
  * Created by Jhordan on 10/02/15.
@@ -47,6 +48,7 @@ public class EvidenceThreeFragment extends FragmentModel implements View.OnClick
 
 
         if(!editTxtObservations.getText().toString().equals("")){
+            ConfigurationPreferences.setHourCommentPreference(getActivity(), DataConfig.getFechaEnvio());
             ConfigurationPreferences.setObservationPreference(getActivity(), editTxtObservations.getText().toString());
             fragmentTransactionReplace(EvidenceFourFragment.newInstance(), getResources().getString(R.string.evidence_four_fragment));
         }else{

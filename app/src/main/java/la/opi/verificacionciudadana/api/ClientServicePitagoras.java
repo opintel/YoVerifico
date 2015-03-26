@@ -15,8 +15,8 @@ import retrofit.client.OkClient;
 public class ClientServicePitagoras {
 
     private static OkClient serviceClient;
-    private static RestAdapter restAdapter;
 
+    private static RestAdapter restAdapter;
 
     private static RestAdapter simplePitagorasRestAdapter() {
 

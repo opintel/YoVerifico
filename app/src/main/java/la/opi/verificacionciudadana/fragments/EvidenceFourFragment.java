@@ -1,7 +1,13 @@
 package la.opi.verificacionciudadana.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.io.IOUtils;
@@ -23,19 +30,24 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.StringWriter;
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.api.EndPoint;
 import la.opi.verificacionciudadana.api.PitagorasMultimediaService;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
 import la.opi.verificacionciudadana.database.ActionsDataBase;
 import la.opi.verificacionciudadana.models.ImageEvidence;
 import la.opi.verificacionciudadana.util.BitmapTransform;
+import la.opi.verificacionciudadana.util.Comunicater;
 import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
+import la.opi.verificacionciudadana.util.DataConfig;
+import la.opi.verificacionciudadana.util.LocationStatus;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
 import rx.android.schedulers.AndroidSchedulers;
@@ -44,7 +56,7 @@ import rx.functions.Action1;
 /**
  * Created by Jhordan on 10/02/15.
  */
-public class EvidenceFourFragment extends Fragment implements View.OnClickListener {
+public class EvidenceFourFragment extends Fragment implements View.OnClickListener, LocationListener {
 
     public EvidenceFourFragment() {
     }
@@ -61,6 +73,9 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
     private TextView txtComments, txtEvaluation, txtPhotos, txtDate;
     private FrameLayout frameLayout;
     private CircleImageView circleImageView;
+    private Location myLocation;
+    private LocationManager locationManager;
+    private String ratingEvaluation;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -86,11 +101,11 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
         // StorageFiles.deleteFilesFromDirectory();
 
 
-        // answers(myJson(), EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_UTF8);
-        uploadFiles();
-        //myJson();
-    }
 
+
+        //uploadFiles();
+        sentJson();
+    }
 
     private void answers(String json, String token, String formToken, String utf) {
 
@@ -127,50 +142,78 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
 
     }
 
+
+    public void sentJson() {
+
+        if (LocationStatus.locationStatus(getActivity())) {
+
+            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, (long) 5000, (float) 5.0, this);
+            myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            myJson();
+            answers(myJson(), EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_UTF8);
+            uploadFiles();
+
+        } else {
+
+            getActivity().startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            Toast.makeText(getActivity(), "Es necesario que tu Gps se encuente encendido", Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
     public String myJson() {
 
-        JSONArray jsonArray = new JSONArray();
 
+        JSONArray jsonArray = new JSONArray();
         JSONArray verificaciones = new JSONArray();
         JSONArray verificaciones_edit = new JSONArray();
         JSONObject answer = new JSONObject();
         JSONObject actividad = new JSONObject();
         JSONObject locationAtCompletion = new JSONObject();
-        JSONObject ocurrencia = new JSONObject();
+        JSONObject descripcionObject = new JSONObject();
+        JSONObject califacationObject = new JSONObject();
+        JSONObject pictureObject = new JSONObject();
 
 
         try {
 
-            for (int i = 0; i < 3; i++) {
 
-                ocurrencia.put("content", "esta bueno el evento");
-                ocurrencia.put("id", "1");
-                ocurrencia.put("updated_at", "17 Sep 2014 18:05:24 GMT");
-                ocurrencia.put("task_id", "1");
-                ocurrencia.put("descripcion", "");
-                ocurrencia.put("evidence_type", "la.opi.verificacionciudadana.Evidence");
-                ocurrencia.put("evidence_id", "1");
-                ocurrencia.put("valid_flag", "1");
-                ocurrencia.put("edit_count", "1");
+            pictureObject.put(Config.VERIFICATION_CONTENT_KEY, getArrayPictures());
+            pictureObject.put(Config.VERIFICATION_ID_KEY, Config.VERIFICATION_TYPE_VALUE_THREE);
+            pictureObject.put(Config.VERIFICATION_UPDATE_KEY, ConfigurationPreferences.getPhotosHourPreference(getActivity()));
+            pictureObject.put(Config.VERIFICATION_EVIDENCE_KEY, Config.VERIFICATION_EVIDENCE_VALUE_PHOTOEVIDENCE);
+            verificaciones.put(pictureObject);
 
-                verificaciones.put(ocurrencia);
+            califacationObject.put(Config.VERIFICATION_CONTENT_KEY, ratingEvaluation);
+            califacationObject.put(Config.VERIFICATION_ID_KEY, Config.VERIFICATION_TYPE_VALUE_TWO);
+            califacationObject.put(Config.VERIFICATION_DESCRIPTION_KEY, evaluacion(Integer.parseInt(ratingEvaluation)));
+            califacationObject.put(Config.VERIFICATION_UPDATE_KEY, ConfigurationPreferences.getHourCalificationPreference(getActivity()));
+            califacationObject.put(Config.VERIFICATION_EVIDENCE_KEY, Config.VERIFICATION_EVIDENCE_VALUE_MULTICHOICE);
+            verificaciones.put(califacationObject);
 
-            }
-
-
-            locationAtCompletion.put("longitude", "-99.16582529");
-            locationAtCompletion.put("provider", "gps");
-            locationAtCompletion.put("latitude", "19.41554712");
-            locationAtCompletion.put("accuracy", "16");
-            locationAtCompletion.put("altitude", "2221.39990234375");
-
-            actividad.put("location_at_completion", locationAtCompletion);
-            actividad.put("completed_at", "17 Sep 2014 18:05:25 GMT");
+            descripcionObject.put(Config.VERIFICATION_CONTENT_KEY, ConfigurationPreferences.getObservationPreference(getActivity()));
+            descripcionObject.put(Config.VERIFICATION_ID_KEY, Config.VERIFICATION_TYPE_VALUE_ONE);
+            descripcionObject.put(Config.VERIFICATION_UPDATE_KEY, ConfigurationPreferences.getHourCommentPreference(getActivity()));
+            descripcionObject.put(Config.VERIFICATION_DESCRIPTION_KEY, Config.VERIFICATION_DESCRIPTION_VALUE);
+            descripcionObject.put(Config.VERIFICATION_EVIDENCE_KEY, Config.VERIFICATION_EVIDENCE_VALUE_TEXT);
+            verificaciones.put(descripcionObject);
 
 
-            answer.put("verificaciones", verificaciones);
-            answer.put("verificaciones_editadas", verificaciones_edit);
-            answer.put("actividad", actividad);
+            locationAtCompletion.put(Config.LOCATION_LONGITUDE_KEY, String.valueOf(myLocation.getLongitude()));
+            locationAtCompletion.put(Config.LOCATION_PROVIDER_KEY, Config.LOCATION_PROVIDER_VALUE);
+            locationAtCompletion.put(Config.LOCATION_LATITUDE_KEY, String.valueOf(myLocation.getLatitude()));
+            locationAtCompletion.put(Config.LOCATION_ACCURACY_KEY, String.valueOf(myLocation.getAccuracy()));
+            locationAtCompletion.put(Config.LOCATION_ALTITUDE_KEY, String.valueOf(myLocation.getAltitude()));
+
+            actividad.put(Config.ACTIVITY_LOCATION_AT_KEY, locationAtCompletion);
+            actividad.put(Config.ACTIVITY_COMPLETED_AT_KEY, DataConfig.getFechaEnvio());
+            actividad.put("id", Comunicater.getIdOcurrence());
+
+            answer.put(Config.VERIFICACIONES_KEY, verificaciones);
+            answer.put(Config.VERIFICACIONES_EDIT_KEY, verificaciones_edit);
+            answer.put(Config.ACTIVITY_KEY, actividad);
 
 
             jsonArray.put(answer);
@@ -214,6 +257,7 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
 
             String[] photo = new String[ActionsDataBase.getPhotoEvidence().size()];
             photo = ActionsDataBase.getPhotoEvidence().toArray(photo);
+
             if (i == 0) {
 
                 int MAX_WIDTH = 1024;
@@ -227,8 +271,35 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
                         .into(circleImageView);
             }
 
+
         }
 
+    }
+
+    private JSONArray getArrayPictures() {
+
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < ActionsDataBase.getTitleEvidence().size(); i++) {
+
+            try {
+                String[] titles = new String[ActionsDataBase.getTitleEvidence().size()];
+                titles = ActionsDataBase.getTitleEvidence().toArray(titles);
+
+                JSONObject pictureName = new JSONObject();
+                pictureName.put(Config.ARRAY_PICTURES_TIMESTAMP, ConfigurationPreferences.getPhotosHourPreference(getActivity()));
+                pictureName.put(Config.ARRAY_PICTURES_FORMAT, Config.ARRAY_PICTURES_EXTENSION);
+                pictureName.put(Config.ARRAY_PICTURES_NAME,titles[i]);
+                jsonArray.put(pictureName);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+        return jsonArray;
     }
 
     private void uiWidgets(View rootView) {
@@ -246,7 +317,7 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
 
     private void setValuesUI() {
 
-        String ratingEvaluation = ConfigurationPreferences.getRatingPreference(getActivity());
+        ratingEvaluation = ConfigurationPreferences.getRatingPreference(getActivity());
         String eventComments = ConfigurationPreferences.getObservationPreference(getActivity());
         String photosTotalSize = ConfigurationPreferences.getPhotosSizePreference(getActivity());
         txtEvaluation.setText(ratingEvaluation);
@@ -298,4 +369,24 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
         }
     }
 
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }

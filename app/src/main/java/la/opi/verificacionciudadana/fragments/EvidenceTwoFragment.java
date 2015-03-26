@@ -15,6 +15,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
+import la.opi.verificacionciudadana.util.DataConfig;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 
 /**
@@ -54,10 +55,11 @@ public class EvidenceTwoFragment extends FragmentModel implements View.OnClickLi
     @Override
     public void onClick(View v) {
 
-        if(Math.round(ratingBarEvent.getRating()) > 0){
+        if (Math.round(ratingBarEvent.getRating()) > 0) {
             ConfigurationPreferences.setRatingPreference(getActivity(), String.valueOf(Math.round(ratingBarEvent.getRating())));
+            ConfigurationPreferences.setHourCalificationPreference(getActivity(), DataConfig.getFechaEnvio());
             fragmentTransactionReplace(EvidenceThreeFragment.newInstance(), getResources().getString(R.string.evidence_three_fragment));
-        }else{
+        } else {
             Toast.makeText(getActivity(), "Es necesario calificar el evento por favor.", Toast.LENGTH_LONG).show();
         }
 

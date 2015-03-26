@@ -12,7 +12,7 @@ public class Config {
     public final static String TXT_YO_VERIFICO = "YoVerifico.txt";
     public final static String CONDITIONS_AND_TERMS = "Aplicación desarrollada by opi.la";
     public final static String DATA_FORMAT = "yyyyMMdd_HHmmss";
-    public final static String DATA_FORMAT_PICTURE = "-dd-MMM-yyyy-HH:mm:ss ";
+    public final static String DATA_FORMAT_PICTURE = "dd-MMM-yyyy-HH:mm:ss ";
     public final static String DATA_FORMAT_PICTURE_FECHA = "dd-MMM-yyyy";
     public final static String IMAGE_NAME_DEFOULT = "IMG_Evidence";
     public final static String JPG_EXTENSION = ".jpg";
@@ -50,5 +50,48 @@ public class Config {
     public final static String SHOWME_FROM_PREFERENCES_TUTORIAL = "showme_tutorial_preferences";
     public final static String SHOWME_TUTORIAL = "showme_tutorial_login";
     public final static String FRAGMENT_TUTORIAL = "tutorial";
+
+    public final static String VERIFICACIONES_KEY = "verificaciones";
+    public final static String VERIFICACIONES_EDIT_KEY = "verificaciones_editadas";
+    public final static String ACTIVITY_KEY = "actividad";
+    public final static String ACTIVITY_COMPLETED_AT_KEY = "completed_at";
+    public final static String ACTIVITY_LOCATION_AT_KEY = "location_at_completion";
+
+    public final static String LOCATION_LONGITUDE_KEY = "longitude";
+    public final static String LOCATION_LATITUDE_KEY = "latitude";
+    public final static String LOCATION_ACCURACY_KEY = "accuracy";
+    public final static String LOCATION_PROVIDER_KEY = "provider";
+    public final static String LOCATION_ALTITUDE_KEY = "altitude";
+    public final static String LOCATION_PROVIDER_VALUE = "gps";
+
+    public final static String VERIFICATION_CONTENT_KEY = "content";
+    public final static String VERIFICATION_ID_KEY = "id";
+    public final static String VERIFICATION_UPDATE_KEY = "updated_at";
+    public final static String VERIFICATION_DESCRIPTION_KEY = "descripcion";
+    public final static String VERIFICATION_EVIDENCE_KEY = "evidence_type";
+    public final static String VERIFICATION_EVIDENCE_VALUE_TEXT = "com.opi.niteowl.models.Evidence.TextEvidence";
+    public final static String VERIFICATION_DESCRIPTION_VALUE = "Anota cualquier observación importante";
+    public final static String VERIFICATION_TYPE_VALUE_ONE = "1";
+    public final static String VERIFICATION_TYPE_VALUE_TWO = "2";
+    public final static String VERIFICATION_TYPE_VALUE_THREE = "3";
+    public final static String VERIFICATION_EVIDENCE_VALUE_MULTICHOICE = "com.opi.niteowl.models.Evidence.MultipleChoiceEvidence";
+    public final static String VERIFICATION_EVIDENCE_VALUE_PHOTOEVIDENCE = "com.opi.niteowl.models.Evidence.PhotoEvidence";
+
+    public final static String ARRAY_PICTURES_TIMESTAMP = "timestamp";
+    public final static String ARRAY_PICTURES_FORMAT = "format";
+    public final static String ARRAY_PICTURES_NAME = "name";
+    public final static String ARRAY_PICTURES_EXTENSION = "PNG";
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

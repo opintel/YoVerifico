@@ -31,6 +31,7 @@ import la.opi.verificacionciudadana.models.ImageEvidence;
 import la.opi.verificacionciudadana.util.CameraSettings;
 import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
+import la.opi.verificacionciudadana.util.DataConfig;
 
 /**
  * Created by Jhordan on 10/02/15.
@@ -57,6 +58,7 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
     private GridView gridView;
     private FrameLayout frameLayout;
     private int sizeArrayPictures;
+    private String fileName;
 
 
     @Override
@@ -84,10 +86,11 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
                 break;
             case R.id.btn_continue:
 
-                if (sizeArrayPictures > 0){
+                if (sizeArrayPictures > 0) {
+                    ConfigurationPreferences.setPhotosHourPreference(getActivity(), DataConfig.getFechaEnvio());
                     fragmentTransactionReplace(EvidenceTwoFragment.newInstance(), getResources().getString(R.string.evidence_two_fragment));
-                }else{
-                    Toast.makeText(getActivity(),"Es necesario tomar al menos una fotografia por favor.",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), "Es necesario tomar al menos una fotografia por favor.", Toast.LENGTH_LONG).show();
                 }
 
                 break;
@@ -144,7 +147,7 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == getActivity().RESULT_OK) {
 
-                ActionsDataBase.insertDataBase(getActivity(), imageFileName, mCurrentPhotoPath);
+                ActionsDataBase.insertDataBase(getActivity(), fileName, mCurrentPhotoPath);
                 Toast.makeText(getActivity(), "Evidencia ha sido guardada", Toast.LENGTH_SHORT).show();
             } else if (resultCode == getActivity().RESULT_CANCELED) {
 
@@ -153,12 +156,6 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
             }
         }
 
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
 
     }
 
@@ -205,6 +202,7 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + Config.DIRECTORY_EVIDENCE);
         File image = File.createTempFile(imageFileName, Config.PNG_EXTENSION, storageDir);
         System.out.println("NOMBRE Imagen" + image.getName());
+        fileName = image.getName();
         mCurrentPhotoPath = image.getAbsolutePath();
 
 

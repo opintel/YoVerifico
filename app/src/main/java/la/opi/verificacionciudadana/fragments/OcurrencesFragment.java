@@ -108,7 +108,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
 
         ocurrencesArrayListTest = new ArrayList<>();
 
-        testOcurrences();
+      //  testOcurrences();
 
 
         ocurrencesRequest(this);
@@ -191,7 +191,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
 
                         //ESTE ES EL QUE FUNCIONA CON EL ENDPOINT
 
-                     /*   ocurrencesArrayListTest = ocurrenceArrayList(writer.toString());
+                      ocurrencesArrayListTest = ocurrenceArrayList(writer.toString());
 
                         Comunicater.setOcurrencesList(ocurrencesArrayListTest);
 
@@ -200,7 +200,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
                         //recyclerView.setHasFixedSize(true);
                         recyclerView.setAdapter(recycleAdapter);
 
-                        recycleAdapter.setItemListRecycleClickListener(itemListRecycleClickListener);*/
+                        recycleAdapter.setItemListRecycleClickListener(itemListRecycleClickListener);
 
 
                     } catch (Exception e) {

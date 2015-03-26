@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,9 +66,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 placeEvent.setText(bundle.getString(Config.PLACE_OCURRENCE));
 
 
-                // TODO
 
-                System.out.println("id de la ocurrencia: " + bundle.getString(Config.ID_OCURRENCE));
                 Comunicater.setIdOcurrence(bundle.getString(Config.ID_OCURRENCE));
 
                 if (bundle.getString(Config.CONTACT_OCURRENCE) == null) {

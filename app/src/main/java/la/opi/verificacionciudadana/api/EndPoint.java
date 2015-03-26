@@ -7,8 +7,8 @@ public class EndPoint {
 
     public final static String PITAGORAS_API = "http://staging.pitagoras.opi.la";
     public static final String AWS_S3_PITAGORAS = "http://uploads.api.opi.la";
-   // public final static String PITAGORAS_API_DEV = "http://10.230.20.77:3000";
-    public final static String PITAGORAS_API_DEV = "http://10.230.20.64:3000";
+   //public final static String PITAGORAS_API_DEV = "http://10.230.20.77:3000";
+    public final static String PITAGORAS_API_DEV = "http://10.230.20.79:3000";
     public final static String MEXICO_STATES = "/api/admin1/index_with_admin2";
     public final static String USER_SIGN_UP = "/users/create.json";
     public final static String USER_SIGN_IN = "/users/sign_in";

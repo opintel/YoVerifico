@@ -55,5 +55,8 @@
     <color name="btn_other_enabled">#A7FFEB</color>
     <color name="cristal">#4FBC9D</color>
     <color name="selector_tab">#212121</color>
+    <color name="button_custom">#EC407A</color>
+    <color name="button_shadow_custom">#D81B60</color>
+    <color name="button_un_pressed">#F48FB1</color>
 
 </resources>

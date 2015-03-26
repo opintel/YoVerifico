@@ -151,7 +151,7 @@
 
         <Button
             android:id="@+id/btn_register_user"
-            style="@style/Widget.Button.Standar"
+            style="@style/Widget.Button.Standar.Custom"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
