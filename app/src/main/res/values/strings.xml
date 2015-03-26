@@ -15,7 +15,7 @@
     <string name="register_with_email">Regístrate con tu correo</string>
     <string name="sessión_with_email">Inicia sesíon con tu correo</string>
     <string name="tutorial_menu">Cómo funciona</string>
-    <string name="tutorial_menu_two">Ayuda</string>
+    <string name="tutorial_menu_two">Nos Mueve la Paz</string>
     <string name="settings_tabs">Configuración</string>
     <string name="mexico">México</string>
     <string name="event_title">Evento</string>
@@ -26,9 +26,6 @@
     <string name="evidence_two_fragment">Calificar Evento</string>
     <string name="evidence_three_fragment">Agregar Observaciones</string>
     <string name="evidence_four_fragment">Tu Reporte</string>
-
-
-
 
 
     <!-- detail -->
@@ -54,9 +51,10 @@
     <string name="not_internet_conection">En este momento no estas conectado</string>
     <string name="not_session_succes">Se ha producido un error durante el inicio de sesión. Inténtalo de nuevo.</string>
     <string name="not_register_succes">Se ha producido un error durante el registro de usuario. Inténtalo de nuevo.</string>
-    <string name="expected_error">Parece que hay un problema con tu conexión. Inténtalo de nuevo.</string>
+    <string name="not_update_succes">Se ha producido un error durante la actualización  de localidad. Inténtalo de nuevo.</string>
+    <string name="expected_error">Parece que ocurrio un error inesperado. Inténtalo de nuevo mas tarde.</string>
     <string name="expected_connection">No se pudo obtener Estado y Municipio debido a un problema con tu conexión. Inténtalo de nuevo"</string>
-    <string name="location_change">Ahora recibiras ocurrencias de esta localidad.</string>
+    <string name="location_change">Ahora recibiras las ocurrencias cercanas a esta localidad.</string>
     <string name="description_app">Programa Nacional para la Prevención Social de la Violencia y la Delincuencia ,en donde la participación de los ciudadanos es fundamental para fortalecer nuestras comunidades e instituciones y así crear condiciones favorables para avanzar hacia la paz.</string>
 
     <!-- SignUp -->
@@ -99,7 +97,7 @@
     <string name="scale_txt">En una escala del 1 al 5</string>
 
     <!-- Messages -->
-i
+    i
     <string name="not_avaliable">Memoria no esta disponible , verifica que tengas espacio</string>
     <string name="only_reading">Al parecer Memoria se encuentra solo en modo lectura</string>
     <string name="yes_dialog">Por supuesto</string>
@@ -112,6 +110,7 @@ i
     <string name="progress_dialog_session">Iniciando sesión, espera un momento por favor.</string>
     <string name="progress_dialog_sing_up">Creando cuenta, espera un momento por favor.</string>
     <string name="progress_dialog_help">Descargando datos, espera un momento por favor.</string>
+    <string name="progress_dialog_update">Actualizando localidad del perfil, espera un momento por favor.</string>
     <string name="url_nosmuevelapaz">http://nosmuevelapaz.org/</string>
     <string name="info_contact">No hay información de contacto</string>
 

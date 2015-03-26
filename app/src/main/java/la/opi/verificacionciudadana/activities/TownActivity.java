@@ -26,13 +26,7 @@ public class TownActivity extends BaseActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
 
-
-        getMenuInflater().inflate(R.menu.menu_municipal, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

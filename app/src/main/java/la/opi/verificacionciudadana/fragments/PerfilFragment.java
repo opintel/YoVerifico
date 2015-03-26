@@ -15,12 +15,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.StringWriter;
+import java.sql.SQLOutput;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
+import la.opi.verificacionciudadana.models.Perfil;
 import la.opi.verificacionciudadana.parser.PerfilParser;
 import la.opi.verificacionciudadana.util.Config;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import retrofit.client.Response;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -65,7 +68,7 @@ public class PerfilFragment extends Fragment {
 
         txtName = (TextView) rootView.findViewById(R.id.name_profile);
         txtEmail = (TextView) rootView.findViewById(R.id.mail_profile);
-       // txtTwon = (TextView) rootView.findViewById(R.id.twon_profile);
+        // txtTwon = (TextView) rootView.findViewById(R.id.twon_profile);
         txtState = (TextView) rootView.findViewById(R.id.state_profile);
 
 
@@ -76,9 +79,18 @@ public class PerfilFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //  profileRequest();
+        profileRequest();
 
-        answers();
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        txtState.setText(ConfigurationPreferences.getStatePreference(getActivity()) +
+                "," + ConfigurationPreferences.getMunicipioPreference(getActivity()));
+
     }
 
     public void profileRequest() {
@@ -92,19 +104,14 @@ public class PerfilFragment extends Fragment {
                 try {
                     final StringWriter writer = new StringWriter();
                     IOUtils.copy(response.getBody().in(), writer, Config.UTF_8);
-
-
                     try {
 
-                        System.out.println("PERFIL RESPONSE: " + writer.toString());
-
-
                         PerfilParser.perfil(writer.toString());
-
-
                         txtName.setText(PerfilParser.getProfileName());
                         txtEmail.setText(PerfilParser.getProfileMail());
-                        txtState.setText(PerfilParser.getProfileStateName() + "," + PerfilParser.getProfileTownName());
+                        ConfigurationPreferences.setIdMunicipioPreference(getActivity(), PerfilParser.getProfileTownId());
+                        ConfigurationPreferences.setIdStatePreference(getActivity(), PerfilParser.getProfileStateId());
+                        setSettingStateFirstTime();
 
 
                     } catch (Exception e) {
@@ -127,60 +134,14 @@ public class PerfilFragment extends Fragment {
     }
 
 
-    public void answers() {
+    private void setSettingStateFirstTime() {
 
-        JSONArray jsonArray = new JSONArray();
+        if (!ConfigurationPreferences.getPlacePreference(getActivity())) {
+            ConfigurationPreferences.setStatePreference(getActivity(), PerfilParser.getProfileStateName());
+            ConfigurationPreferences.setMunicipioPreference(getActivity(), PerfilParser.getProfileTownName());
+            ConfigurationPreferences.setPlacePreference(getActivity(), true);
 
-        JSONArray verificaciones = new JSONArray();
-        JSONArray verificaciones_edit = new JSONArray();
-        JSONObject answer = new JSONObject();
-        JSONObject actividad = new JSONObject();
-        JSONObject locationAtCompletion = new JSONObject();
-        JSONObject ocurrencia = new JSONObject();
-
-
-        try {
-
-            for (int i = 0; i < 3; i++) {
-
-                ocurrencia.put("content", "esta bueno el evento");
-                ocurrencia.put("id", "1");
-                ocurrencia.put("updated_at", "17 Sep 2014 18:05:24 GMT");
-                ocurrencia.put("task_id", "1");
-                ocurrencia.put("descripcion", "");
-                ocurrencia.put("evidence_type", "la.opi.verificacionciudadana.Evidence");
-                ocurrencia.put("evidence_id", "1");
-                ocurrencia.put("valid_flag", "1");
-                ocurrencia.put("edit_count", "1");
-
-                verificaciones.put(ocurrencia);
-
-            }
-
-
-            locationAtCompletion.put("longitude", "-99.16582529");
-            locationAtCompletion.put("provider", "gps");
-            locationAtCompletion.put("latitude", "19.41554712");
-            locationAtCompletion.put("accuracy", "16");
-            locationAtCompletion.put("altitude", "2221.39990234375");
-
-            actividad.put("location_at_completion", locationAtCompletion);
-            actividad.put("completed_at", "17 Sep 2014 18:05:25 GMT");
-
-
-            answer.put("verificaciones", verificaciones);
-            answer.put("verificaciones_editadas", verificaciones_edit);
-            answer.put("actividad", actividad);
-
-
-            jsonArray.put(answer);
-
-
-            System.out.println(jsonArray.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-
     }
 
 

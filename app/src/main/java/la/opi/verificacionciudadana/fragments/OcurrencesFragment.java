@@ -83,6 +83,8 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
         recyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
        // mapa = (FloatingActionButton) rootView.findViewById(R.id.btn_maps);
         swipeRefreshLayout.setColorSchemeResources(R.color.secondary_text, R.color.primary, R.color.accent);
+
+
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -114,9 +116,12 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
         ocurrencesRequest(this);
 
 
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -141,7 +146,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
 
                 System.out.println("VALOR ACTUAL" + topRowVerticalPosition);
 
-                swipeRefreshLayout.setEnabled(topRowVerticalPosition >= 8);
+                swipeRefreshLayout.setEnabled(topRowVerticalPosition >= 0);
             }
         });
 

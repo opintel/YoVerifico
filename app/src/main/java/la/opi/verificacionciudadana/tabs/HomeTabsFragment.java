@@ -17,6 +17,7 @@ import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.fragments.EventsFragment;
 import la.opi.verificacionciudadana.fragments.OcurrencesFragment;
 import la.opi.verificacionciudadana.fragments.PerfilFragment;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 
 
 public class HomeTabsFragment extends Fragment {
@@ -39,6 +40,8 @@ public class HomeTabsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home_tabs, container, false);
 
         View actionBarCustom = View.inflate(getActivity(), R.layout.activity_doss, null);
+
+
 
 
         SlidingTabLayout mSlidingTabLayout = (SlidingTabLayout) actionBarCustom.findViewById(R.id.sliding_tabs);

@@ -3,27 +3,15 @@ package la.opi.verificacionciudadana.dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.activities.SettingsActivity;
-import la.opi.verificacionciudadana.util.Config;
 
 /**
  * Created by Jhordan on 11/02/15.
  */
-public class CustomDialog extends DialogFragment {
-
-
-    public static CustomDialog newInstance(int title) {
-        CustomDialog frag = new CustomDialog();
-        Bundle args = new Bundle();
-        args.putInt(Config.MESSAGE, title);
-        frag.setArguments(args);
-        return frag;
-    }
+public class ConnectionUpdateDialog extends DialogFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,17 +23,13 @@ public class CustomDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        int title = getArguments().getInt(Config.MESSAGE);
-
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(getActivity());
 
-        builder.setMessage(getResources().getString(title))
+        builder.setMessage(R.string.not_update_succes)
                 .setPositiveButton(R.string.session_error_confirm, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-
-                        getActivity().onBackPressed();
                         dialog.cancel();
                     }
                 });

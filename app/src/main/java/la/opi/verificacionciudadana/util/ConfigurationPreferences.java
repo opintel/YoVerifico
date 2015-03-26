@@ -18,12 +18,14 @@ public class ConfigurationPreferences {
     public static final String USER_MAIL = "user_mail";
     public static final String MUNICIPAL_PREFERENCE = "Municipio_Pitagoras";
     public static final String USER_MUNICIPAL = "user_municipio";
+    public static final String USER_MUNICIPAL_ID = "user_municipio_id";
     public static final String MUNICIPAL_EMPITY = "municipio";
     public static final String PLACE_PREFERENCE = "Place_Pitagoras";
     public static final String USER_PLACE = "user_place";
     public static final Boolean PLACE_EMPITY = false;
     public static final String STATE_PREFERENCE = "State_Pitagoras";
     public static final String USER_STATE = "user_state";
+    public static final String USER_STATE_ID = "user_state_id";
     public static final String STATE_EMPITY = "estado";
     public static final String EVIDENCE_PREFERENCE = "Evidence_Pitagoras";
     public static final String EVIDENCE_PREFERENCE_TWO = "Evidence_Pitagoras_two";
@@ -213,6 +215,37 @@ public class ConfigurationPreferences {
     }
 
 
+
+    public static void setIdMunicipioPreference(Context context, String email) {
+
+        SharedPreferences sharedPref = context.getSharedPreferences(MUNICIPAL_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(USER_MUNICIPAL_ID, email);
+        editor.commit();
+    }
+
+    public static String getIdMunicipioPreference(Context context) {
+
+        SharedPreferences prefs = context.getSharedPreferences(MUNICIPAL_PREFERENCE, Context.MODE_PRIVATE);
+        return prefs.getString(USER_MUNICIPAL_ID, MUNICIPAL_EMPITY);
+
+    }
+
+
+    public static void setIdStatePreference(Context context, String state) {
+
+        SharedPreferences sharedPref = context.getSharedPreferences(STATE_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(USER_STATE_ID, state);
+        editor.commit();
+    }
+
+    public static String getIdStatePreference(Context context) {
+
+        SharedPreferences prefs = context.getSharedPreferences(STATE_PREFERENCE, Context.MODE_PRIVATE);
+        return prefs.getString(USER_STATE_ID, STATE_EMPITY);
+
+    }
 
 
 

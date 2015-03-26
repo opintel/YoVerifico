@@ -1,5 +1,7 @@
 package la.opi.verificacionciudadana.parser;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -88,17 +90,6 @@ public class PerfilParser {
             setProfileTownId(jsonObject.getString(EndPoint.PROFILE_TWON_ID));
             setProfileStateName(jsonObject.getString(EndPoint.PROFILE_STATE_NAME));
             setProfileTownName(jsonObject.getString(EndPoint.PROFILE_TWON_NAME));
-
-
-            System.out.println(getProfileId());
-            System.out.println(getProfileName());
-            System.out.println(getProfileMail());
-
-            System.out.println(getProfileStateId());
-            System.out.println(getProfileTownId());
-            System.out.println(getProfileStateName());
-            System.out.println(getProfileName());
-
 
         } catch (JSONException e) {
             e.printStackTrace();

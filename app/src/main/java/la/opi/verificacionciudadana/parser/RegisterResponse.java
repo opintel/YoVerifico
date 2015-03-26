@@ -59,10 +59,6 @@ public class RegisterResponse {
             email = jsonObject.getString(EndPoint.PARSER_REGISTER_MAIL);
             name = jsonObject.getString(EndPoint.PARSER_REGISTER_NAME);
             setName(name);
-
-            System.out.println("RESPUESTA" + id + email + name);
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

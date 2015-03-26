@@ -178,11 +178,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 try {
                     final StringWriter writer = new StringWriter();
                     IOUtils.copy(response.getBody().in(), writer, "UTF-8");
-
                     RegisterResponse.registerResponseSucces(writer.toString());
                     progressDialog.dismiss();
-                    showToast("Se ha registrado a "+  RegisterResponse.getName() + " exitosamente" +
-                            "");
+                    if(response.getStatus() == 200){
+                        showToast("Se ha registrado a "+  RegisterResponse.getName() + " exitosamente" +
+                                "");
+                    }
+
 
                 } catch (Exception e) {
 
@@ -197,7 +199,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             @Override
             public void call(Throwable throwable) {
 
-                if( throwable.getMessage().equals("422 Unprocessable Entity")){
+                if( throwable.getMessage().equals("422 Unprocessable Entity") || throwable.getMessage().equals("422")){
                     showToast("usuario ya esta registrado");
                     progressDialog.dismiss();
 
@@ -303,7 +305,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showToast(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 
     private void dialogNoConnection() {
