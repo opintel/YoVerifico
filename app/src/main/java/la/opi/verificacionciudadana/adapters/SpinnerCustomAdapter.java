@@ -63,4 +63,10 @@ public class SpinnerCustomAdapter extends ArrayAdapter<State> {
         TextView txtState;
 
     }
+
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 }

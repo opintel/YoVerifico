@@ -81,7 +81,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
         swipeRefreshLayout = (android.support.v4.widget.SwipeRefreshLayout)
                 rootView.findViewById(R.id.swipe_refresh_layout);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
-       // mapa = (FloatingActionButton) rootView.findViewById(R.id.btn_maps);
+        // mapa = (FloatingActionButton) rootView.findViewById(R.id.btn_maps);
         swipeRefreshLayout.setColorSchemeResources(R.color.secondary_text, R.color.primary, R.color.accent);
 
 
@@ -98,23 +98,10 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
         super.onActivityCreated(savedInstanceState);
 
 
-      /*  mapa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MapaActivity.class);
-                getActivity().startActivity(intent);
-                getActivity().overridePendingTransition(R.animator.open_next, R.animator.close_main);
-            }
-        });*/
-
-
         ocurrencesArrayListTest = new ArrayList<>();
 
-      //  testOcurrences();
-
-
+        //  testOcurrences();
         ocurrencesRequest(this);
-
 
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -127,25 +114,27 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
                     public void run() {
 
 
-                        swipeRefreshLayout.setRefreshing(false);
+          swipeRefreshLayout.setRefreshing(false);
 
 
                     }
                 }, 2500);
+
+
+
+
+
+
             }
         });
+
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
                 int topRowVerticalPosition =
-
                         (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
-
-                System.out.println("VALOR ACTUAL" + topRowVerticalPosition);
-
                 swipeRefreshLayout.setEnabled(topRowVerticalPosition >= 0);
             }
         });
@@ -183,28 +172,13 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
                     try {
 
 
-                        for (Ocurrence p : ocurrenceArrayList(writer.toString())) {
-                            System.out.println("datos ==  " + p.getOcurrenceData());
-                            System.out.println("datos ==  " + p.getFromHour());
-                            System.out.println("datos ==  " + p.getToHour());
-                            System.out.println("datos ==  " + p.getAction());
-                            System.out.println("datos ==  " + p.getDescription());
-
-
-                        }
-
-
                         //ESTE ES EL QUE FUNCIONA CON EL ENDPOINT
 
-                      ocurrencesArrayListTest = ocurrenceArrayList(writer.toString());
-
+                        ocurrencesArrayListTest = ocurrenceArrayList(writer.toString());
                         Comunicater.setOcurrencesList(ocurrencesArrayListTest);
-
                         recycleAdapter = new OcurrencesAdapter(ocurrencesArrayListTest, R.layout.item_list_ocurrences, getActivity());
-
                         //recyclerView.setHasFixedSize(true);
                         recyclerView.setAdapter(recycleAdapter);
-
                         recycleAdapter.setItemListRecycleClickListener(itemListRecycleClickListener);
 
 
@@ -273,7 +247,6 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
 
         return ocurrenceList;
     }
-
 
     private void testOcurrences() {
 

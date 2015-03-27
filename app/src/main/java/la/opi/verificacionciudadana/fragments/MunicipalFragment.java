@@ -22,6 +22,7 @@ import android.widget.Toast;
 import org.apache.commons.io.IOUtils;
 
 import java.io.StringWriter;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -67,12 +68,17 @@ public class MunicipalFragment extends Fragment {
     String idState;
     String idTwon;
     String keyMunicipio, keyState;
+    int i = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        try{
         requestStates();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -114,8 +120,8 @@ public class MunicipalFragment extends Fragment {
                 try {
                     if (InternetConnection.connectionState(getActivity())) {
 
-                        Toast.makeText(getActivity(), idState + "-" + estado + " " + idTwon + "-" + municipio, Toast.LENGTH_LONG).show();
-                        //TODO FIX ID HARCODED
+                      //  Toast.makeText(getActivity(), idState + "-" + estado + " " + idTwon + "-" + municipio, Toast.LENGTH_LONG).show();
+                        //TODO FIX USER ID HARCODED
                         userUpdate("599", idState, idTwon);
                         ConfigurationPreferences.setIdMunicipioPreference(getActivity(), idTwon);
                         ConfigurationPreferences.setIdStatePreference(getActivity(), idState);
@@ -193,7 +199,7 @@ public class MunicipalFragment extends Fragment {
                     final StringWriter writer = new StringWriter();
                     IOUtils.copy(response.getBody().in(), writer, "UTF-8");
 
-                    SpinnerCustomAdapter spinnerCustomAdapter = new
+                    final SpinnerCustomAdapter spinnerCustomAdapter = new
                             SpinnerCustomAdapter(getActivity(), ParserStatesSpinner.paserState(writer.toString()));
 
 
@@ -201,10 +207,10 @@ public class MunicipalFragment extends Fragment {
                     for (Map.Entry<Integer, String> entry : ParserStatesSpinner.getStatehashMap().entrySet()) {
                         Integer key = entry.getKey();
                         String value = entry.getValue();
+
                         if (value.equals(ConfigurationPreferences.getIdStatePreference(getActivity()))) {
                             keyState = key.toString();
 
-                            System.out.println("key Estado" + keyState);
                         }
 
 
@@ -213,6 +219,7 @@ public class MunicipalFragment extends Fragment {
 
                     spinnerStates.setAdapter(spinnerCustomAdapter);
                    spinnerStates.setSelection(Integer.parseInt(keyState));
+
 
                     spinnerStates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
@@ -237,23 +244,28 @@ public class MunicipalFragment extends Fragment {
                             for (Map.Entry<Integer, String> entry : townHash.entrySet()) {
                                 Integer key = entry.getKey();
                                 String value = entry.getValue();
+
                                 if (value.equals(ConfigurationPreferences.getIdMunicipioPreference(getActivity()))) {
                                     keyMunicipio = key.toString();
-
-                                    System.out.println("key de municipio"+ keyMunicipio);
                                 }
 
 
                             }
+
+
                             final SpinnerCustomTownAdapter spinnerCustomTownAdapter = new SpinnerCustomTownAdapter(getActivity(), townArrayList);
 
                             Collections.sort(townArrayList, new ParserStatesSpinner.CustomComparator());
 
                             spinnerMunicipal.setAdapter(spinnerCustomTownAdapter);
-                            spinnerMunicipal.setSelection(Integer.parseInt(keyMunicipio));
 
-                            //TODO FIXME ARREGLAR LA PARTE DE  MUNICIPIOS Y ESTADOS
 
+                            // hack for setPreference
+                            i++;
+                            if(i == 1){
+                                spinnerMunicipal.setSelection(Integer.parseInt(keyMunicipio));
+
+                            }
 
                             spinnerMunicipal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
@@ -272,11 +284,15 @@ public class MunicipalFragment extends Fragment {
 
                         }
 
+
+
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {
 
                         }
                     });
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
