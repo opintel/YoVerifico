@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.fragments.EventsFragment;
+import la.opi.verificacionciudadana.fragments.LocationFragment;
 import la.opi.verificacionciudadana.fragments.OcurrencesFragment;
 import la.opi.verificacionciudadana.fragments.PerfilFragment;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
@@ -53,6 +54,7 @@ public class HomeTabsFragment extends Fragment {
         listaFragments = new ArrayList<>();
         listaFragments.add(OcurrencesFragment.newInstance());
         listaFragments.add(PerfilFragment.newInstance());
+        listaFragments.add(LocationFragment.newInstance());
 
 
         HomePagerAdapter myPagerAdapters = new HomePagerAdapter(getChildFragmentManager(), listaFragments);

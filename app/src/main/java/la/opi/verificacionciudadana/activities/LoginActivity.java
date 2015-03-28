@@ -20,7 +20,7 @@ import la.opi.verificacionciudadana.util.SystemConfigurationBars;
 /**
  * Created by Jhordan on 08/03/15.
  */
-public class LoginActivity extends BaseActivity implements ActivityAnimate {
+public class LoginActivity extends BaseActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,26 +96,6 @@ public class LoginActivity extends BaseActivity implements ActivityAnimate {
     }
 
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void help() {
-        Intent intent = new Intent(LoginActivity.this, HelpActivity.class);
-        startActivity(intent, animateActivity(R.animator.animator_enter, R.animator.animator_exit));
-        finish();
-    }
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void tutorial() {
-        Intent intent = new Intent(LoginActivity.this, TutorialActivity.class);
-        intent = intent.putExtra("tutorial", "showme_tutorial");
-        startActivity(intent, animateActivity(R.animator.animator_enter, R.animator.animator_exit));
-        finish();
-    }
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    @Override
-    public Bundle animateActivity(int animateEnter, int animateExit) {
-        return ActivityOptions.makeCustomAnimation(this, R.animator.animator_enter, R.animator.animator_exit).toBundle();
-    }
 
     private void showToast(int message) {
         Toast.makeText(this, getResources().getString(message), Toast.LENGTH_SHORT).show();

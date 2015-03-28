@@ -3,15 +3,18 @@ package la.opi.verificacionciudadana.tabs;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
 import java.util.List;
+
 import la.opi.verificacionciudadana.R;
 
 public class HomePagerAdapter extends FragmentPagerAdapter {
 
-    private static int[] ICONS = new int[] {
+    private static int[] ICONS = new int[]{
 
             R.drawable.ic_events_custom,
-            R.drawable.ic_perfil_custom
+            R.drawable.ic_perfil_custom,
+            R.drawable.ic_location_custom
 
     };
 

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.apache.commons.io.IOUtils;
@@ -54,22 +55,27 @@ public class PerfilFragment extends Fragment {
     android.support.v4.widget.SwipeRefreshLayout swipeRefreshLayout;
 
     TextView txtName, txtEmail, txtState, txtTwon;
+    ImageView imageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_perfil, container, false);
 
-        swipeRefreshLayout = (android.support.v4.widget.SwipeRefreshLayout)
-                rootView.findViewById(R.id.swipe_refresh_layout);
-
-        swipeRefreshLayout.setColorSchemeResources(R.color.secondary_text, R.color.primary, R.color.accent);
-        swipeRefreshLayout.setRefreshing(true);
 
 
-        txtName = (TextView) rootView.findViewById(R.id.name_profile);
-        txtEmail = (TextView) rootView.findViewById(R.id.mail_profile);
+       // swipeRefreshLayout = (android.support.v4.widget.SwipeRefreshLayout)
+              //  rootView.findViewById(R.id.swipe_refresh_layout);
+
+
+       // swipeRefreshLayout.setColorSchemeResources(R.color.secondary_text, R.color.primary, R.color.accent);
+       //
+       // swipeRefreshLayout.setRefreshing(true);
+
+
+     //   txtName = (TextView) rootView.findViewById(R.id.name_profile);
+       // txtEmail = (TextView) rootView.findViewById(R.id.mail_profile);
         // txtTwon = (TextView) rootView.findViewById(R.id.twon_profile);
-        txtState = (TextView) rootView.findViewById(R.id.state_profile);
+       // txtState = (TextView) rootView.findViewById(R.id.state_profile);
 
 
         return rootView;
@@ -79,7 +85,7 @@ public class PerfilFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        profileRequest();
+   //     profileRequest();
 
 
     }
@@ -88,8 +94,8 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        txtState.setText(ConfigurationPreferences.getStatePreference(getActivity()) +
-                "," + ConfigurationPreferences.getMunicipioPreference(getActivity()));
+   //     txtState.setText(ConfigurationPreferences.getStatePreference(getActivity()) +
+     //           "," + ConfigurationPreferences.getMunicipioPreference(getActivity()));
 
     }
 

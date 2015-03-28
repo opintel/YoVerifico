@@ -100,8 +100,8 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
 
         ocurrencesArrayListTest = new ArrayList<>();
 
-        //  testOcurrences();
-        ocurrencesRequest(this);
+         testOcurrences();
+       // ocurrencesRequest(this);
 
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
