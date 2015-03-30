@@ -5,23 +5,26 @@ package la.opi.verificacionciudadana.api;
  */
 public class EndPoint {
 
-    public final static String PITAGORAS_API = "http://staging.pitagoras.opi.la";
+    public final static String PITAGORAS_API_PRODUCCTION = "http://staging.pitagoras.opi.la";
     public static final String AWS_S3_PITAGORAS = "http://uploads.api.opi.la";
-   //public final static String PITAGORAS_API_DEV = "http://10.230.20.77:3000";
+    public final static String EVIDENCE_MULTIMEDIA_S3 = "/levantamientos/multimedia/nite_owl";
+    public final static String PART_FILE = "file";
+
     public final static String PITAGORAS_API_DEV = "http://10.230.20.79:3000";
     public final static String MEXICO_STATES = "/api/admin1/index_with_admin2";
     public final static String USER_SIGN_UP = "/users/create.json";
     public final static String USER_SIGN_IN = "/users/sign_in";
     public final static String HOME = "/home";
     public final static String OCURRENCES = "/occurrences.json";
-    public final static String UPDATE_USER_DATA = "/users/{:id}/update.json";
+    public final static String USER_UPDATE = "/users/{id}/update.json";
     public final static String OPI_WEB = "http://opi.la";
     public final static String USER_LOG_OUT = "/users/sign_out";
     public final static String USER_PROFILE_TEST = "/users/599.json";
     public final static String USER_PROFILE = "/users/get_info.json";
-
+    public final static String USER_ANSWERS = "/answers";
 
     public final static String FIELD_AUTHENTICITY_TOKEN = "authenticity_token";
+    public final static String FIELD_FORM_AUTHENTICITY_TOKEN = "form_authenticity_token";
     public final static String FIELD_UTF_8 = "utf8";
     public final static String FIELD_USER_NAME = "user[name]";
     public final static String FIELD_USER_MAIL = "user[email]";
@@ -32,6 +35,9 @@ public class EndPoint {
     public final static String FIELD_USER_CONFIRMATION = "user[password_confirmation]";
     public final static String FIELD_COMMIT = "commit";
     public final static String FIELD_USER_REMEMBER_ME = "user[remember_me]";
+    public final static String FIELD_JSON = "json";
+
+    public final static String PATH_ID = "id";
 
     public final static String HEADER_USER_AGENT = "User-Agent";
     public final static String HEADER_AGENT_NAME = "YoVerifico-Android-OPI";

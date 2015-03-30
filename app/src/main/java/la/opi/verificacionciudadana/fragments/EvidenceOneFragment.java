@@ -116,26 +116,42 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
             System.out.println("database values: " + ss);
         }
 
+        if(ActionsDataBase.getTitleEvidence().size() == 0){
 
-        ArrayList<ImageEvidence> imageEvidences = new ArrayList<>();
+            ArrayList<ImageEvidence> imageEvidences = new ArrayList<>();
+                ImageEvidence imageEvidence = new ImageEvidence();
+                imageEvidence.setTitle("Toma una o varias fotos del evento");
+                imageEvidence.setEvidence("null");
+                imageEvidences.add(imageEvidence);
+            gridView.setNumColumns(1);
 
-        for (int i = 0; i < ActionsDataBase.getTitleEvidence().size() && i < ActionsDataBase.getPhotoEvidence().size(); i++) {
+
+            EvidencesImagesAdapter evidencesImagesAdapter = new EvidencesImagesAdapter(getActivity(), imageEvidences);
+            gridView.setAdapter(evidencesImagesAdapter);
 
 
-            ImageEvidence imageEvidence = new ImageEvidence();
+        }else{
 
-            String[] title = new String[ActionsDataBase.getTitleEvidence().size()];
-            title = ActionsDataBase.getTitleEvidence().toArray(title);
-            String[] photo = new String[ActionsDataBase.getPhotoEvidence().size()];
-            photo = ActionsDataBase.getPhotoEvidence().toArray(photo);
-            imageEvidence.setTitle(title[i]);
-            imageEvidence.setEvidence(photo[i]);
+            ArrayList<ImageEvidence> imageEvidences = new ArrayList<>();
+            for (int i = 0; i < ActionsDataBase.getTitleEvidence().size() && i < ActionsDataBase.getPhotoEvidence().size(); i++) {
+                ImageEvidence imageEvidence = new ImageEvidence();
+                String[] title = new String[ActionsDataBase.getTitleEvidence().size()];
+                title = ActionsDataBase.getTitleEvidence().toArray(title);
+                String[] photo = new String[ActionsDataBase.getPhotoEvidence().size()];
+                photo = ActionsDataBase.getPhotoEvidence().toArray(photo);
+                imageEvidence.setTitle(title[i]);
+                imageEvidence.setEvidence(photo[i]);
+                imageEvidences.add(imageEvidence);
+            }
+            gridView.setNumColumns(2);
 
-            imageEvidences.add(imageEvidence);
+            EvidencesImagesAdapter evidencesImagesAdapter = new EvidencesImagesAdapter(getActivity(), imageEvidences);
+            gridView.setAdapter(evidencesImagesAdapter);
+
+
         }
 
-        EvidencesImagesAdapter evidencesImagesAdapter = new EvidencesImagesAdapter(getActivity(), imageEvidences);
-        gridView.setAdapter(evidencesImagesAdapter);
+
 
 
     }

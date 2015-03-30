@@ -63,6 +63,11 @@ public class EvidencesImagesAdapter extends ArrayAdapter<ImageEvidence> {
         int size = (int) Math.ceil(Math.sqrt(MAX_WIDTH * MAX_HEIGHT));
 
 
+        if(evidence.getEvidence().equals("null")){
+
+            holder.imageEvidencePath.setImageResource(R.drawable.mex);
+
+        }else{
 
 
 
@@ -72,6 +77,7 @@ public class EvidencesImagesAdapter extends ArrayAdapter<ImageEvidence> {
                  .resize(size, size)
                  .centerInside()
                  .into(holder.imageEvidencePath);
+        }
 
        // holder.imageEvidencePath.setImageBitmap(avatarConvertBitmap(evidence.getEvidence()));
 

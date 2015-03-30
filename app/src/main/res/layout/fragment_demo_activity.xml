@@ -4,7 +4,7 @@
     android:id="@+id/background_pager_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mex"
+    android:background="@drawable/tutorial_one"
     android:orientation="vertical"
     tools:context="la.opi.verificacionciudadana.activities.TutorialActivity$DemoFragment">
 

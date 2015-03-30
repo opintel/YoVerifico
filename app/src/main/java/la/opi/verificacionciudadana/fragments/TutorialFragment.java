@@ -25,7 +25,6 @@ public class TutorialFragment extends Fragment {
 
     public TutorialFragment() {
     }
-
     public static TutorialFragment newInstance() {
 
         TutorialFragment tutorialFragment = new TutorialFragment();
@@ -47,9 +46,10 @@ public class TutorialFragment extends Fragment {
         ViewPager pager = (ViewPager) rootView.findViewById(R.id.pager);
         PagerAdapterDemo pagerAdapterImages;
         pagerAdapterImages = new PagerAdapterDemo(getFragmentManager());
-        pagerAdapterImages.addFragment(FragmentTutorialItem.newInstance(R.string.text_demo_1, R.string.lorem));
-        pagerAdapterImages.addFragment(FragmentTutorialItem.newInstance(R.string.text_demo_2, R.string.lorem));
-        pagerAdapterImages.addFragment(FragmentTutorialItem.newInstance(R.string.text_demo_3, R.string.lorem));
+        pagerAdapterImages.addFragment(FragmentTutorialItem.newInstance(R.string.text_demo_1, R.string.txt_demo_1_description));
+        pagerAdapterImages.addFragment(FragmentTutorialItem.newInstance(R.string.text_demo_2, R.string.txt_demo_2_description));
+        pagerAdapterImages.addFragment(FragmentTutorialItem.newInstance(R.string.text_demo_3, R.string.txt_demo_3_description));
+        pagerAdapterImages.addFragment(FragmentTutorialItem.newInstance(R.string.text_demo_4, R.string.txt_demo_4_description));
 
         relativeLayout = (RelativeLayout) rootView.findViewById(R.id.background_pager_layout);
 

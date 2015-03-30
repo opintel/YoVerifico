@@ -34,6 +34,10 @@ public class Config {
     public final static String TABLE_NAME = "EVIDENCIA";
     public final static String QUERY_PATH = "SELECT * FROM EVIDENCIA";
 
+    public final static String LATITUDE_OCURRENCE = "latitude_ocurrence";
+    public final static String LONGITUDE_OCURRENCE = "longitude_ocurrence";
+    public final static String STATE_OCURRRENCE = "admin1_ocurrence";
+    public final static String TWON_OCURRRENCE = "admin2_ocurrence";
     public final static String TITLE_OCURRENCE = "title_ocurrence";
     public final static String DATA_OCURRENCE = "data_ocurrence";
     public final static String TIME_OCURRENCE = "time_ocurrence";

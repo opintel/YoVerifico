@@ -16,6 +16,9 @@
     <string name="sessión_with_email">Inicia sesíon con tu correo</string>
     <string name="tutorial_menu">Cómo funciona</string>
     <string name="tutorial_menu_two">Nos Mueve la Paz</string>
+    <string name="map_menu">mapa</string>
+    <string name="share_menu">compartir</string>
+
     <string name="settings_tabs">Configuración</string>
     <string name="mexico">México</string>
     <string name="event_title">Evento</string>
@@ -82,9 +85,14 @@
     <!-- Demo Activity -->
     <string name="action_omited">Omitir</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetuer adipiscing elit ipsum dolor sit amet, consectetuer adipiscing elit</string>
-    <string name="text_demo_1">VERIFICA TU LOCALIDAD</string>
-    <string name="text_demo_2">CAPTURA UNA O VARIAS FOTOS DEL EVENTO</string>
-    <string name="text_demo_3">CHECA TUS RESULTADOS</string>
+    <string name="text_demo_1">VERIFICA ALGUNO DE LOS EVENTOS QUE SE REALIZAN EN EL PAÍS Y AYUDEMOS A CONSTRUIR EL FUTURO DE MÉXICO  </string>
+    <string name="text_demo_2">ACUDE Y VERIFICA EL EVENTO DE TU INTERES</string>
+    <string name="text_demo_3">CAPTURA EVIDENCIA EN TAN SOLO UNOS MINUTOS</string>
+    <string name="text_demo_4">¡ENVIA TU REPORTE!</string>
+    <string name="txt_demo_1_description"></string>
+    <string name="txt_demo_2_description">Explora los eventos cercanos a tu localidad, recuerda que si no puedes asistir o esta fuera de tu localidad no te preocupes puedes compartirlo con tus amigos.</string>
+    <string name="txt_demo_3_description">Captura una o varias fotos del evento, asignale una calificación y agrega un comentario. Tu evidencia es fundamental para generar un cambio en el país.</string>
+    <string name="txt_demo_4_description">Envia tu reporte desde el lugar en donde se realizo el evento para que seá una evidencia valida y gracias por tu participación unidos avanzamos hacia la paz.</string>
     <!-- Events Fragment -->
 
     <string name="google_maps_key">AIzaSyCAIn_FQYTrqtgu_nYvzwRWsIgmrMtIq4s</string>
@@ -97,11 +105,14 @@
     <string name="scale_txt">En una escala del 1 al 5</string>
 
     <!-- Messages -->
-    i
+
     <string name="not_avaliable">Memoria no esta disponible , verifica que tengas espacio</string>
     <string name="only_reading">Al parecer Memoria se encuentra solo en modo lectura</string>
     <string name="yes_dialog">Por supuesto</string>
     <string name="no_dialog">No lo creo</string>
+    <string name="btn_location">Cambiar localidad ahora</string>
+    <string name="location_title_text">Recuerda que puedes visualizar ocurrencias de todo el país.</string>
+    <string name="location_instruction_txt">Cambia tu localidad para recibir ocurrencias de otro estado o municipio y si no puedes asistir comparte el evento con tus amigos.</string>
     <string name="camera_instruction">Captura todas las fotos  que desees acerca del evento , llena la información solicitada y envia la evidencia</string>
     <string name="camera_instruction_two">Presiona la camara para tomar una foto.</string>
     <string name="hasnot_camera">Al parecer este dispositivo no tiene una camara.</string>

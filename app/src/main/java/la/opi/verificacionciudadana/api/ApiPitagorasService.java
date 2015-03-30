@@ -24,7 +24,6 @@ public interface ApiPitagorasService {
     @FormUrlEncoded
     @POST(EndPoint.USER_SIGN_UP)
     Observable<Response> userSignUp(
-
             @Field(EndPoint.FIELD_AUTHENTICITY_TOKEN) String token,
             @Field(EndPoint.FIELD_UTF_8) String utf,
             @Field(EndPoint.FIELD_USER_NAME) String name,
@@ -41,7 +40,6 @@ public interface ApiPitagorasService {
     @FormUrlEncoded
     @POST(EndPoint.USER_SIGN_IN)
     Observable<Response> userSingIn(
-
             @Field(EndPoint.FIELD_UTF_8) String utf,
             @Field(EndPoint.FIELD_AUTHENTICITY_TOKEN) String auth_token,
             @Field(EndPoint.FIELD_USER_MAIL) String email,
@@ -61,22 +59,19 @@ public interface ApiPitagorasService {
     Observable<Response> getProfile();
 
     @FormUrlEncoded
-    @PUT("/users/{id}/update.json")
+    @PUT(EndPoint.USER_UPDATE)
     Observable<Response> userUpdate(
-
-            @Path("id") String id,
+            @Path(EndPoint.PATH_ID) String id,
             @Field(EndPoint.FIELD_USER_STATE) String State,
             @Field(EndPoint.FIELD_USER_TOWN) String twon
     );
 
     @FormUrlEncoded
-    @POST("/answers")
+    @POST(EndPoint.USER_ANSWERS)
     Observable<Response> sentAnswers(
-            @Field("json") String json,
-            @Field("authenticity_token") String auth_token,
-            @Field("form_authenticity_token") String form_auth_token,
-            @Field("utf8") String utf);
-
-
+            @Field(EndPoint.FIELD_JSON) String json,
+            @Field(EndPoint.FIELD_AUTHENTICITY_TOKEN) String auth_token,
+            @Field(EndPoint.FIELD_FORM_AUTHENTICITY_TOKEN) String form_auth_token,
+            @Field(EndPoint.FIELD_UTF_8) String utf);
 
 }

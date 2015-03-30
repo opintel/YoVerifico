@@ -81,7 +81,7 @@ public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.Vi
             viewHolder.txtColoniaOcurrence.setTypeface(VerificaCiudadFonts.typefaceRobotoRegular(context));
             viewHolder.txtTitleOcurrence.setText(ocurrence.getAction());
             viewHolder.txtDescriptionOcurrence.setText(ocurrence.getDescription());
-            viewHolder.txtColoniaOcurrence.setText(ocurrence.getCalle() + " ," + ocurrence.getColonia() + " " + ocurrence.getAdmin2());
+            viewHolder.txtColoniaOcurrence.setText(ocurrence.getCalle() + ", " + ocurrence.getColonia() + " " + ocurrence.getAdmin2());
 
 
         } else if (viewHolder.typeHolder == HEADER) {
@@ -174,6 +174,10 @@ public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.Vi
         bundle.putString(Config.PLACE_OCURRENCE, ocurrence.getCalle() + " ," + ocurrence.getColonia() + " " + ocurrence.getAdmin2());
         bundle.putString(Config.CONTACT_OCURRENCE, ocurrence.getContactInfo());
         bundle.putString(Config.ID_OCURRENCE, ocurrence.getId());
+        bundle.putString(Config.STATE_OCURRRENCE,ocurrence.getAdmin1());
+        bundle.putString(Config.TWON_OCURRRENCE,ocurrence.getAdmin2());
+        bundle.putString(Config.LATITUDE_OCURRENCE,ocurrence.getLatitude());
+        bundle.putString(Config.LONGITUDE_OCURRENCE,ocurrence.getLongitude());
         return bundle;
 
     }

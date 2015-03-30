@@ -48,6 +48,7 @@ import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.DataConfig;
 import la.opi.verificacionciudadana.util.LocationStatus;
+import la.opi.verificacionciudadana.util.StorageFiles;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
 import rx.android.schedulers.AndroidSchedulers;
@@ -98,13 +99,15 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
 
 
         // Toast.makeText(getActivity(), a + b, Toast.LENGTH_SHORT).show();
-        // StorageFiles.deleteFilesFromDirectory();
+       StorageFiles.deleteFilesFromDirectory();
+        ActionsDataBase.deleteDataBase(getActivity());
 
 
 
 
         //uploadFiles();
-        sentJson();
+        // este es el que funciona
+        //sentJson();
     }
 
     private void answers(String json, String token, String formToken, String utf) {

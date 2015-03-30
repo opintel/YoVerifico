@@ -144,7 +144,7 @@ public class MunicipalFragment extends Fragment {
 
     private void userUpdate(String idUser, String idState, String idTwon) {
 
-        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.progress_dialog_session), true);
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.progress_dialog_update), true);
         ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
         apiPitagorasService.userUpdate(idUser, idState, idTwon)
                 .observeOn(AndroidSchedulers.handlerThread(new Handler())).subscribe(new Action1<Response>() {

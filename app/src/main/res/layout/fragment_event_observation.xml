@@ -56,7 +56,6 @@
                     android:layout_alignLeft="@+id/textView3"
                     android:layout_alignStart="@+id/textView3"
                     android:layout_below="@+id/textView3"
-                    android:text="@string/lorem"
                     android:layout_marginTop="50dp"
                     android:hint="@string/evindece_three_instruccions_a"
                     android:textSize="16sp" />

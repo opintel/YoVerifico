@@ -30,7 +30,7 @@ public class ClientServicePitagoras {
 
 
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(EndPoint.PITAGORAS_API_DEV)
+                .setEndpoint(EndPoint.PITAGORAS_API_PRODUCCTION)
                 .setErrorHandler(new RetrofitErrorHandler())
                 .setClient(ClientServicePitagoras.getClient())
                 .setRequestInterceptor(requestInterceptor)

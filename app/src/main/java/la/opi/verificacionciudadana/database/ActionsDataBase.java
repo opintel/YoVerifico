@@ -47,6 +47,14 @@ public class ActionsDataBase {
 
     }
 
+    public static void deleteDataBase(Context context) {
+        SQLiteDatabase db;
+        EvidenceDataBase evidenciasDB = new EvidenceDataBase(context, Config.DATA_BASE_NAME, null, 1);
+        db = evidenciasDB.getWritableDatabase();
+        db.delete(Config.TABLE_NAME,null,null);
+
+    }
+
 
     public static void queryDataBase(Context context) {
 

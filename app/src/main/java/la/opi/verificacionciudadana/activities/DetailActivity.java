@@ -21,7 +21,6 @@ public class DetailActivity extends BaseActivity {
                     .add(R.id.container_detail_evidence, DetailFragment.newInstance())
                     .commit();
         }
-
         if (getIntent().getStringExtra(Config.KEY_INTENT) != null) {
             activity = getIntent().getStringExtra(Config.KEY_INTENT);
         } else {

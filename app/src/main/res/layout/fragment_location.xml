@@ -10,16 +10,14 @@
         android:background="@color/primary"
         android:textStyle="bold" />
 
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="Recuerda que puedes visualizar ocurrencias de todo el país."
+        android:layout_marginTop="80dp"
         android:gravity="center"
+        android:text="@string/location_title_text"
         android:textColor="@color/secondary_text"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -30,24 +28,21 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:text="Simplemente cambia tu localidad dentro de la aplicación y si no puedes asistir comparte el evento con tus amigos."
         android:gravity="center"
+        android:text="@string/location_instruction_txt"
         android:textColor="@color/secondary_text"
-        android:textSize="16sp"
-    />
-
+        android:textSize="16sp" />
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_localidad"
         style="@style/Widget.Button.Standar.Custom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="48dp"
         android:layout_marginLeft="48dp"
-        android:text="Cambiar localidad ahora" />
-
+        android:layout_marginRight="48dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_location" />
 
 </LinearLayout>
 

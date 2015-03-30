@@ -276,6 +276,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
         ocurrence.setCalle("Guadalajara");
         ocurrence.setColonia("Roma Norte");
         ocurrence.setAdmin2("Cuauhtemoc");
+        ocurrence.setAdmin1("Distrito Federal");
         ocurrence.setAction("Construcción de centro cultural");
         ocurrence.setDescription("Segunda etapa de construcción del faro de artes y oficios, en un predio de 4,000 m2, ubicado en eje 6 esquina L. Gracida, Col. Unidad Habiatacional Vicente Guerrero.");
         ocurrence.setStrategyDescription("Realizar acciones de prevención situacional que contribuyan a la reducción de oportunidades para la violencia y la delincuencia.");

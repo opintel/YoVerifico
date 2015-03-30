@@ -12,8 +12,7 @@ import retrofit.mime.TypedFile;
 import rx.Observable;
 
 public interface PitagorasMultimediaService {
-
     @Multipart
-    @POST("/levantamientos/multimedia/nite_owl")
-    Observable<Response> uploadMedia(@Part("file") TypedFile file);
+    @POST(EndPoint.EVIDENCE_MULTIMEDIA_S3)
+    Observable<Response> uploadMedia(@Part(EndPoint.PART_FILE) TypedFile file);
 }
