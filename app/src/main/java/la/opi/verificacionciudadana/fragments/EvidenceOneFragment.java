@@ -51,14 +51,14 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
 
     // ImageView img;
     final static int REQUEST_IMAGE_CAPTURE = 0;
-    String mCurrentPhotoPath;
+    String mCurrentPhotoPath = "";
     View rootView;
     String imageFileName;
     private String datePicture;
     private GridView gridView;
     private FrameLayout frameLayout;
     private int sizeArrayPictures;
-    private String fileName;
+    String fileName ;
 
 
     @Override
@@ -104,7 +104,7 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
     public void onResume() {
         super.onResume();
 
-        System.out.println("SE EJECUTO ON RESUME");
+
         ActionsDataBase.queryDataBase(getActivity());
         ActionsDataBase.getTitleEvidence();
         ActionsDataBase.getPhotoEvidence();
@@ -116,34 +116,35 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
             System.out.println("database values: " + ss);
         }
 
-        if(ActionsDataBase.getTitleEvidence().size() == 0){
+        if (ActionsDataBase.getTitleEvidence().size() == 0) {
 
-            ArrayList<ImageEvidence> imageEvidences = new ArrayList<>();
-                ImageEvidence imageEvidence = new ImageEvidence();
-                imageEvidence.setTitle("Toma una o varias fotos del evento");
-                imageEvidence.setEvidence("null");
-                imageEvidences.add(imageEvidence);
+            ArrayList<ImageEvidence> imageEvidenceArrayList = new ArrayList<>();
+            ImageEvidence imageEvidence = new ImageEvidence();
+            imageEvidence.setTitle("vacio");
+            imageEvidence.setEvidence("vacio");
+            imageEvidenceArrayList.add(imageEvidence);
             gridView.setNumColumns(1);
 
 
-            EvidencesImagesAdapter evidencesImagesAdapter = new EvidencesImagesAdapter(getActivity(), imageEvidences);
+            EvidencesImagesAdapter evidencesImagesAdapter = new EvidencesImagesAdapter(getActivity(), imageEvidenceArrayList);
             gridView.setAdapter(evidencesImagesAdapter);
 
 
-        }else{
+        } else {
 
             ArrayList<ImageEvidence> imageEvidences = new ArrayList<>();
             for (int i = 0; i < ActionsDataBase.getTitleEvidence().size() && i < ActionsDataBase.getPhotoEvidence().size(); i++) {
-                ImageEvidence imageEvidence = new ImageEvidence();
+
+                ImageEvidence pictures = new ImageEvidence();
                 String[] title = new String[ActionsDataBase.getTitleEvidence().size()];
                 title = ActionsDataBase.getTitleEvidence().toArray(title);
                 String[] photo = new String[ActionsDataBase.getPhotoEvidence().size()];
                 photo = ActionsDataBase.getPhotoEvidence().toArray(photo);
-                imageEvidence.setTitle(title[i]);
-                imageEvidence.setEvidence(photo[i]);
-                imageEvidences.add(imageEvidence);
+
+                pictures.setTitle(title[i]);
+                pictures.setEvidence(photo[i]);
+                imageEvidences.add(pictures);
             }
-            gridView.setNumColumns(2);
 
             EvidencesImagesAdapter evidencesImagesAdapter = new EvidencesImagesAdapter(getActivity(), imageEvidences);
             gridView.setAdapter(evidencesImagesAdapter);
@@ -151,10 +152,11 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
 
         }
 
-
-
-
     }
+
+
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -163,7 +165,9 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == getActivity().RESULT_OK) {
 
+
                 ActionsDataBase.insertDataBase(getActivity(), fileName, mCurrentPhotoPath);
+
                 Toast.makeText(getActivity(), "Evidencia ha sido guardada", Toast.LENGTH_SHORT).show();
             } else if (resultCode == getActivity().RESULT_CANCELED) {
 
@@ -183,7 +187,6 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
     private void initializedCamera() {
         if (CameraSettings.checkCameraExist(getActivity())) {
             takePictures();
-
         }
     }
 
@@ -210,7 +213,6 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
     }
 
     private File createImageFile() throws IOException {
-
         Calendar c = Calendar.getInstance();
         SimpleDateFormat timeData = new SimpleDateFormat(Config.DATA_FORMAT_PICTURE);
         datePicture = timeData.format(c.getTime());
@@ -220,9 +222,7 @@ public class EvidenceOneFragment extends FragmentModel implements View.OnClickLi
         System.out.println("NOMBRE Imagen" + image.getName());
         fileName = image.getName();
         mCurrentPhotoPath = image.getAbsolutePath();
-
-
-        return image;
+       return image;
     }
 
 }

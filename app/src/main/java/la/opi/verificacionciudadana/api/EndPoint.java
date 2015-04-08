@@ -5,12 +5,12 @@ package la.opi.verificacionciudadana.api;
  */
 public class EndPoint {
 
-    public final static String PITAGORAS_API_PRODUCCTION = "http://staging.pitagoras.opi.la";
+    public final static String PITAGORAS_API_STAGING = "http://staging.pitagoras.opi.la";
     public static final String AWS_S3_PITAGORAS = "http://uploads.api.opi.la";
     public final static String EVIDENCE_MULTIMEDIA_S3 = "/levantamientos/multimedia/nite_owl";
     public final static String PART_FILE = "file";
 
-    public final static String PITAGORAS_API_DEV = "http://10.230.20.79:3000";
+    public final static String PITAGORAS_API_DEV = "http://10.230.20.80:3000";
     public final static String MEXICO_STATES = "/api/admin1/index_with_admin2";
     public final static String USER_SIGN_UP = "/users/create.json";
     public final static String USER_SIGN_IN = "/users/sign_in";

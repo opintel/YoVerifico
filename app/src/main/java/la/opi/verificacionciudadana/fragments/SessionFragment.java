@@ -58,13 +58,6 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
     private EditText editTxtEmail, editTxtPassword;
     private Button btnLogin;
     boolean textChangedEmail, textChangedPassword;
@@ -105,7 +98,7 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
 
                 try {
                     if (InternetConnection.connectionState(getActivity())) {
-                        connectionPitagoras();
+                        tokenRequest();
                     } else {
                         dialogNoConnection();
                         showToast(R.string.not_internet_conection);
@@ -123,22 +116,11 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
     }
 
 
-    //<editor-fold desc="Request Pitagoras">
 
-    private void connectionPitagoras() {
 
-        tokenRequest();
-        email = editTxtEmail.getText().toString();
-        password = editTxtPassword.getText().toString();
-        boolean emailValida = isEmailValid(email);
-        if (!emailValida) {
-            dialogError();
-        } else {
 
-            singInRequest(EndPoint.PARAMETER_UTF8, userToken, email, password, EndPoint.PARAMETER_REMEMBERME, EndPoint.PARAMETER_COMMIT_SIGN_IN);
-        }
 
-    }
+
 
     public void tokenRequest() {
 
@@ -160,12 +142,32 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
                         Log.e(Config.ERROR_REGULAR_EXPRESION, e.toString());
                     }
 
-                    userToken = token;
-                    System.out.println("TOKEN API:  " + token);
 
-                /*    if(token != null){
-                        TokenPreference.setTokenPreference(context, token);
-                    }*/
+
+                    if (token != null) {
+
+                        userToken = token;
+                        System.out.println("TOKEN API:  " + token);
+
+                        email = editTxtEmail.getText().toString();
+                        password = editTxtPassword.getText().toString();
+                        boolean emailValida = isEmailValid(email);
+                        if (!emailValida) {
+                            dialogError();
+                        } else {
+
+
+                            singInRequest(EndPoint.PARAMETER_UTF8, userToken, email, password, EndPoint.PARAMETER_REMEMBERME, EndPoint.PARAMETER_COMMIT_SIGN_IN);
+
+                        }
+
+                    }else{
+                           showToast(R.string.expected_error_token);
+                    }
+
+
+
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -182,11 +184,11 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
 
     }
 
-    private void singInRequest(String utf, String token, final String userMail, String userPassword, String rememberme, String commit) {
+    public void singInRequest(String utf, final String tokenLogin, final String userMail, final String userPassword, String rememberme, String commit) {
 
         final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.progress_dialog_session), true);
         ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
-        apiPitagorasService.userSingIn(utf, token, userMail, userPassword, rememberme, commit)
+        apiPitagorasService.userSingIn(utf, tokenLogin, userMail, userPassword, rememberme, commit)
                 .observeOn(AndroidSchedulers.handlerThread(new Handler())).subscribe(new Action1<Response>() {
             @Override
             public void call(Response response) {
@@ -197,8 +199,10 @@ public class SessionFragment extends Fragment implements View.OnClickListener, A
                     if (HttpHelper.regexLoginSuccess(writer.toString())) {
 
                         home();
-                        ConfigurationPreferences.setMailPreference(getActivity(), userMail);
+                        ConfigurationPreferences.setTokenPreference(getActivity(), tokenLogin,userPassword,userMail);
+                        ConfigurationPreferences.setUserSession(getActivity(), "inicio_session_user");
                         progressDialog.dismiss();
+
                     } else {
 
                         dialogError();

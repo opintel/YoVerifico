@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -24,18 +23,23 @@ import org.apache.commons.io.IOUtils;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.adapters.SpinnerCustomAdapter;
+import la.opi.verificacionciudadana.adapters.SpinnerCustomTownAdapter;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
 import la.opi.verificacionciudadana.api.EndPoint;
 import la.opi.verificacionciudadana.dialogs.ConnectionRegisterDialog;
 import la.opi.verificacionciudadana.dialogs.CustomDialog;
 import la.opi.verificacionciudadana.models.State;
+import la.opi.verificacionciudadana.models.Town;
 import la.opi.verificacionciudadana.parser.ParserStatesSpinner;
 import la.opi.verificacionciudadana.parser.RegisterResponse;
 import la.opi.verificacionciudadana.util.Config;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 import la.opi.verificacionciudadana.util.InternetConnection;
 import la.opi.verificacionciudadana.util.VerificaCiudadFonts;
 import retrofit.client.Response;
@@ -45,14 +49,14 @@ import rx.functions.Action1;
 /**
  * Created by Jhordan on 08/03/15.
  */
-public class RegisterFragment extends Fragment implements View.OnClickListener {
+public class SingUpFragment extends Fragment implements View.OnClickListener {
 
-    public RegisterFragment() {
+    public SingUpFragment() {
     }
 
-    public static RegisterFragment newInstance() {
+    public static SingUpFragment newInstance() {
 
-        RegisterFragment loginFragment = new RegisterFragment();
+        SingUpFragment loginFragment = new SingUpFragment();
         Bundle extraArguments = new Bundle();
         loginFragment.setArguments(extraArguments);
         return loginFragment;
@@ -64,6 +68,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private String userName, userMail, userPassword, userConfirm, userMunicipio, userState;
     private Boolean textChangeA, textChangeB, textChangeC, textChangeD;
     SpinnerCustomAdapter spinnerCustomAdapter ;
+    String keyMunicipio, keyState;
+    String estado;
+    String municipio;
+    String idState;
+    String idTwon;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -88,7 +97,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         buttonEnabled();
 
         if(spinnerCustomAdapter == null){
-            statesRequest();
+           requestStates();
         }
 
     }
@@ -146,7 +155,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
             dialogCustom(R.string.message_password_equals);
 
-        } else if (userState == null || userMunicipio == null) {
+        } else if (idState == null || idTwon == null) {
 
             dialogCustom(R.string.expected_connection);
             editTxtPassword.setText("");
@@ -158,7 +167,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         } else {
 
-              singUserRequest(EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_UTF8, userName, userMail, EndPoint.PARAMETER_USER_ROLE, userState, userMunicipio,
+              singUserRequest(EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_UTF8, userName, userMail, EndPoint.PARAMETER_USER_ROLE, idState, idTwon,
                     userPassword, userConfirm, EndPoint.PARAMETER_COMMIT_SIGN_UP);
         }
 
@@ -181,8 +190,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     RegisterResponse.registerResponseSucces(writer.toString());
                     progressDialog.dismiss();
                     if(response.getStatus() == 200){
-                        showToast("Se ha registrado a "+  RegisterResponse.getName() + " exitosamente" +
-                                "");
+                        showToast("Se ha registrado a "+  RegisterResponse.getName() + " exitosamente" + "");
                     }
 
 
@@ -215,8 +223,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void statesRequest() {
 
+
+    private void requestStates() {
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.progress_dialog_help), true);
         ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
         apiPitagorasService.getMexicoStates().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Response>() {
             @Override
@@ -227,61 +237,109 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
                     final StringWriter writer = new StringWriter();
                     IOUtils.copy(response.getBody().in(), writer, "UTF-8");
-                    spinnerData(writer.toString());
+
+                    final SpinnerCustomAdapter spinnerCustomAdapter = new
+                            SpinnerCustomAdapter(getActivity(), ParserStatesSpinner.paserState(writer.toString()));
+
+                    progressDialog.dismiss();
+
+
+                    //set userState by idstate
+                    for (Map.Entry<Integer, String> entry : ParserStatesSpinner.getStatehashMap().entrySet()) {
+                        Integer key = entry.getKey();
+                        String value = entry.getValue();
+
+                        if (value.equals(ConfigurationPreferences.getIdStatePreference(getActivity()))) {
+                            keyState = key.toString();
+
+                        }
+
+
+                    }
+
+
+                    spinnerStates.setAdapter(spinnerCustomAdapter);
+
+
+
+                    spinnerStates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                            estado = ((State) spinnerStates.getItemAtPosition(position)).getName();
+                            idState = ((State) spinnerStates.getItemAtPosition(position)).getId();
+
+                            ArrayList<Town> townArrayList = ((State) spinnerStates.getItemAtPosition(position)).getTownArrayList();
+
+
+                            //set userTwon by idTwon
+
+                            HashMap<Integer, String> townHash = new HashMap<>();
+                            int positionList = 0;
+
+                            Collections.sort(townArrayList, new ParserStatesSpinner.CustomComparator());
+                            for (Town town : townArrayList) {
+                                townHash.put(positionList, town.getId());
+                                positionList++;
+                            }
+                            for (Map.Entry<Integer, String> entry : townHash.entrySet()) {
+                                Integer key = entry.getKey();
+                                String value = entry.getValue();
+
+                                if (value.equals(ConfigurationPreferences.getIdMunicipioPreference(getActivity()))) {
+                                    keyMunicipio = key.toString();
+                                }
+
+
+                            }
+
+
+                            final SpinnerCustomTownAdapter spinnerCustomTownAdapter = new SpinnerCustomTownAdapter(getActivity(), townArrayList);
+
+                            Collections.sort(townArrayList, new ParserStatesSpinner.CustomComparator());
+
+                            spinnerMunicipal.setAdapter(spinnerCustomTownAdapter);
+
+
+
+
+                            spinnerMunicipal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                                    idTwon = ((Town) spinnerMunicipal.getItemAtPosition(position)).getId();
+                                    municipio = ((Town) spinnerMunicipal.getItemAtPosition(position)).getName();
+
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+
+                        }
+
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    progressDialog.dismiss();
                 }
+
 
             }
         }, new Action1<Throwable>() {
             @Override
             public void call(Throwable throwable) {
                 Log.e(Config.ERROR_RETROFIT, throwable.getMessage());
-            }
-        });
-
-    }
-
-    private void spinnerData(String response) {
-
-        spinnerCustomAdapter =
-                new SpinnerCustomAdapter(getActivity(), ParserStatesSpinner.paserState(response));
-        spinnerStates.setAdapter(spinnerCustomAdapter);
-
-        spinnerStates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                userState = getState((State) spinnerStates.getItemAtPosition(position));
-                ArrayList<String> town = getNameTown((State) spinnerStates.getItemAtPosition(position));
-                Collections.sort(town);
-                final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                        R.layout.item_spinner_mexico,
-                        R.id.item_spinner,
-                        town);
-
-                spinnerMunicipal.setAdapter(adapter);
-
-                spinnerMunicipal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                        //  userMunicipio = adapter.getItem(position);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                progressDialog.dismiss();
             }
         });
 
@@ -341,8 +399,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
                         btnRegisterme.setEnabled(true);
                         btnRegisterme.setTextColor(getResources().getColor(R.color.white));
-                        spinnerMunicipal.setVisibility(View.VISIBLE);
-                        spinnerStates.setVisibility(View.VISIBLE);
+
 
 
                     }
@@ -380,8 +437,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     if (textChangeA == textChangeB && textChangeC == textChangeB && textChangeD == textChangeB) {
                         btnRegisterme.setEnabled(true);
                         btnRegisterme.setTextColor(getResources().getColor(R.color.white));
-                        spinnerMunicipal.setVisibility(View.VISIBLE);
-                        spinnerStates.setVisibility(View.VISIBLE);
+
 
 
                     }
@@ -419,8 +475,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     if (textChangeA == textChangeC && textChangeB == textChangeC && textChangeD == textChangeC) {
                         btnRegisterme.setEnabled(true);
                         btnRegisterme.setTextColor(getResources().getColor(R.color.white));
-                        spinnerMunicipal.setVisibility(View.VISIBLE);
-                        spinnerStates.setVisibility(View.VISIBLE);
+
 
 
                     }
@@ -459,8 +514,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     if (textChangeA == textChangeD && textChangeD == textChangeB && textChangeD == textChangeC) {
                         btnRegisterme.setEnabled(true);
                         btnRegisterme.setTextColor(getResources().getColor(R.color.white));
-                        spinnerMunicipal.setVisibility(View.VISIBLE);
-                        spinnerStates.setVisibility(View.VISIBLE);
+
 
 
                     }
@@ -503,8 +557,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         btnRegisterme.setTypeface(VerificaCiudadFonts.typefaceRobotoBold(getActivity()));
         btnRegisterme.setOnClickListener(this);
         btnRegisterme.setEnabled(false);
-        spinnerMunicipal.setVisibility(View.INVISIBLE);
-        spinnerStates.setVisibility(View.INVISIBLE);
+
         btnRegisterme.setTextColor(getResources().getColor(R.color.white_nitido));
 
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -87,16 +88,25 @@ public class OcurrencesAdapter extends RecyclerView.Adapter<OcurrencesAdapter.Vi
         } else if (viewHolder.typeHolder == HEADER) {
 
 
+            System.out.println(" OCURRENCES" + ocurrenceArrayList.size());
           viewHolder.explorer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Activity activity = (Activity) context;
-                    Intent intent = new Intent(context, MapaActivity.class);
-                    context.startActivity(intent);
-                    activity.overridePendingTransition(R.animator.open_next, R.animator.close_main);
+              @Override
+              public void onClick(View v) {
 
-                }
-            });
+                  if (ocurrenceArrayList.size() == 1) {
+
+                      Toast.makeText(context,"No hay ocurrencias en este Municipio y Estado",Toast.LENGTH_SHORT).show();
+
+                  }else {
+                      Activity activity = (Activity) context;
+                      Intent intent = new Intent(context, MapaActivity.class);
+                      context.startActivity(intent);
+                      activity.overridePendingTransition(R.animator.open_next, R.animator.close_main);
+                  }
+
+
+              }
+          });
         }
 
 

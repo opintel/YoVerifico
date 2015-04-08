@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import la.opi.verificacionciudadana.R;
-import la.opi.verificacionciudadana.activities.LoginActivity;
 import la.opi.verificacionciudadana.activities.SettingsActivity;
+import la.opi.verificacionciudadana.util.ConfigurationPreferences;
 
 public class HomeTabs extends ActionBarActivity {
 
@@ -17,6 +18,9 @@ public class HomeTabs extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_tabs);
+
+
+        Log.e("tag_ciclo", "se creo");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
@@ -60,6 +64,30 @@ public class HomeTabs extends ActionBarActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("tag_ciclo", "stop");
+
+    }
+
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        Log.d("Focus debug", "Focus changed !");
+
+        if (!hasFocus) {
+            Log.d("Focus debug", "Lost focus !");
+
+        }
     }
 
 

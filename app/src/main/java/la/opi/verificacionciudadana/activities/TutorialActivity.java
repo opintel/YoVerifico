@@ -1,18 +1,39 @@
 package la.opi.verificacionciudadana.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.crashlytics.android.Crashlytics;
+
+import org.apache.commons.io.IOUtils;
+
+import java.io.StringWriter;
 
 import la.opi.verificacionciudadana.R;
+import la.opi.verificacionciudadana.api.ApiPitagorasService;
+import la.opi.verificacionciudadana.api.ClientServicePitagoras;
+import la.opi.verificacionciudadana.api.EndPoint;
+import la.opi.verificacionciudadana.api.HttpHelper;
+import la.opi.verificacionciudadana.exceptions.ExceptionErrorWriter;
 import la.opi.verificacionciudadana.fragments.TutorialFragment;
+import la.opi.verificacionciudadana.tabs.HomeTabs;
 import la.opi.verificacionciudadana.util.Config;
 import la.opi.verificacionciudadana.util.ConfigurationPreferences;
+import la.opi.verificacionciudadana.util.InternetConnection;
+import la.opi.verificacionciudadana.util.SessionManager;
 import la.opi.verificacionciudadana.util.StorageFiles;
 import la.opi.verificacionciudadana.util.StorageState;
 import la.opi.verificacionciudadana.util.SystemConfigurationBars;
+import retrofit.client.Response;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 public class TutorialActivity extends BaseActivity {
     String activity;
@@ -21,6 +42,8 @@ public class TutorialActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         systemBarsCustom();
+        Crashlytics.start(this);
+
         super.getToolbar().setTitleTextColor(getResources().getColor(R.color.transparent));
         createDirectory();
 
@@ -35,8 +58,41 @@ public class TutorialActivity extends BaseActivity {
             if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)) {
                 showTutorial(savedInstanceState);
             } else {
-                startActivity(new Intent(TutorialActivity.this, LoginActivity.class));
-                finish();
+
+                Log.d("tag_aux", ConfigurationPreferences.getOnDestroy(this).toString());
+                if (!ConfigurationPreferences.getUserSession(this).equals("close_session")) {
+
+
+
+
+
+                    if (InternetConnection.connectionState(this)) {
+                        try {
+                            super.getToolbar().setTitleTextColor(getResources().getColor(R.color.white));
+                            SharedPreferences preferences = getSharedPreferences(ConfigurationPreferences.TOKEN, Context.MODE_PRIVATE);
+                            singInRequest(this, EndPoint.PARAMETER_UTF8,
+                                    preferences.getString(ConfigurationPreferences.USER_TOKEN, ""),
+                                    preferences.getString(ConfigurationPreferences.USER_MAIL_LOGIN, ""), preferences.getString(ConfigurationPreferences.USER_PASS, "")
+                                    , EndPoint.PARAMETER_REMEMBERME, EndPoint.PARAMETER_COMMIT_SIGN_IN);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    } else {
+
+                        showToast(R.string.not_internet_conection);
+                    }
+
+
+
+
+
+                } else {
+                    startActivity(new Intent(TutorialActivity.this, LoginActivity.class));
+                    finish();
+                }
+
             }
 
         } else {
@@ -66,7 +122,7 @@ public class TutorialActivity extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)){
+                if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)) {
                     super.onBackPressed();
                     overridePendingTransition(R.animator.open_main, R.animator.close_next);
                 }
@@ -82,7 +138,7 @@ public class TutorialActivity extends BaseActivity {
                     finish();
                     overridePendingTransition(R.animator.open_next, R.animator.close_main);
 
-                }else if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)){
+                } else if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)) {
                     super.onBackPressed();
                     overridePendingTransition(R.animator.open_main, R.animator.close_next);
                 }
@@ -98,7 +154,7 @@ public class TutorialActivity extends BaseActivity {
     public void onBackPressed() {
 
 
-        if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)){
+        if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)) {
             super.onBackPressed();
             overridePendingTransition(R.animator.open_main, R.animator.close_next);
         }
@@ -135,5 +191,54 @@ public class TutorialActivity extends BaseActivity {
         }
     }
 
+
+    private void singInRequest(final Context context, String utf, final String tokenLogin, final String userMail, final String userPassword, String rememberme, String commit) {
+
+
+        ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
+        apiPitagorasService.userSingIn(utf, tokenLogin, userMail, userPassword, rememberme, commit)
+                .observeOn(AndroidSchedulers.handlerThread(new Handler())).subscribe(new Action1<Response>() {
+            @Override
+            public void call(Response response) {
+
+                try {
+                    final StringWriter writer = new StringWriter();
+                    IOUtils.copy(response.getBody().in(), writer, Config.UTF_8);
+                    if (HttpHelper.regexLoginSuccess(writer.toString())) {
+
+
+                        ConfigurationPreferences.setTokenPreference(context, tokenLogin, userPassword, userMail);
+                        ConfigurationPreferences.setUserSession(context, "inicio_session_user");
+
+                        Intent intent = new Intent(context, HomeTabs.class);
+                        startActivity(intent);
+                        finish();
+
+
+                    } else {
+
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+
+
+            }
+        });
+
+
+    }
+
+    private void showToast(int message) {
+        Toast.makeText(this, getResources().getString(message), Toast.LENGTH_SHORT).show();
+    }
 
 }

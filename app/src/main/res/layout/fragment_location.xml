@@ -33,16 +33,22 @@
         android:textColor="@color/secondary_text"
         android:textSize="16sp" />
 
+
+
+
     <Button
         android:id="@+id/btn_localidad"
-        style="@style/Widget.Button.Standar.Custom"
+        style="@style/Widget.Button.Standar.Custom.Two"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginRight="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="32dp"
+        android:padding="10dp"
         android:text="@string/btn_location" />
+
 
 </LinearLayout>
 

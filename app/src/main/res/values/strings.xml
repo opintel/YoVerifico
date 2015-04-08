@@ -56,6 +56,7 @@
     <string name="not_register_succes">Se ha producido un error durante el registro de usuario. Inténtalo de nuevo.</string>
     <string name="not_update_succes">Se ha producido un error durante la actualización  de localidad. Inténtalo de nuevo.</string>
     <string name="expected_error">Parece que ocurrio un error inesperado. Inténtalo de nuevo mas tarde.</string>
+    <string name="expected_error_token">Parece que ocurrio un error con tu conexión. Inténtalo de nuevo.</string>
     <string name="expected_connection">No se pudo obtener Estado y Municipio debido a un problema con tu conexión. Inténtalo de nuevo"</string>
     <string name="location_change">Ahora recibiras las ocurrencias cercanas a esta localidad.</string>
     <string name="description_app">Programa Nacional para la Prevención Social de la Violencia y la Delincuencia ,en donde la participación de los ciudadanos es fundamental para fortalecer nuestras comunidades e instituciones y así crear condiciones favorables para avanzar hacia la paz.</string>
@@ -112,7 +113,7 @@
     <string name="no_dialog">No lo creo</string>
     <string name="btn_location">Cambiar localidad ahora</string>
     <string name="location_title_text">Recuerda que puedes visualizar ocurrencias de todo el país.</string>
-    <string name="location_instruction_txt">Cambia tu localidad para recibir ocurrencias de otro estado o municipio y si no puedes asistir comparte el evento con tus amigos.</string>
+    <string name="location_instruction_txt">Cambia tu localidad para recibir ocurrencias de otro estado / municipio y si no puedes asistir comparte el evento con tus amigos.</string>
     <string name="camera_instruction">Captura todas las fotos  que desees acerca del evento , llena la información solicitada y envia la evidencia</string>
     <string name="camera_instruction_two">Presiona la camara para tomar una foto.</string>
     <string name="hasnot_camera">Al parecer este dispositivo no tiene una camara.</string>
@@ -121,6 +122,7 @@
     <string name="progress_dialog_session">Iniciando sesión, espera un momento por favor.</string>
     <string name="progress_dialog_sing_up">Creando cuenta, espera un momento por favor.</string>
     <string name="progress_dialog_help">Descargando datos, espera un momento por favor.</string>
+    <string name="progress_dialog_evidence">Enviando reporte, espera un momento por favor.</string>
     <string name="progress_dialog_update">Actualizando localidad del perfil, espera un momento por favor.</string>
     <string name="url_nosmuevelapaz">http://nosmuevelapaz.org/</string>
     <string name="info_contact">No hay información de contacto</string>
@@ -156,5 +158,17 @@
     <string name="my_bueno_ponderation">Muy Bueno</string>
     <string name="excelente_ponderation">Excelente</string>
 
+    <!--profile fragment-->
+    <string name="user_name_profile">Nombre de usuario</string>
+    <string name="user_location_profile">Estado , Municipio</string>
+    <string name="user_mail_profile">tucorreo@mail.com</string>
+    <string name="user_movil">Ciudadano Movil</string>
+
+    <!-- fragment municipal-->
+
+    <string name="title_main">Selecciona tu nueva Localidad</string>
+    <string name="sub_state">Estado</string>
+    <string name="sub_twon">Municipio</string>
+    <string name="sub_btn">Guardar cambios</string>
 
 </resources>

@@ -52,50 +52,28 @@ public class PerfilFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    android.support.v4.widget.SwipeRefreshLayout swipeRefreshLayout;
-
-    TextView txtName, txtEmail, txtState, txtTwon;
-    ImageView imageView;
+    TextView txtName, txtEmail, txtState;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_perfil, container, false);
-
-
-
-       // swipeRefreshLayout = (android.support.v4.widget.SwipeRefreshLayout)
-              //  rootView.findViewById(R.id.swipe_refresh_layout);
-
-
-       // swipeRefreshLayout.setColorSchemeResources(R.color.secondary_text, R.color.primary, R.color.accent);
-       //
-       // swipeRefreshLayout.setRefreshing(true);
-
-
-     //   txtName = (TextView) rootView.findViewById(R.id.name_profile);
-       // txtEmail = (TextView) rootView.findViewById(R.id.mail_profile);
-        // txtTwon = (TextView) rootView.findViewById(R.id.twon_profile);
-       // txtState = (TextView) rootView.findViewById(R.id.state_profile);
-
-
-        return rootView;
+      txtName = (TextView) rootView.findViewById(R.id.name_profile);
+      txtEmail = (TextView) rootView.findViewById(R.id.mail_profile);
+      txtState = (TextView) rootView.findViewById(R.id.state_profile);
+      return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-   //     profileRequest();
-
-
+       profileRequest();
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
-   //     txtState.setText(ConfigurationPreferences.getStatePreference(getActivity()) +
-     //           "," + ConfigurationPreferences.getMunicipioPreference(getActivity()));
+        txtState.setText(ConfigurationPreferences.getStatePreference(getActivity()) +
+               ", " + ConfigurationPreferences.getMunicipioPreference(getActivity()));
 
     }
 
@@ -112,12 +90,18 @@ public class PerfilFragment extends Fragment {
                     IOUtils.copy(response.getBody().in(), writer, Config.UTF_8);
                     try {
 
+                        System.out.println("perfil" +writer.toString());
+
                         PerfilParser.perfil(writer.toString());
                         txtName.setText(PerfilParser.getProfileName());
                         txtEmail.setText(PerfilParser.getProfileMail());
                         ConfigurationPreferences.setIdMunicipioPreference(getActivity(), PerfilParser.getProfileTownId());
                         ConfigurationPreferences.setIdStatePreference(getActivity(), PerfilParser.getProfileStateId());
                         setSettingStateFirstTime();
+                        txtState.setText(ConfigurationPreferences.getStatePreference(getActivity()) +
+                                ", " + ConfigurationPreferences.getMunicipioPreference(getActivity()));
+                        ConfigurationPreferences.setUserIdPreference(getActivity(), PerfilParser.getProfileId());
+
 
 
                     } catch (Exception e) {
@@ -138,7 +122,6 @@ public class PerfilFragment extends Fragment {
 
 
     }
-
 
     private void setSettingStateFirstTime() {
 

@@ -23,10 +23,15 @@ public class ConfigurationPreferences {
     public static final String PLACE_PREFERENCE = "Place_Pitagoras";
     public static final String USER_PLACE = "user_place";
     public static final Boolean PLACE_EMPITY = false;
+    public static final Boolean DESTROY_EMPITY = false;
     public static final String STATE_PREFERENCE = "State_Pitagoras";
+    public static final String SESSION_PREFERENCE = "session_pitagoras";
     public static final String USER_STATE = "user_state";
+    public static final String USER_ID = "user_id_profile";
     public static final String USER_STATE_ID = "user_state_id";
+    public static final String USER_SESSION = "user_session";
     public static final String STATE_EMPITY = "estado";
+    public static final String NO_SESSION = "close_session";
     public static final String EVIDENCE_PREFERENCE = "Evidence_Pitagoras";
     public static final String EVIDENCE_PREFERENCE_TWO = "Evidence_Pitagoras_two";
     public static final String EVIDENCE_PREFERENCE_PICTURES = "evidence_pitagoras_photos";
@@ -39,12 +44,20 @@ public class ConfigurationPreferences {
     public static final String HOUR_COMMENT = "comment_evidence_hour";
     public static final String HOUR_CALIFICATION = "calification_evidence_hour";
     public static final String HOUR_TAKE_PHOTOS = "photos_hour";
+    public static final String USER_PROFILE_SESSION = "user_profile_session";
+    public static final String USER_NAME = "user_name";
+    public static final String USER_MAIL_LOGIN = "user_mail";
+    public static final String USER_PASS = "user_pass";
+    public static final String ON_DESTROY = "on_destroy";
+    public static final String ON_DESTROY_METHOD = "on_destroy_method";
 
-    public static void setTokenPreference(Context context, String token) {
+    public static void setTokenPreference(Context context, String token, String pass, String mail) {
 
         SharedPreferences sharedPref = context.getSharedPreferences(TOKEN, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(USER_TOKEN, token);
+        editor.putString(USER_PASS, pass);
+        editor.putString(USER_MAIL_LOGIN, mail);
         editor.commit();
     }
 
@@ -79,7 +92,7 @@ public class ConfigurationPreferences {
 
     public static void setMunicipioPreference(Context context, String email) {
 
-        SharedPreferences sharedPref = context.getSharedPreferences(MUNICIPAL_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(USER_MUNICIPAL, email);
         editor.commit();
@@ -87,7 +100,7 @@ public class ConfigurationPreferences {
 
     public static String getMunicipioPreference(Context context) {
 
-        SharedPreferences prefs = context.getSharedPreferences(MUNICIPAL_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
         return prefs.getString(USER_MUNICIPAL, MUNICIPAL_EMPITY);
 
     }
@@ -95,7 +108,7 @@ public class ConfigurationPreferences {
 
     public static void setStatePreference(Context context, String state) {
 
-        SharedPreferences sharedPref = context.getSharedPreferences(STATE_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(USER_STATE, state);
         editor.commit();
@@ -103,7 +116,7 @@ public class ConfigurationPreferences {
 
     public static String getStatePreference(Context context) {
 
-        SharedPreferences prefs = context.getSharedPreferences(STATE_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
         return prefs.getString(USER_STATE, STATE_EMPITY);
 
     }
@@ -161,7 +174,6 @@ public class ConfigurationPreferences {
     }
 
 
-
     public static void setHourCommentPreference(Context context, String hour) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(EVIDENCE_PREFERENCE_TWO, context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -215,10 +227,9 @@ public class ConfigurationPreferences {
     }
 
 
-
     public static void setIdMunicipioPreference(Context context, String email) {
 
-        SharedPreferences sharedPref = context.getSharedPreferences(MUNICIPAL_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(USER_MUNICIPAL_ID, email);
         editor.commit();
@@ -226,7 +237,7 @@ public class ConfigurationPreferences {
 
     public static String getIdMunicipioPreference(Context context) {
 
-        SharedPreferences prefs = context.getSharedPreferences(MUNICIPAL_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
         return prefs.getString(USER_MUNICIPAL_ID, MUNICIPAL_EMPITY);
 
     }
@@ -234,7 +245,7 @@ public class ConfigurationPreferences {
 
     public static void setIdStatePreference(Context context, String state) {
 
-        SharedPreferences sharedPref = context.getSharedPreferences(STATE_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(USER_STATE_ID, state);
         editor.commit();
@@ -242,11 +253,78 @@ public class ConfigurationPreferences {
 
     public static String getIdStatePreference(Context context) {
 
-        SharedPreferences prefs = context.getSharedPreferences(STATE_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
         return prefs.getString(USER_STATE_ID, STATE_EMPITY);
 
     }
 
+    public static void setUserSession(Context context, String inicioSession) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SESSION_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_SESSION, inicioSession);
+        editor.commit();
+    }
+
+    public static String getUserSession(Context context) {
+
+        SharedPreferences preferences = context.getSharedPreferences(SESSION_PREFERENCE, Context.MODE_PRIVATE);
+        return preferences.getString(USER_SESSION, NO_SESSION);
+
+    }
+
+    public static void setUserIdPreference(Context context, String state) {
+
+        SharedPreferences sharedPref = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(USER_ID, state);
+        editor.commit();
+    }
+
+    public static String getUserIdPreference(Context context) {
+
+        SharedPreferences prefs = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
+        return prefs.getString(USER_ID, STATE_EMPITY);
+
+    }
+
+
+    public static void clearUserSessionPreference(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+        SharedPreferences pref = context.getSharedPreferences(PLACE_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.clear();
+        edit.commit();
+        SharedPreferences pre = context.getSharedPreferences(SESSION_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edi = pre.edit();
+        edi.clear();
+        edi.commit();
+
+        SharedPreferences sharedPref = context.getSharedPreferences(TOKEN, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edito = sharedPref.edit();
+        edito.clear();
+        edito.commit();
+
+    }
+
+
+    public static void setOnDestroy(Context context, Boolean state) {
+
+        SharedPreferences sharedPref = context.getSharedPreferences(ON_DESTROY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(ON_DESTROY_METHOD, state);
+        editor.commit();
+    }
+
+    public static Boolean getOnDestroy(Context context) {
+
+        SharedPreferences prefs = context.getSharedPreferences(USER_PROFILE_SESSION, Context.MODE_PRIVATE);
+        return prefs.getBoolean(ON_DESTROY_METHOD, DESTROY_EMPITY);
+
+    }
 
 
 }

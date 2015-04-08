@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class HttpHelper {
 
     private static String token ;
+
     public static String regexToken(String html){
 
         String regex = "<meta content=\"([^\\s]+)\" name=\"csrf-token\"";

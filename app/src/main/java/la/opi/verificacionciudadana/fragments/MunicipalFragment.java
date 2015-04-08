@@ -36,6 +36,7 @@ import la.opi.verificacionciudadana.api.ClientServicePitagoras;
 import la.opi.verificacionciudadana.dialogs.ConnectionDialog;
 import la.opi.verificacionciudadana.dialogs.ConnectionUpdateDialog;
 import la.opi.verificacionciudadana.dialogs.CustomDialog;
+import la.opi.verificacionciudadana.dialogs.CustomDialogLocalidad;
 import la.opi.verificacionciudadana.models.State;
 import la.opi.verificacionciudadana.models.Town;
 import la.opi.verificacionciudadana.parser.ParserStatesSpinner;
@@ -74,9 +75,9 @@ public class MunicipalFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try{
-        requestStates();
-        }catch (Exception e){
+        try {
+            requestStates();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -89,8 +90,6 @@ public class MunicipalFragment extends Fragment {
         spinnerMunicipal = (Spinner) rootView.findViewById(R.id.spinner_municipal);
         spinnerStates = (Spinner) rootView.findViewById(R.id.spinner_state);
         btnSavePreferences = (Button) rootView.findViewById(R.id.save);
-
-
         return rootView;
     }
 
@@ -108,7 +107,6 @@ public class MunicipalFragment extends Fragment {
 
     }
 
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -119,10 +117,7 @@ public class MunicipalFragment extends Fragment {
 
                 try {
                     if (InternetConnection.connectionState(getActivity())) {
-
-                      //  Toast.makeText(getActivity(), idState + "-" + estado + " " + idTwon + "-" + municipio, Toast.LENGTH_LONG).show();
-                        //TODO FIX USER ID HARCODED
-                        userUpdate("599", idState, idTwon);
+                        userUpdate(ConfigurationPreferences.getUserIdPreference(getActivity()), idState, idTwon);
                         ConfigurationPreferences.setIdMunicipioPreference(getActivity(), idTwon);
                         ConfigurationPreferences.setIdStatePreference(getActivity(), idState);
 
@@ -139,9 +134,6 @@ public class MunicipalFragment extends Fragment {
 
     }
 
-
-
-
     private void userUpdate(String idUser, String idState, String idTwon) {
 
         final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.progress_dialog_update), true);
@@ -155,7 +147,7 @@ public class MunicipalFragment extends Fragment {
                     final StringWriter writer = new StringWriter();
                     IOUtils.copy(response.getBody().in(), writer, Config.UTF_8);
 
-                    System.out.println(response.getStatus());
+                    System.out.println("municipio update " + response.getStatus());
                     //204 No content  (pasa en update)
                     if (response.getStatus() == 204 || response.getStatus() == 200) {
                         ConfigurationPreferences.setStatePreference(getActivity(), estado);
@@ -178,7 +170,7 @@ public class MunicipalFragment extends Fragment {
             public void call(Throwable throwable) {
                 progressDialog.dismiss();
                 throwable.printStackTrace();
-                Toast.makeText(getActivity(),getResources().getString(R.string.expected_error),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.expected_error), Toast.LENGTH_SHORT).show();
 
 
             }
@@ -187,7 +179,7 @@ public class MunicipalFragment extends Fragment {
     }
 
     private void requestStates() {
-
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.progress_dialog_help), true);
         ApiPitagorasService apiPitagorasService = ClientServicePitagoras.getRestAdapter().create(ApiPitagorasService.class);
         apiPitagorasService.getMexicoStates().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Response>() {
             @Override
@@ -201,6 +193,8 @@ public class MunicipalFragment extends Fragment {
 
                     final SpinnerCustomAdapter spinnerCustomAdapter = new
                             SpinnerCustomAdapter(getActivity(), ParserStatesSpinner.paserState(writer.toString()));
+
+                    progressDialog.dismiss();
 
 
                     //set userState by idstate
@@ -218,7 +212,7 @@ public class MunicipalFragment extends Fragment {
 
 
                     spinnerStates.setAdapter(spinnerCustomAdapter);
-                   spinnerStates.setSelection(Integer.parseInt(keyState));
+                    spinnerStates.setSelection(Integer.parseInt(keyState));
 
 
                     spinnerStates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -262,7 +256,7 @@ public class MunicipalFragment extends Fragment {
 
                             // hack for setPreference
                             i++;
-                            if(i == 1){
+                            if (i == 1) {
                                 spinnerMunicipal.setSelection(Integer.parseInt(keyMunicipio));
 
                             }
@@ -285,7 +279,6 @@ public class MunicipalFragment extends Fragment {
                         }
 
 
-
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {
 
@@ -295,6 +288,7 @@ public class MunicipalFragment extends Fragment {
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    progressDialog.dismiss();
                 }
 
 
@@ -303,6 +297,7 @@ public class MunicipalFragment extends Fragment {
             @Override
             public void call(Throwable throwable) {
                 Log.e(Config.ERROR_RETROFIT, throwable.getMessage());
+                progressDialog.dismiss();
             }
         });
 
@@ -310,11 +305,9 @@ public class MunicipalFragment extends Fragment {
     }
 
     private void dialogCustom(int message) {
-
         android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        CustomDialog dialog = CustomDialog.newInstance(message);
+        CustomDialogLocalidad dialog = CustomDialogLocalidad.newInstance(message);
         dialog.show(fragmentManager, Config.DIALOG_TEXT);
-
     }
 
     private void showToast(int message) {
@@ -322,7 +315,6 @@ public class MunicipalFragment extends Fragment {
     }
 
     private void dialogNoConnection() {
-
         android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         ConnectionUpdateDialog dialog = new ConnectionUpdateDialog();
         dialog.show(fragmentManager, Config.DIALOG_TEXT);

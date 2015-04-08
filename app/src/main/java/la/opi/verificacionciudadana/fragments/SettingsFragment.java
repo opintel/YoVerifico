@@ -1,6 +1,9 @@
 package la.opi.verificacionciudadana.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
@@ -17,6 +20,7 @@ import java.io.StringWriter;
 
 import la.opi.verificacionciudadana.R;
 import la.opi.verificacionciudadana.activities.LoginActivity;
+import la.opi.verificacionciudadana.activities.TownActivity;
 import la.opi.verificacionciudadana.activities.TutorialActivity;
 import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
@@ -67,6 +71,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 startActivity(i);
                 getActivity().finish();
                 getActivity().overridePendingTransition(R.animator.open_next, R.animator.close_main);
+               ConfigurationPreferences.clearUserSessionPreference(getActivity());
+
                 return false;
             }
         });
@@ -83,6 +89,19 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 return false;
             }
         });
+
+        Preference location = findPreference(getString(R.string.pref_location_key));
+        location.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(getActivity(), TownActivity.class);
+                startActivity(intent);
+
+                return false;
+            }
+        });
+
+
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
 
     }
@@ -142,6 +161,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         });
 
     }
+
 
 
 }

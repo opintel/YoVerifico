@@ -63,21 +63,20 @@ public class EvidencesImagesAdapter extends ArrayAdapter<ImageEvidence> {
         int size = (int) Math.ceil(Math.sqrt(MAX_WIDTH * MAX_HEIGHT));
 
 
-        if(evidence.getEvidence().equals("null")){
+       if(evidence.getEvidence().equals("vacio")){
 
             holder.imageEvidencePath.setImageResource(R.drawable.mex);
 
-        }else{
+        }else {
 
 
-
-         Picasso.with(getContext()).load("file://" + evidence.getEvidence())
-                 .transform(new BitmapTransform(MAX_WIDTH, MAX_HEIGHT))
-                 .skipMemoryCache()
-                 .resize(size, size)
-                 .centerInside()
-                 .into(holder.imageEvidencePath);
-        }
+           Picasso.with(getContext()).load("file://" + evidence.getEvidence())
+                   .transform(new BitmapTransform(MAX_WIDTH, MAX_HEIGHT))
+                   .skipMemoryCache()
+                   .resize(size, size)
+                   .centerInside()
+                   .into(holder.imageEvidencePath);
+       }
 
        // holder.imageEvidencePath.setImageBitmap(avatarConvertBitmap(evidence.getEvidence()));
 

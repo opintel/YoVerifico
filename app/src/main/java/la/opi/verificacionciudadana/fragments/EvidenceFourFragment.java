@@ -1,5 +1,6 @@
 package la.opi.verificacionciudadana.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -42,6 +43,7 @@ import la.opi.verificacionciudadana.api.ApiPitagorasService;
 import la.opi.verificacionciudadana.api.ClientServicePitagoras;
 import la.opi.verificacionciudadana.database.ActionsDataBase;
 import la.opi.verificacionciudadana.models.ImageEvidence;
+import la.opi.verificacionciudadana.tabs.HomeTabs;
 import la.opi.verificacionciudadana.util.BitmapTransform;
 import la.opi.verificacionciudadana.util.Comunicater;
 import la.opi.verificacionciudadana.util.Config;
@@ -93,21 +95,9 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
         setValuesUI();
     }
 
-
     @Override
     public void onClick(View v) {
-
-
-        // Toast.makeText(getActivity(), a + b, Toast.LENGTH_SHORT).show();
-       StorageFiles.deleteFilesFromDirectory();
-        ActionsDataBase.deleteDataBase(getActivity());
-
-
-
-
-        //uploadFiles();
-        // este es el que funciona
-        //sentJson();
+       sentJson();
     }
 
     private void answers(String json, String token, String formToken, String utf) {
@@ -145,7 +135,6 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
 
     }
 
-
     public void sentJson() {
 
         if (LocationStatus.locationStatus(getActivity())) {
@@ -156,6 +145,8 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
             myJson();
             answers(myJson(), EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_TOKEN, EndPoint.PARAMETER_UTF8);
             uploadFiles();
+           // startActivity(new Intent(getActivity(), HomeTabs.class));
+            //getActivity().onBackPressed();
 
         } else {
 
@@ -337,7 +328,7 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
 
         ActionsDataBase.queryDataBase(getActivity());
         ActionsDataBase.getPhotoEvidence();
-
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.progress_dialog_evidence), true);
         PitagorasMultimediaService multimediaService =
                 ClientServicePitagoras.getMultimediaRestAdapter().create(PitagorasMultimediaService.class);
 
@@ -357,7 +348,12 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
 
                             Log.i("response status: ", Integer.toString(response.getStatus()));
                             if (response.getStatus() == 200) {
-                                Toast.makeText(getActivity(), "Imagenes alojadas en el S3 vato!", Toast.LENGTH_LONG).show();
+                                progressDialog.dismiss();
+                                StorageFiles.deleteFilesFromDirectory();
+                                ActionsDataBase.deleteDataBase(getActivity());
+
+                                Toast.makeText(getActivity(), "Gracias por tu participación evidencia enviada con exito.", Toast.LENGTH_LONG).show();
+
 
                             }
 
@@ -366,6 +362,7 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
                         @Override
                         public void call(Throwable throwable) {
                             Log.e(Config.ERROR_RETROFIT, throwable.getMessage());
+                            progressDialog.dismiss();
                         }
                     });
 

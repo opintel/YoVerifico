@@ -78,13 +78,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_ocurrences, container, false);
 
-        swipeRefreshLayout = (android.support.v4.widget.SwipeRefreshLayout)
-                rootView.findViewById(R.id.swipe_refresh_layout);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
-        // mapa = (FloatingActionButton) rootView.findViewById(R.id.btn_maps);
-        swipeRefreshLayout.setColorSchemeResources(R.color.secondary_text, R.color.primary, R.color.accent);
-
-
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -97,14 +91,13 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        //  ocurrencesArrayListTest = new ArrayList<>();
 
-        ocurrencesArrayListTest = new ArrayList<>();
-
-         testOcurrences();
-       // ocurrencesRequest(this);
+        //testOcurrences();
 
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+      /*  swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
@@ -126,10 +119,12 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
 
 
             }
-        });
+        });*/
+
+        ocurrencesRequest(this);
 
 
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+     /*   recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -137,7 +132,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
                         (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
                 swipeRefreshLayout.setEnabled(topRowVerticalPosition >= 0);
             }
-        });
+        });*/
 
 
     }
@@ -171,6 +166,8 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
 
                     try {
 
+                        System.out.println(response.getStatus());
+                        System.out.println(writer.toString());
 
                         //ESTE ES EL QUE FUNCIONA CON EL ENDPOINT
 

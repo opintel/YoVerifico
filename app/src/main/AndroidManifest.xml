@@ -60,10 +60,7 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_municipal"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name=".activities.MunicipalActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -124,6 +121,9 @@
             android:screenOrientation="portrait" />
 
 
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="42e5e2628e3aac8af3cf9f6251a6716b21425a73" />
     </application>
 
 </manifest>

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/primary"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -14,66 +14,65 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Selecciona tu nueva Localidad"
-        android:textColor="@color/secondary_text"
-        android:textSize="20sp"
+        android:text="@string/title_main"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Estado"
-        android:textColor="@color/secondary_text"
-        android:textSize="17sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/sub_state"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+      />
 
-    <FrameLayout
-        android:id="@+id/layoutSpinnerCivilStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@color/recycle_events_background"
-        android:padding="10dp">
+
 
         <Spinner
             android:id="@+id/spinner_state"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+            android:layout_height="wrap_content" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Municipio"
-        android:textColor="@color/secondary_text"
-        android:textSize="17sp"
-        android:textStyle="bold" />
+        android:textColor="@color/white"
+        android:textSize="20sp"
+      />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@color/recycle_events_background"
-        android:padding="10dp">
+
 
         <Spinner
             android:id="@+id/spinner_municipal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+            android:layout_height="wrap_content" />
+
+
 
 
     <Button
         android:id="@+id/save"
-        style="@style/Widget.Button.Standar.Custom"
+        style="@style/Widget.Button.Standar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:text="Guardar carmbios" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="32dp"
+        android:padding="10dp"
+        android:text="@string/sub_btn" />
 
 
 </LinearLayout>

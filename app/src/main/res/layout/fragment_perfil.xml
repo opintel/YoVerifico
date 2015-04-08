@@ -10,7 +10,7 @@
         android:layout_gravity="right|top"
         android:paddingRight="16dp"
         android:paddingTop="16dp"
-        android:text="Ciudadano Movil"
+        android:text="@string/user_movil"
         android:textColor="@color/white"
         android:textSize="12sp" />
 
@@ -20,18 +20,27 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="Erik Jhordan Gonzalez Reyes"
+        android:text="@string/user_name_profile"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginLeft="@dimen/margin_left_login"
+        android:layout_marginRight="@dimen/margin_left_login"
+        android:layout_marginStart="@dimen/divider_left"
+        android:layout_marginTop="64dp"
+        android:background="@color/button_shadow_map_press" />
     <TextView
         android:id="@+id/state_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
-        android:paddingTop="42dp"
-        android:text="Distrito Federal , Iztacalco"
+        android:paddingTop="16dp"
+        android:text="@string/user_location_profile"
         android:textColor="@color/white"
         android:textSize="16sp" />
 
@@ -40,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
-        android:text="erikcaffrey10@gmail.com"
+        android:text="@string/user_mail_profile"
         android:textColor="@color/white"
         android:textSize="14sp" />
 

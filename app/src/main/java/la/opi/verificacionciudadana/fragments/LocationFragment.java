@@ -43,6 +43,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener {
         locationFragment.setArguments(extraArguments);
         return locationFragment;
     }
+
     Button btnLocalidad;
 
     @Override
@@ -50,14 +51,13 @@ public class LocationFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_location, container, false);
         btnLocalidad = (Button) rootView.findViewById(R.id.btn_localidad);
         btnLocalidad.setOnClickListener(this);
-
         return rootView;
     }
 
     @Override
     public void onClick(View v) {
-
-        startActivity(new Intent(getActivity(), TownActivity.class));
+       Intent intent = new Intent(getActivity(), TownActivity.class);
+       startActivity(intent);
 
     }
 }

@@ -6,7 +6,7 @@
             android:key="@string/pref_location_key"
             android:title="@string/pref_location">
 
-            <intent android:action=".activities.MunicipalActivity" />
+
         </Preference>
 
         <Preference
