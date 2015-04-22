@@ -64,7 +64,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
     ArrayList<Ocurrence> ocurrencesArrayListTest;
     View rootView;
     FloatingActionButton mapa;
-
+    ItemListRecycleClickListener itemListRecycleClickListener = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,10 +78,16 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_ocurrences, container, false);
 
+        swipeRefreshLayout = (SwipeRefreshLayout ) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.button_custom, R.color.swipe_color_one, R.color.primary_dark);
+
         recyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        //datos reales
+        //ocurrencesRequest(this);
 
         return rootView;
     }
@@ -91,13 +97,12 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //  ocurrencesArrayListTest = new ArrayList<>();
+          ocurrencesArrayListTest = new ArrayList<>();
 
-        //testOcurrences();
+        testOcurrences();
 
 
-
-      /*  swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
@@ -106,8 +111,16 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
                     @Override
                     public void run() {
 
+                        Comunicater.setOcurrencesList(ocurrencesArrayListTest);
 
-          swipeRefreshLayout.setRefreshing(false);
+                        recycleAdapter = new OcurrencesAdapter(ocurrencesArrayListTest, R.layout.item_list_ocurrences, getActivity());
+                        recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setAdapter(recycleAdapter);
+                        recycleAdapter.setItemListRecycleClickListener(itemListRecycleClickListener);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    swipeRefreshLayout.setRefreshing(false);
 
 
                     }
@@ -119,12 +132,11 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
 
 
             }
-        });*/
-
-        ocurrencesRequest(this);
+        });
 
 
-     /*   recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+       recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -132,7 +144,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
                         (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
                 swipeRefreshLayout.setEnabled(topRowVerticalPosition >= 0);
             }
-        });*/
+        });
 
 
     }
@@ -288,12 +300,12 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
         ocurrenced.setOcurrenceData("2015-03-17");
         ocurrenced.setFromHour("01:00");
         ocurrenced.setToHour("18:00");
-        ocurrenced.setCalle("Guadalajara");
-        ocurrenced.setColonia("Roma Norte");
+        ocurrenced.setCalle("Zamora");
+        ocurrenced.setColonia("Condesa");
         ocurrenced.setAdmin2("Cuauhtemoc");
-        ocurrenced.setAction("Construcción parke skate");
-        ocurrenced.setDescription("Segunda etapa de construcción del faro de artes y oficios, en un predio de 4,000 m2, ubicado en eje 6 esquina L. Gracida, Col. Unidad Habiatacional Vicente Guerrero.");
-        ocurrenced.setStrategyDescription("Realizar acciones de prevención situacional que contribuyan a la reducción de oportunidades para la violencia y la delincuencia.");
+        ocurrenced.setAction("Taller de Recreación Familiar");
+        ocurrenced.setDescription("Ubicado en eje 6 esquina L. Gracida, Col. Unidad Habiatacional Vicente Guerrero.");
+        ocurrenced.setStrategyDescription("Realizar acciones de recreación familiar que contribuyan a la reducción de oportunidades para la violencia intrafamiliar.");
         ocurrenced.setLatitude("19.415334");
         ocurrenced.setLongitude("-99.166063");
 
@@ -308,7 +320,7 @@ public class OcurrencesFragment extends Fragment implements ItemListRecycleClick
         ocur.setCalle("Guadalajara");
         ocur.setColonia("Roma Norte");
         ocur.setAdmin2("Cuauhtemoc");
-        ocur.setAction("Construcción hacker Space");
+        ocur.setAction("Construcción Parque Municipal");
         ocur.setDescription("Segunda etapa de construcción del faro de artes y oficios, en un predio de 4,000 m2, ubicado en eje 6 esquina L. Gracida, Col. Unidad Habiatacional Vicente Guerrero.");
         ocur.setStrategyDescription("Realizar acciones de prevención situacional que contribuyan a la reducción de oportunidades para la violencia y la delincuencia.");
         ocur.setLatitude("19.515334");

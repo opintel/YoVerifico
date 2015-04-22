@@ -81,6 +81,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 link = "http://maps.google.com/?q=" + bundle.getString(Config.LATITUDE_OCURRENCE) + "," + bundle.getString(Config.LONGITUDE_OCURRENCE);
 
                 Comunicater.setIdOcurrence(bundle.getString(Config.ID_OCURRENCE));
+                Comunicater.setTitleOcurrences(bundle.getString(Config.TITLE_OCURRENCE));
 
                 if (bundle.getString(Config.CONTACT_OCURRENCE) == null) {
                     contactEvent.setText(getResources().getString(R.string.info_contact));

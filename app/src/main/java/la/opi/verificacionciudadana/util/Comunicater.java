@@ -13,6 +13,15 @@ public class Comunicater {
     static List<Marker> arrayList;
     static List<Ocurrence> ocurrencesList;
     static String idOcurrence;
+    static String titleOcurrences;
+
+    public static String getTitleOcurrences() {
+        return titleOcurrences;
+    }
+
+    public static void setTitleOcurrences(String titleOcurrences) {
+        Comunicater.titleOcurrences = titleOcurrences;
+    }
 
     public static String getDatoMarker() {
         return datoMarker;

@@ -32,7 +32,7 @@ public class FragmentInfoWindowMap extends Fragment {
         return fragmentInfoWindowMap;
     }
 
-    TextView txtTitle;
+    TextView txtTitle ,txtMore;
     String argumentTitle;
     Bundle bundle;
     String activity;
@@ -53,10 +53,11 @@ public class FragmentInfoWindowMap extends Fragment {
 
         bundle = getArguments().getBundle(BUNDLE);
         txtTitle = (TextView) rootView.findViewById(R.id.txt_title_detail);
+        txtMore = (TextView)rootView.findViewById(R.id.txt_more);
         argumentTitle = getArguments().getString(TITLE);
         txtTitle.setText(argumentTitle);
 
-        txtTitle.setOnClickListener(new View.OnClickListener() {
+       txtMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

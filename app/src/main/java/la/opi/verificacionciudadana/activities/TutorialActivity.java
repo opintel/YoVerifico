@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -37,14 +39,33 @@ import rx.functions.Action1;
 
 public class TutorialActivity extends BaseActivity {
     String activity;
+    Button btnOmited;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        systemBarsCustom();
+
+        btnOmited = (Button) findViewById(R.id.btn_omited);
+
+        btnOmited.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (activity.equals("null")) {
+
+                    Intent intent = new Intent(TutorialActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.animator.open_next, R.animator.close_main);
+
+                } else if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)) {
+                    onBackPressed();
+                    overridePendingTransition(R.animator.open_main, R.animator.close_next);
+                }
+            }
+        });
         Crashlytics.start(this);
 
-        super.getToolbar().setTitleTextColor(getResources().getColor(R.color.transparent));
+       // super.getToolbar().setTitleTextColor(getResources().getColor(R.color.white));
         createDirectory();
 
         if (getIntent().getStringExtra(Config.FRAGMENT_TUTORIAL) != null) {
@@ -63,12 +84,9 @@ public class TutorialActivity extends BaseActivity {
                 if (!ConfigurationPreferences.getUserSession(this).equals("close_session")) {
 
 
-
-
-
                     if (InternetConnection.connectionState(this)) {
                         try {
-                            super.getToolbar().setTitleTextColor(getResources().getColor(R.color.white));
+                          //  super.getToolbar().setTitleTextColor(getResources().getColor(R.color.white));
                             SharedPreferences preferences = getSharedPreferences(ConfigurationPreferences.TOKEN, Context.MODE_PRIVATE);
                             singInRequest(this, EndPoint.PARAMETER_UTF8,
                                     preferences.getString(ConfigurationPreferences.USER_TOKEN, ""),
@@ -109,48 +127,6 @@ public class TutorialActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_demo, menu);
-        return true;
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-
-                if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)) {
-                    super.onBackPressed();
-                    overridePendingTransition(R.animator.open_main, R.animator.close_next);
-                }
-
-                break;
-
-            case R.id.action_omited:
-
-                if (activity.equals("null")) {
-
-                    Intent intent = new Intent(TutorialActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.animator.open_next, R.animator.close_main);
-
-                } else if (activity.equals(Config.SHOWME_TUTORIAL) || activity.equals(Config.SHOWME_FROM_PREFERENCES_TUTORIAL)) {
-                    super.onBackPressed();
-                    overridePendingTransition(R.animator.open_main, R.animator.close_next);
-                }
-
-
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onBackPressed() {
 
 
@@ -174,10 +150,6 @@ public class TutorialActivity extends BaseActivity {
         }
     }
 
-    private void systemBarsCustom() {
-        SystemConfigurationBars systemConfigurationBars = new SystemConfigurationBars(this);
-        systemConfigurationBars.configurationNavigationBar();
-    }
 
     private void createDirectory() {
 

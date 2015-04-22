@@ -52,6 +52,7 @@ public class QuestionDialog extends DialogFragment {
 
         startActivity(new Intent(getActivity(),InformacionActivity.class));
         getActivity().overridePendingTransition(R.animator.open_next, R.animator.close_main);
+
     }
 
 

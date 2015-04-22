@@ -39,7 +39,7 @@
         android:layout_marginBottom="8dp"
         fab:fab_addButtonColorNormal="@color/white"
         fab:fab_addButtonColorPressed="@color/white"
-        fab:fab_addButtonPlusIconColor="@color/accent">
+        fab:fab_addButtonPlusIconColor="@color/button_custom">
 
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -48,8 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            fab:fab_colorNormal="@color/accent"
-            fab:fab_colorPressed="@color/accent"
+            fab:fab_colorNormal="@color/button_custom"
+            fab:fab_colorPressed="@color/button_custom"
             fab:fab_icon="@drawable/ic_camara"
             fab:fab_plusIconColor="@color/white" />
 
@@ -59,8 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            fab:fab_colorNormal="@color/accent"
-            fab:fab_colorPressed="@color/accent"
+            fab:fab_colorNormal="@color/button_custom"
+            fab:fab_colorPressed="@color/button_custom"
             fab:fab_icon="@drawable/ic_go"
             fab:fab_plusIconColor="@color/white" />
 

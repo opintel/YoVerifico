@@ -66,6 +66,7 @@ public class EvidencesImagesAdapter extends ArrayAdapter<ImageEvidence> {
        if(evidence.getEvidence().equals("vacio")){
 
             holder.imageEvidencePath.setImageResource(R.drawable.mex);
+           holder.txtTitlePath.setText("Recuerda tomar alguna evidencia del evento! ");
 
         }else {
 

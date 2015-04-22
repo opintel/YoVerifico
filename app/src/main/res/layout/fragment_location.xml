@@ -4,11 +4,15 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/primary"
         android:textStyle="bold" />
+
+
 
     <TextView
         android:layout_width="match_parent"
@@ -48,6 +52,15 @@
         android:layout_marginTop="32dp"
         android:padding="10dp"
         android:text="@string/btn_location" />
+
+
+
+    <ImageView
+        android:id="@+id/pruebas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="70dp"
+        android:src="@drawable/segob" />
 
 
 </LinearLayout>

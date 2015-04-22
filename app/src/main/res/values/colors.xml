@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--<color name="primary">#00BB9B</color>-->
-    <!--<color name="primary_dark">#008D77</color>-->
-    <!--<color name="accent">#00BB9B</color>-->
-    <color name="primary">#536DFE</color>
-    <color name="primary_dark">#3D5AFE</color>
-    <color name="accent">#EC407A</color>
+    <color name="primary">#FFA726</color>
+    <color name="primary_dark">#F57C00</color>
+    <color name="accent">#1DE9B6</color>
+    <!--<color name="primary">#536DFE</color>-->
+    <!--<color name="primary_dark">#3D5AFE</color>-->
+    <!--<color name="accent">#EC407A</color>-->
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="divider_color">#B6B6B6</color>
@@ -14,6 +14,7 @@
     <color name="float_button">#00BCD4</color>
     <color name="item_list">#20BDBDBD</color>
 
+    <color name="swipe_color_one">#00BCD4</color>
     <color name="otro">#00CCAE</color>
     <color name="header">#ECEFED</color>
     <color name="color_control_app">#5f5f5f</color>

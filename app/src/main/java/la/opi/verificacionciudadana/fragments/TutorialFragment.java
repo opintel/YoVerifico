@@ -41,7 +41,8 @@ public class TutorialFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_demo_activity, container, false);
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(R.string.activity_login_screen_name);
+//        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("Yo Verifico");
+
 
         ViewPager pager = (ViewPager) rootView.findViewById(R.id.pager);
         PagerAdapterDemo pagerAdapterImages;
@@ -51,11 +52,11 @@ public class TutorialFragment extends Fragment {
         pagerAdapterImages.addFragment(FragmentTutorialItem.newInstance(R.string.text_demo_3, R.string.txt_demo_3_description));
         pagerAdapterImages.addFragment(FragmentTutorialItem.newInstance(R.string.text_demo_4, R.string.txt_demo_4_description));
 
-        relativeLayout = (RelativeLayout) rootView.findViewById(R.id.background_pager_layout);
+     //relativeLayout = (RelativeLayout) rootView.findViewById(R.id.background_pager_layout);
 
         pager.setAdapter(pagerAdapterImages);
 
-
+/*
         CirclePageIndicator circlePageIndicator = (CirclePageIndicator) rootView.findViewById(R.id.indicator);
 
         circlePageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -113,7 +114,7 @@ public class TutorialFragment extends Fragment {
         });
 
         circlePageIndicator.setViewPager(pager);
-
+*/
 
         return rootView;
     }

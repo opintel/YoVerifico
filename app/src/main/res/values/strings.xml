@@ -86,6 +86,7 @@
     <!-- Demo Activity -->
     <string name="action_omited">Omitir</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetuer adipiscing elit ipsum dolor sit amet, consectetuer adipiscing elit</string>
+    <string name="more">VER MAS</string>
     <string name="text_demo_1">VERIFICA ALGUNO DE LOS EVENTOS QUE SE REALIZAN EN EL PAÍS Y AYUDEMOS A CONSTRUIR EL FUTURO DE MÉXICO  </string>
     <string name="text_demo_2">ACUDE Y VERIFICA EL EVENTO DE TU INTERES</string>
     <string name="text_demo_3">CAPTURA EVIDENCIA EN TAN SOLO UNOS MINUTOS</string>

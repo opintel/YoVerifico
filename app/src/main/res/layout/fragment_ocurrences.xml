@@ -4,13 +4,19 @@
     android:layout_height="match_parent"
     android:background="@color/recycle_events_background">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:scrollbars="vertical" />
+        android:layout_height="wrap_content">
 
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:scrollbars="vertical" />
+    </android.support.v4.widget.SwipeRefreshLayout>
     <!--<com.getbase.floatingactionbutton.FloatingActionButton-->
     <!--android:id="@+id/btn_maps"-->
     <!--android:layout_width="wrap_content"-->

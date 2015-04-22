@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,7 +74,7 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
     }
 
     private Button sendEvidences;
-    private TextView txtComments, txtEvaluation, txtPhotos, txtDate;
+    private TextView txtComments, txtEvaluation, txtPhotos, txtDate ,txtEvidenceName;
     private FrameLayout frameLayout;
     private CircleImageView circleImageView;
     private Location myLocation;
@@ -306,6 +307,7 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
         circleImageView = (CircleImageView) rootView.findViewById(R.id.circleView);
         frameLayout = (FrameLayout) getActivity().findViewById(R.id.container_informacion);
         frameLayout.setBackgroundColor(getResources().getColor(R.color.primary));
+        txtEvidenceName = (TextView)rootView.findViewById(R.id.txt_event_name);
 
     }
 
@@ -320,6 +322,7 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
         SimpleDateFormat timeData = new SimpleDateFormat(Config.DATA_FORMAT_PICTURE_FECHA);
         txtDate.setText(timeData.format(Calendar.getInstance().getTime()));
         sendEvidences.setOnClickListener(this);
+        txtEvidenceName.setText(Comunicater.getTitleOcurrences());
         pictureReport();
 
     }
@@ -353,6 +356,17 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
                                 ActionsDataBase.deleteDataBase(getActivity());
 
                                 Toast.makeText(getActivity(), "Gracias por tu participación evidencia enviada con exito.", Toast.LENGTH_LONG).show();
+
+
+                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+
+
+
+                                for(int i= 0; i<6;i++){
+                                    fragmentManager.popBackStack();
+                                }
+
 
 
                             }
@@ -389,4 +403,7 @@ public class EvidenceFourFragment extends Fragment implements View.OnClickListen
     public void onProviderDisabled(String provider) {
 
     }
+
+
+
 }

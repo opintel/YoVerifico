@@ -4,7 +4,7 @@
     android:id="@+id/background_pager_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tutorial_one"
+    android:background="@color/primary"
     android:orientation="vertical"
     tools:context="la.opi.verificacionciudadana.activities.TutorialActivity$DemoFragment">
 
@@ -15,18 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/indicator" />
 
-    <com.viewpagerindicator.CirclePageIndicator
-        android:id="@+id/indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="34dp"
-        android:padding="7dp"
-        app:fillColor="@color/white"
-        app:pageColor="@color/white_two"
-        app:radius="5dp"
-        app:strokeWidth="0dp" />
+
+
+
 
 
 </RelativeLayout>
